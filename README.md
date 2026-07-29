@@ -1,25 +1,40 @@
-# Aurevia — Real Estate Intelligence Platform
+<div align="center">
+  <img src="img_hero.png" alt="Aurevia Header" width="100%" style="border-radius: 12px; margin-bottom: 24px;" />
+  
+  <h1>Aurevia — Real Estate Intelligence Platform</h1>
+  
+  <p><b>Real estate, decoded.</b></p>
+  <p>Aurevia is an AI-powered real estate intelligence platform that helps investors and buyers discover, analyze, and transact properties smarter through AI-driven personalization, market analytics, and investment scoring.</p>
 
-> **Real estate, decoded.**  
-> Aurevia is an AI-powered real estate intelligence platform that helps investors and buyers discover, analyze, and transact properties smarter through AI-driven personalization, market analytics, and investment scoring.
+  <p>
+    <a href="#-saas-product-demo-video">View Demo</a> •
+    <a href="#-platform-architecture--features">Features</a> •
+    <a href="#-quick-start--local-setup">Quick Start</a>
+  </p>
+</div>
 
 ---
 
 ## 🎬 SaaS Product Demo Video
 
-### 16:9 Landscape Launch Video (57 seconds)
+Aurevia's core experience is showcased in a high-fidelity, fully code-driven product demo. 
 
-![Aurevia Product Demo Video 16:9](aurevia_demo_16x9.webp)
+### 16:9 Landscape Launch Video (57s)
 
-*Launch the interactive, high-frame-rate animation directly in your browser: [`demo.html`](demo.html)*
+<a href="demo.html">
+  <img src="aurevia_demo_16x9.webp" alt="Aurevia Product Demo Video 16:9" width="100%" style="border-radius: 8px;" />
+</a>
 
----
+> **Note on playback**: The animated WebP above plays automatically. To experience the high-frame-rate, interactive HTML animation with its ambient soundtrack, you need to run it locally. Clone this repository and open [`demo.html`](demo.html) in your browser.
 
-### 📱 9:16 Vertical Mobile & Social Cutdown (55 seconds)
+### 📱 9:16 Vertical Mobile & Social Cutdown (55s)
 
 <div align="center">
-  <img src="aurevia_demo_9x16.webp" alt="Aurevia Product Demo Video 9:16 Vertical" width="360" />
-  <p><em>Launch interactive vertical animation: <a href="demo_9x16.html"><code>demo_9x16.html</code></a></em></p>
+  <a href="demo_9x16.html">
+    <img src="aurevia_demo_9x16.webp" alt="Aurevia Product Demo Video 9:16 Vertical" width="320" style="border-radius: 16px;" />
+  </a>
+  <br/>
+  <p><em>Vertical cutdown for mobile and social media. <br/>Clone and open <a href="demo_9x16.html"><code>demo_9x16.html</code></a> locally to experience the interactive version.</em></p>
 </div>
 
 ---
@@ -27,10 +42,10 @@
 ## 📽️ Video Shot List & Timestamp Structure
 
 | Timestamp | Scene | Key Motion & Content | Text Overlay |
-|---|---|---|---|
+|:---:|---|---|---|
 | **0:00–0:05** | **Logo Reveal** | Deep black screen, gold Aurevia logo fades in with soft radial pulse glow. Tagline types out with cursor. | *"Real estate, decoded."* |
 | **0:05–0:12** | **Problem Framing** | Rapid cut sequence of cluttered, overwhelming listing pages with noise filter bars fading to black. | *"Endless listings. **No real answers.**"* |
-| **0:12–0:20** | **Product Reveal** | Aurevia browser chrome dashboard slides up with spring motion. AI search bar animates natural typing query: *"Find 2-bed investment property with 8%+ yield in Austin"*. Property cards slide in with AI match percentage badges. | *"AI Match Engine"* |
+| **0:12–0:20** | **Product Reveal** | Aurevia browser chrome dashboard slides up with spring motion. AI search bar animates natural typing query. Property cards slide in with AI match percentage badges. | *"AI Match Engine"* |
 | **0:20–0:27** | **Personalized Matches** | 4-card grid filtering and reordering dynamically. Match score bars fill up (`96%`, `89%`, `82%`, `84%`). | *"Personalized Matches"* |
 | **0:27–0:33** | **Market Insights** | Gold SVG price appreciation curve draws itself live across 2020–2025 timeline. Neighborhood demand heatmap cells animate with market comparison stats. | *"Market Insights"* |
 | **0:33–0:40** | **Investment Analysis** | 3 investment panels animate up. ROI counter (`24.7%`), Cap Rate (`8.4%`), and Risk Score (`14/100`) count up with performance gauges filling. | *"Investment Scorecard"* |
@@ -42,40 +57,49 @@
 
 ## ⚡ Platform Architecture & Features
 
-- **AI Search & Match Engine** — Natural language natural property search with multi-dimensional match scoring algorithm based on target yield, risk tolerance, and appreciation potential.
-- **Market Analytics Layer** — Real-time price appreciation tracking, neighborhood heatmaps, and macro market trend comparisons (Austin, Miami, NYC, Denver, Nashville).
-- **Investment Scorecard** — Automated ROI calculations (IRR), cap rate breakdown, gross vs. net yield comparisons, and 100-point risk score assessments.
-- **Guided Deal Pipeline** — Streamlined digital transaction pipeline covering offer submission, inspection coordination, vault document e-signing, and escrow tracking.
+* **AI Search & Match Engine** — Natural language property search with a multi-dimensional match scoring algorithm based on target yield, risk tolerance, and appreciation potential.
+* **Market Analytics Layer** — Real-time price appreciation tracking, neighborhood heatmaps, and macro market trend comparisons (Austin, Miami, NYC, Denver, Nashville).
+* **Investment Scorecard** — Automated ROI calculations (IRR), cap rate breakdown, gross vs. net yield comparisons, and 100-point risk score assessments.
+* **Guided Deal Pipeline** — Streamlined digital transaction pipeline covering offer submission, inspection coordination, vault document e-signing, and escrow tracking.
 
 ---
 
 ## 🎨 Brand Identity & Design System
 
+Aurevia's design language aims for a premium, calm, and trustworthy consumer experience, avoiding generic startup clichés.
+
 - **Color Palette**:
-  - Base Background: Deep Charcoal `#09090E` / `#0F1018`
-  - Brand Accent: Aureate Gold `#E8A820` / `#FFD160`
-  - Data Indicators: Mint Green `#34D399` (positive return), Navy Blue `#9AAEDD`, Purple `#A78BFA`
+  - **Base Background**: Deep Charcoal (`#09090E` / `#0F1018`)
+  - **Brand Accent**: Aureate Gold (`#E8A820` / `#FFD160`)
+  - **Data Indicators**: Mint Green (`#34D399`) for positive returns, Navy Blue (`#9AAEDD`), Purple (`#A78BFA`)
 - **Typography**:
-  - Headlines: *DM Serif Display* (editorial precision)
-  - Interface & Data: *Inter* (clean sans-serif, high-legibility UI typography)
-- **Audio Direction**:
-  - Web Audio API procedural 3-layer ambient synthesizer score (sub bass, LFO-modulated breathing pad, high shimmer pad) + soft UI interaction clicks.
+  - **Headlines**: *DM Serif Display* (editorial precision)
+  - **Interface & Data**: *Inter* (clean sans-serif, high-legibility UI typography)
+- **Audio Direction (Demo)**:
+  - Custom Web Audio API procedural 3-layer ambient synthesizer score (sub bass, LFO-modulated breathing pad, high shimmer pad) paired with soft UI interaction clicks.
 
 ---
 
 ## 🚀 Quick Start / Local Setup
 
-1. **View Main Platform Landing Page**:
-   Open [`index.html`](index.html) in any modern web browser.
+Because the interactive demos use local assets and precise timing, they are best viewed directly in a local browser.
 
-2. **Run 16:9 Product Demo Video Animation**:
-   Open [`demo.html`](demo.html) in your browser.
-   - Press `R` to restart the video sequence from 0:00
-   - Press `Space` to pause or resume playback
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/AshleyFullero/Aurevia.git
+   cd Aurevia
+   ```
 
-3. **Run 9:16 Vertical Demo Animation**:
-   Open [`demo_9x16.html`](demo_9x16.html) in your browser.
+2. **View Main Platform Landing Page**
+   Open `index.html` in any modern web browser to see the responsive, premium UI.
+
+3. **Run the Interactive Demo Videos (HTML)**
+   - Open `demo.html` for the 16:9 landscape video.
+   - Open `demo_9x16.html` for the vertical mobile video.
+   - **Controls:** Press `R` to restart the video sequence, or `Space` to pause/resume playback. Make sure your browser allows audio context if you want to hear the procedural ambient soundtrack.
 
 ---
 
-© 2026 Aurevia Intelligence Inc. All rights reserved.
+<div align="center">
+  <p>© 2026 Aurevia Intelligence Inc. All rights reserved.</p>
+</div>
