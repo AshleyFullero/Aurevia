@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aurevia — The AI-powered real estate intelligence platform. Discover, analyze, and transact properties smarter with personalized AI recommendations, market insights, and investment analytics.">
+  <meta name="keywords" content="AI real estate, property intelligence, market insights, investment analytics, property search, real estate technology">
+  <meta property="og:title" content="Aurevia — AI-Powered Real Estate Intelligence">
+  <meta property="og:description" content="The intelligent path to property. AI-driven personalization, market insights, and investment analytics in one premium platform.">
+  <meta property="og:type" content="website">
+  <title>Aurevia — The Intelligent Path to Property</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Favicon: inline SVG data URI -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23E8A820'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' fill='%230F0E09' font-size='18' font-weight='bold' font-family='serif'>A</text></svg>">
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVIGATION
+       ========================================== -->
+  <nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+        <a href="#hero" class="nav-logo" aria-label="Aurevia home">
+          <div class="nav-logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 1L16 14H2L9 1Z"/>
+            </svg>
+          </div>
+          <span class="nav-logo-text">Aure<span>via</span></span>
+        </a>
+
+        <!-- Nav Links -->
+        <ul class="nav-links" role="list">
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#product" class="nav-link">Product</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="#social-proof" class="nav-link">About</a></li>
+        </ul>
+
+        <!-- Actions -->
+        <div class="nav-actions">
+          <a href="#cta" class="btn btn-ghost btn-sm" id="nav-login-btn">Log in</a>
+          <a href="#cta" class="btn btn-primary btn-sm" id="nav-cta-btn">
+            <span>Get Early Access</span>
+          </a>
+        </div>
+
+        <!-- Hamburger (mobile) -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
+    <a href="#features" class="mobile-menu-link" onclick="closeMobileMenu()">Features</a>
+    <a href="#product" class="mobile-menu-link" onclick="closeMobileMenu()">Product</a>
+    <a href="#how-it-works" class="mobile-menu-link" onclick="closeMobileMenu()">How It Works</a>
+    <a href="#social-proof" class="mobile-menu-link" onclick="closeMobileMenu()">About</a>
+    <a href="#cta" class="btn btn-primary" onclick="closeMobileMenu()"><span>Get Early Access</span></a>
+  </div>
+
+  <main>
+
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <section id="hero" aria-label="Hero section">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-content">
+
+          <!-- Text Column -->
+          <div class="hero-text-col">
+
+            <!-- Eyebrow -->
+            <div class="hero-eyebrow reveal">
+              <div class="hero-eyebrow-dot" aria-hidden="true"></div>
+              <span class="label text-gold">AI-Powered Real Estate Intelligence</span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="display-xl hero-headline reveal reveal-delay-1">
+              <span class="line-1">Your AI co‑pilot</span>
+              <span class="line-1">for smarter</span>
+              <span class="line-gold">real estate</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="body-lg hero-subheadline text-muted reveal reveal-delay-2">
+              Aurevia fuses personalized AI recommendations, live market intelligence, 
+              and investment analytics — so every property decision is backed by data, 
+              not guesswork.
+            </p>
+
+            <!-- AI Search Bar -->
+            <div class="ai-search-bar reveal reveal-delay-3" id="heroSearchBar" role="search" tabindex="0">
+              <div class="ai-search-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 1.5C8 1.5 5 4 5 7C5 8.66 6.34 10 8 10C9.66 10 11 8.66 11 7C11 4 8 1.5 8 1.5Z" fill="#E8A820" opacity="0.8"/>
+                  <path d="M2 13C4 10.5 6 9.5 8 9.5C10 9.5 12 10.5 14 13" stroke="#E8A820" stroke-width="1.5" stroke-linecap="round"/>
+                  <circle cx="8" cy="7" r="1.5" fill="#E8A820"/>
+                </svg>
+              </div>
+              <input
+                type="text"
+                class="ai-search-input"
+                id="aiSearchInput"
+                placeholder="Ask Aurevia anything about real estate..."
+                aria-label="Ask Aurevia a question"
+              />
+              <div class="ai-typing-indicator" id="typingIndicator" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <!-- CTA Row -->
+            <div class="hero-cta-row reveal reveal-delay-4">
+              <a href="#cta" class="btn btn-primary btn-lg" id="hero-primary-cta">
+                <span>Start Exploring</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </a>
+              <a href="#product" class="btn btn-ghost btn-lg" id="hero-secondary-cta">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M6.5 6C6.5 6 7 5.5 8 5.5C9 5.5 9.5 6.2 9.5 7C9.5 8 8 8.5 8 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <circle cx="8" cy="11" r="0.75" fill="currentColor"/>
+                </svg>
+                See How It Works
+              </a>
+            </div>
+
+            <!-- Social Proof -->
+            <div class="hero-social-proof reveal reveal-delay-5">
+              <div class="hero-avatars" aria-hidden="true">
+                <div class="hero-avatar">JK</div>
+                <div class="hero-avatar">ML</div>
+                <div class="hero-avatar">SR</div>
+                <div class="hero-avatar">+</div>
+              </div>
+              <div>
+                <p class="body-sm" style="font-weight:600;">Trusted by 12,000+ investors</p>
+                <div style="display:flex;gap:2px;margin-top:2px;" aria-label="5 star rating">
+                  <span style="color:#E8A820;font-size:13px;">★★★★★</span>
+                </div>
+              </div>
+              <div style="height:32px;width:1px;background:var(--color-border);"></div>
+              <div>
+                <p class="body-sm" style="font-weight:600;color:var(--color-success);">↑ 94% avg. match accuracy</p>
+                <p class="body-sm text-muted">across all recommendations</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Visual Column -->
+          <div class="hero-visual-col reveal reveal-delay-2">
+            <div class="hero-dashboard">
+              <!-- Main dashboard image -->
+              <img
+                src="img_hero.png"
+                alt="Aurevia AI dashboard showing property matches and market analytics"
+                class="hero-dashboard-img"
+                width="640"
+                height="420"
+              />
+
+              <!-- Floating match badge -->
+              <div class="hero-float-card hero-match-badge" aria-hidden="true">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#34D399;animation:pulse-dot 2s ease-in-out infinite;"></div>
+                  <span class="label text-gold">AI Match Score</span>
+                </div>
+                <div style="font-size:28px;font-weight:800;letter-spacing:-0.03em;line-height:1;margin-bottom:4px;">96%</div>
+                <p class="body-sm text-muted">2BR · Austin, TX · $1.24M</p>
+              </div>
+
+              <!-- Floating insight card -->
+              <div class="hero-float-card hero-insight-card" aria-hidden="true" style="animation-delay:-3s;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                  <span class="label text-muted">Cap Rate</span>
+                  <span class="badge badge-success" style="font-size:10px;padding:2px 8px;">+0.4%</span>
+                </div>
+                <div style="font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--color-success);">8.3%</div>
+                <p class="body-sm text-muted" style="margin-top:4px;">South Congress District</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PROBLEM / VALUE FRAMING
+         ========================================== -->
+    <section id="problem" class="section" aria-labelledby="problem-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="badge badge-gold">The Problem</span>
+          </div>
+          <h2 class="display-lg reveal" id="problem-heading">Real estate is still <em class="italic">broken</em></h2>
+          <p class="body-lg text-muted reveal reveal-delay-1" style="margin-top:16px;">
+            Most platforms treat you like a search query. Aurevia treats you like an investor.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+
+          <!-- Traditional Column -->
+          <div class="problem-col traditional reveal">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;" aria-hidden="true">⚡</div>
+              <div>
+                <h3 class="heading-sm">Traditional Search</h3>
+                <p class="body-sm text-muted">Overwhelming &amp; generic</p>
+              </div>
+            </div>
+
+            <div class="problem-row">
+              <div class="problem-icon-wrap bad" aria-hidden="true">✕</div>
+              <div>
+                <p class="body-sm" style="font-weight:600;margin-bottom:2px;">Thousands of irrelevant listings</p>
+                <p class="body-sm text-muted">Browse 500+ properties that don't match your life, budget, or goals</p>
+              </div>
+            </div>
+            <div class="problem-row">
+              <div class="problem-icon-wrap bad" aria-hidden="true">✕</div>
+              <div>
+                <p class="body-sm" style="font-weight:600;margin-bottom:2px;">No pricing transparency</p>
+                <p class="body-sm text-muted">Market value is a black box. You only know the ask price</p>
+              </div>
+            </div>
+            <div class="problem-row">
+              <div class="problem-icon-wrap bad" aria-hidden="true">✕</div>
+              <div>
+                <p class="body-sm" style="font-weight:600;margin-bottom:2px;">Zero investment intelligence</p>
+                <p class="body-sm text-muted">Cap rates, yield, appreciation — you're on your own to figure it out</p>
+              </div>
+            </div>
+            <div class="problem-row">
+              <div class="problem-icon-wrap bad" aria-hidden="true">✕</div>
+              <div>
+                <p class="body-sm" style="font-weight:600;margin-bottom:2px;">Fragmented closing process</p>
+                <p class="body-sm text-muted">Agents, lawyers, banks — a 6-month coordination nightmare</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- VS Divider -->
+          <div class="problem-divider" aria-hidden="true">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--color-bg-card);border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--color-text-tertiary);">VS</div>
+          </div>
+
+          <!-- Aurevia Column -->
+          <div class="problem-col aurevia reveal reveal-delay-2">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,rgba(232,168,32,0.2),rgba(204,122,0,0.1));border:1px solid rgba(232,168,32,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;" aria-hidden="true">◆</div>
+              <div>
+                <h3 class="heading-sm">Aurevia Intelligence</h3>
+                <p class="body-sm text-muted">Personalized &amp; data-backed</p>
+              </div>
+            </div>
+
+            <div class="problem-row">
+              <div class="problem-icon-wrap good" aria-hidden="true">✓</div>
+              <div>
+                <p class="body-sm" style="font-weight:600;margin-bottom:2px;">AI-curated match feed</p>
+                <p class="body-sm text-muted">5–10 hyper-relevant listings ranked by your unique match score, daily</p>
+              </div>
+            </div>
+            <div class="problem-row">
+              <div class="problem-icon-wrap good" aria-hidden="true">✓</div>
+              <div>
+                <p class="body-sm" style="font-weight:600;margin-bottom:2px;">Real-time pricing intelligence</p>
+                <p class="body-sm text-muted">Fair value estimates, price history, and demand forecasting per neighborhood</p>
+              </div>
+            </div>
+            <div class="problem-row">
+              <div class="problem-icon-wrap good" aria-hidden="true">✓</div>
+              <div>
+                <p class="body-sm" style="font-weight:600;margin-bottom:2px;">Built-in investment analytics</p>
+                <p class="body-sm text-muted">Cap rate, ROI, rental yield, and risk scoring — calculated instantly per listing</p>
+              </div>
+            </div>
+            <div class="problem-row">
+              <div class="problem-icon-wrap good" aria-hidden="true">✓</div>
+              <div>
+                <p class="body-sm" style="font-weight:600;margin-bottom:2px;">End-to-end transaction layer</p>
+                <p class="body-sm text-muted">Guided offers, e-signing, document management, and closing — in one flow</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <!-- ==========================================
+         FEATURES GRID
+         ========================================== -->
+    <section id="features" class="section" aria-labelledby="features-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="badge badge-gold">Core Capabilities</span>
+          </div>
+          <h2 class="display-lg reveal" id="features-heading">
+            Intelligence at every<br>stage of the journey
+          </h2>
+          <p class="body-lg text-muted reveal reveal-delay-1" style="margin-top:16px;">
+            Four deeply integrated pillars that transform how you discover, evaluate, and own property.
+          </p>
+        </div>
+
+        <div class="features-grid">
+
+          <!-- Feature 1: Personalized Recommendations -->
+          <div class="feature-card reveal" id="feature-recs">
+            <div class="feature-icon gold" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M13 3C13 3 6 7 6 13C6 16.87 9.13 20 13 20C16.87 20 20 16.87 20 13C20 7 13 3 13 3Z" stroke="#E8A820" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M8.5 15.5L11 13L13 15L16 11" stroke="#E8A820" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Personalized Recommendations</h3>
+            <p>
+              Our AI builds a living profile of your preferences, lifestyle, commute patterns, 
+              and financial goals — then surfaces listings ranked by how well they actually fit 
+              your life, not just your search terms.
+            </p>
+            <ul class="feature-bullets" role="list">
+              <li class="feature-bullet">Match scores based on 200+ lifestyle signals</li>
+              <li class="feature-bullet">Daily curated shortlist of 5–10 properties</li>
+              <li class="feature-bullet">AI learns and improves with every interaction</li>
+              <li class="feature-bullet">Neighborhood fit scores for schools, transit, safety</li>
+            </ul>
+          </div>
+
+          <!-- Feature 2: Market Insights -->
+          <div class="feature-card reveal reveal-delay-1" id="feature-insights">
+            <div class="feature-icon blue" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M4 18L9 12L13 15L17 9L22 13" stroke="#9AAEDD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="4" y="4" width="18" height="18" rx="2" stroke="#9AAEDD" stroke-width="1.5"/>
+                <path d="M4 18H22" stroke="#9AAEDD" stroke-width="1" opacity="0.3"/>
+              </svg>
+            </div>
+            <h3>Market Insights</h3>
+            <p>
+              Real-time pricing intelligence powered by live transaction data, 
+              permit filings, and macro indicators. Know where the market is going 
+              before you make your move.
+            </p>
+            <ul class="feature-bullets" role="list">
+              <li class="feature-bullet">Neighborhood price trend forecasting</li>
+              <li class="feature-bullet">Supply/demand heat maps and velocity scores</li>
+              <li class="feature-bullet">Fair value estimates vs. listing price</li>
+              <li class="feature-bullet">Alert system for price drops &amp; new inventory</li>
+            </ul>
+          </div>
+
+          <!-- Feature 3: Investment Analysis -->
+          <div class="feature-card reveal reveal-delay-2" id="feature-invest">
+            <div class="feature-icon purple" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M5 20L10 14L14 17L20 6" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20 6H15M20 6V11" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="13" cy="13" r="10" stroke="#A78BFA" stroke-width="1.5" opacity="0.3"/>
+              </svg>
+            </div>
+            <h3>Investment Analysis</h3>
+            <p>
+              Built for investors who need hard numbers. Every listing surfaces 
+              cap rate, projected yield, 5-year appreciation forecast, and a 
+              proprietary risk score — before you book a showing.
+            </p>
+            <ul class="feature-bullets" role="list">
+              <li class="feature-bullet">ROI projections &amp; IRR calculations</li>
+              <li class="feature-bullet">Rental yield estimates by bedroom count</li>
+              <li class="feature-bullet">Risk scoring: vacancy rate, macro exposure</li>
+              <li class="feature-bullet">Comparable market analysis (CMA) on demand</li>
+            </ul>
+          </div>
+
+          <!-- Feature 4: End-to-End Transactions -->
+          <div class="feature-card reveal reveal-delay-3" id="feature-tx">
+            <div class="feature-icon teal" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M8 4H18C19.1 4 20 4.9 20 6V20C20 21.1 19.1 22 18 22H8C6.9 22 6 21.1 6 20V6C6 4.9 6.9 4 8 4Z" stroke="#2DD4BF" stroke-width="1.5"/>
+                <path d="M10 9H16M10 13H16M10 17H13" stroke="#2DD4BF" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M15 17L17 19L21 15" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>End-to-End Transactions</h3>
+            <p>
+              From your first offer to closing day, Aurevia coordinates every step. 
+              Offer management, attorney matching, e-signing, and progress tracking — 
+              all in one intelligent workspace.
+            </p>
+            <ul class="feature-bullets" role="list">
+              <li class="feature-bullet">Guided offer builder with AI negotiation hints</li>
+              <li class="feature-bullet">Secure e-signature and document vault</li>
+              <li class="feature-bullet">Escrow tracking and milestone alerts</li>
+              <li class="feature-bullet">Curated attorney &amp; inspector marketplace</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <!-- ==========================================
+         PRODUCT SHOWCASE / INTERACTIVE DASHBOARD
+         ========================================== -->
+    <section id="product" class="section" aria-labelledby="product-heading">
+      <div class="container-wide">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="badge badge-gold">Product Preview</span>
+          </div>
+          <h2 class="display-lg reveal" id="product-heading">See Aurevia in action</h2>
+          <p class="body-lg text-muted reveal reveal-delay-1" style="margin-top:16px;max-width:560px;margin-left:auto;margin-right:auto;">
+            A live-feeling look at the AI dashboard — where your goals become an intelligent, 
+            continuously-updated property intelligence feed.
+          </p>
+        </div>
+
+        <!-- Dashboard Shell -->
+        <div class="dashboard-shell reveal" id="dashboardShell">
+
+          <!-- Top Bar -->
+          <div class="dashboard-topbar">
+            <div class="dashboard-dots" aria-hidden="true">
+              <div class="dashboard-dot dot-red"></div>
+              <div class="dashboard-dot dot-yellow"></div>
+              <div class="dashboard-dot dot-green"></div>
+            </div>
+            <div class="dashboard-search">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M8 8L10.5 10.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+              <span>app.aurevia.com/dashboard</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-left:auto;">
+              <div class="badge badge-gold" style="font-size:10px;gap:4px;">
+                <span style="width:5px;height:5px;border-radius:50%;background:var(--color-text-gold);display:inline-block;animation:pulse-dot 2s infinite;"></span>
+                Live
+              </div>
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="dashboard-body">
+
+            <!-- Sidebar -->
+            <nav class="dashboard-sidebar" aria-label="Dashboard navigation">
+              <div style="padding:8px 0;border-bottom:1px solid var(--color-border);margin-bottom:8px;">
+                <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--color-text-tertiary);text-transform:uppercase;padding:4px 0 8px;">Workspace</div>
+                <div class="dashboard-nav-item active" tabindex="0" role="button">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M4 7h6M4 9.5h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  Property Feed
+                </div>
+                <div class="dashboard-nav-item" tabindex="0" role="button">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 10L5 6L7 8L9.5 4L12 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  Market Insights
+                </div>
+                <div class="dashboard-nav-item" tabindex="0" role="button">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  Analytics
+                </div>
+                <div class="dashboard-nav-item" tabindex="0" role="button">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 2h6a1 1 0 0 1 1 1v9l-3.5-2L4 12V3a1 1 0 0 1 1-1h-1Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                  Saved
+                </div>
+              </div>
+
+              <div>
+                <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--color-text-tertiary);text-transform:uppercase;padding:4px 0 8px;">Transactions</div>
+                <div class="dashboard-nav-item" tabindex="0" role="button">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 5h4M5 7.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  Active Offers
+                  <span style="margin-left:auto;background:rgba(232,168,32,0.2);color:var(--color-text-gold);font-size:9px;font-weight:700;padding:1px 5px;border-radius:100px;">2</span>
+                </div>
+                <div class="dashboard-nav-item" tabindex="0" role="button">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l4 4L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Closed Deals
+                </div>
+              </div>
+
+              <!-- User profile -->
+              <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--color-border);display:flex;align-items:center;gap:10px;">
+                <div class="hero-avatar" style="font-size:10px;background:linear-gradient(135deg,#E8A820,#CC7A00);color:#0F0E09;font-weight:800;">JK</div>
+                <div>
+                  <p style="font-size:12px;font-weight:600;">Jamie K.</p>
+                  <p style="font-size:10px;color:var(--color-text-tertiary);">Premium Investor</p>
+                </div>
+              </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="dashboard-main">
+
+              <!-- AI Search Bar in dashboard -->
+              <div class="dashboard-ai-bar" role="search">
+                <div class="dashboard-ai-badge" aria-label="Aurevia AI">AI</div>
+                <span id="dashboardQuery" style="flex:1;font-size:13px;color:var(--color-text-secondary);">
+                  Find me a 2-bed investment property with 8%+ yield in Austin, TX
+                </span>
+                <div style="display:flex;align-items:center;gap:4px;color:var(--color-text-tertiary);font-size:11px;">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 6l1.5 1.5L8 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  12 results found
+                </div>
+              </div>
+
+              <!-- Top Row: Property feed + chart -->
+              <div style="display:grid;grid-template-columns:1fr 260px;gap:16px;flex:1;">
+
+                <!-- Property Feed -->
+                <div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                    <p style="font-size:12px;font-weight:600;color:var(--color-text-secondary);">
+                      TOP MATCHES  <span style="color:var(--color-text-tertiary);font-weight:400;">· Sorted by match score</span>
+                    </p>
+                    <div style="display:flex;gap:6px;">
+                      <button class="btn btn-ghost btn-sm" style="font-size:11px;padding:4px 10px;" aria-label="Filter results">Filter</button>
+                      <button class="btn btn-ghost btn-sm" style="font-size:11px;padding:4px 10px;" aria-label="Sort results">Sort</button>
+                    </div>
+                  </div>
+
+                  <div class="property-feed">
+
+                    <!-- Property Card 1 -->
+                    <article class="prop-card" id="prop-austin-1" tabindex="0" aria-label="Austin property 94% match">
+                      <div class="prop-card-img">
+                        <img src="img_austin.png" alt="Modern apartment building in Austin, Texas" loading="lazy"/>
+                        <div class="prop-match-badge" aria-label="94% AI match">94% Match</div>
+                      </div>
+                      <div class="prop-card-body">
+                        <p class="prop-price">$1,245,000</p>
+                        <p class="prop-address">2BR · 2BA · 1,180 sqft · Austin, TX 78704</p>
+                        <div class="prop-details">
+                          <span>Cap: <strong style="color:var(--color-success);">8.4%</strong></span>
+                          <span>Yield: <strong style="color:var(--color-success);">8.1%</strong></span>
+                          <span>↑ 12% /yr</span>
+                        </div>
+                      </div>
+                    </article>
+
+                    <!-- Property Card 2 -->
+                    <article class="prop-card" id="prop-miami-1" tabindex="0" aria-label="Miami property 89% match">
+                      <div class="prop-card-img">
+                        <img src="img_miami.png" alt="Luxury waterfront condo in Miami, Florida" loading="lazy"/>
+                        <div class="prop-match-badge" aria-label="89% AI match">89% Match</div>
+                      </div>
+                      <div class="prop-card-body">
+                        <p class="prop-price">$2,180,000</p>
+                        <p class="prop-address">2BR · 2BA · 1,420 sqft · Miami, FL 33132</p>
+                        <div class="prop-details">
+                          <span>Cap: <strong style="color:var(--color-success);">8.7%</strong></span>
+                          <span>Yield: <strong style="color:var(--color-success);">8.9%</strong></span>
+                          <span>↑ 9% /yr</span>
+                        </div>
+                      </div>
+                    </article>
+
+                    <!-- Property Card 3 -->
+                    <article class="prop-card" id="prop-nyc-1" tabindex="0" aria-label="New York City property 81% match">
+                      <div class="prop-card-img">
+                        <img src="img_nyc.png" alt="Elegant townhouse in New York City" loading="lazy"/>
+                        <div class="prop-match-badge" style="background:rgba(20,22,35,0.9);border-color:rgba(255,255,255,0.15);color:var(--color-text-secondary);" aria-label="81% AI match">81% Match</div>
+                      </div>
+                      <div class="prop-card-body">
+                        <p class="prop-price">$3,750,000</p>
+                        <p class="prop-address">3BR · 2.5BA · 2,100 sqft · New York, NY 10014</p>
+                        <div class="prop-details">
+                          <span>Cap: <strong style="color:var(--color-warning);">6.2%</strong></span>
+                          <span>Yield: <strong style="color:var(--color-success);">7.1%</strong></span>
+                          <span>↑ 6% /yr</span>
+                        </div>
+                      </div>
+                    </article>
+
+                    <!-- Skeleton card (loading state) -->
+                    <div class="prop-card" aria-hidden="true" style="pointer-events:none;">
+                      <div style="height:130px;" class="skeleton"></div>
+                      <div style="padding:12px 16px;display:flex;flex-direction:column;gap:8px;">
+                        <div class="skeleton" style="height:14px;width:60%;"></div>
+                        <div class="skeleton" style="height:10px;width:80%;"></div>
+                        <div class="skeleton" style="height:10px;width:50%;"></div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- Analytics Panel -->
+                <div>
+                  <div class="analytics-panel" aria-label="Investment analytics panel">
+                    <div class="analytics-header">
+                      <div>
+                        <p style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:2px;">Austin Market</p>
+                        <p style="font-size:14px;font-weight:700;">Price Appreciation</p>
+                      </div>
+                      <div class="badge badge-success" style="font-size:9px;padding:2px 7px;">+12.4%</div>
+                    </div>
+
+                    <!-- SVG Chart -->
+                    <div class="chart-container">
+                      <svg viewBox="0 0 260 100" class="chart-svg" preserveAspectRatio="none" aria-label="Price appreciation chart showing upward trend">
+                        <defs>
+                          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#E8A820" stop-opacity="0.4"/>
+                            <stop offset="100%" stop-color="#E8A820" stop-opacity="0"/>
+                          </linearGradient>
+                        </defs>
+                        <!-- Area fill -->
+                        <path class="mini-chart-area"
+                          d="M0,80 C20,75 40,70 60,60 C80,50 100,48 120,40 C140,32 160,28 180,20 C200,12 220,10 240,8 L260,6 L260,100 L0,100 Z"
+                        />
+                        <!-- Line -->
+                        <path class="mini-chart-line"
+                          d="M0,80 C20,75 40,70 60,60 C80,50 100,48 120,40 C140,32 160,28 180,20 C200,12 220,10 240,8 L260,6"
+                        />
+                        <!-- Data points -->
+                        <circle cx="0" cy="80" r="3" fill="#E8A820" opacity="0.6"/>
+                        <circle cx="65" cy="58" r="3" fill="#E8A820" opacity="0.6"/>
+                        <circle cx="130" cy="38" r="3" fill="#E8A820" opacity="0.6"/>
+                        <circle cx="195" cy="18" r="3" fill="#E8A820" opacity="0.8"/>
+                        <circle cx="260" cy="6" r="4" fill="#E8A820"/>
+                        <!-- Labels -->
+                        <text x="0" y="96" font-size="8" fill="#5C6278" font-family="Inter, sans-serif">2020</text>
+                        <text x="55" y="96" font-size="8" fill="#5C6278" font-family="Inter, sans-serif">2021</text>
+                        <text x="116" y="96" font-size="8" fill="#5C6278" font-family="Inter, sans-serif">2022</text>
+                        <text x="178" y="96" font-size="8" fill="#5C6278" font-family="Inter, sans-serif">2023</text>
+                        <text x="230" y="96" font-size="8" fill="#5C6278" font-family="Inter, sans-serif">2024</text>
+                      </svg>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="analytics-stats" role="list">
+                      <div class="analytics-stat" role="listitem">
+                        <p style="font-size:16px;font-weight:800;letter-spacing:-0.02em;color:var(--color-success);">8.4%</p>
+                        <p style="font-size:10px;color:var(--color-text-tertiary);margin-top:2px;">Cap Rate</p>
+                      </div>
+                      <div class="analytics-stat" role="listitem">
+                        <p style="font-size:16px;font-weight:800;letter-spacing:-0.02em;color:var(--color-text-gold);">12.4%</p>
+                        <p style="font-size:10px;color:var(--color-text-tertiary);margin-top:2px;">YoY Growth</p>
+                      </div>
+                      <div class="analytics-stat" role="listitem">
+                        <p style="font-size:16px;font-weight:800;letter-spacing:-0.02em;">2.1%</p>
+                        <p style="font-size:10px;color:var(--color-text-tertiary);margin-top:2px;">Vacancy</p>
+                      </div>
+                    </div>
+
+                    <!-- Risk Score -->
+                    <div style="margin-top:16px;padding:12px;background:rgba(255,255,255,0.02);border:1px solid var(--color-border);border-radius:var(--radius-md);">
+                      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                        <p style="font-size:11px;color:var(--color-text-tertiary);">Aurevia Risk Score</p>
+                        <p style="font-size:12px;font-weight:700;color:var(--color-success);">Low Risk</p>
+                      </div>
+                      <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;">
+                        <div id="riskBar" style="height:100%;width:25%;background:linear-gradient(90deg,#34D399,#6EE7B7);border-radius:3px;transition:width 1.5s ease;"></div>
+                      </div>
+                      <div style="display:flex;justify-content:space-between;margin-top:4px;">
+                        <span style="font-size:9px;color:var(--color-text-tertiary);">Safe</span>
+                        <span style="font-size:9px;color:var(--color-text-tertiary);">High Risk</span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <!-- ==========================================
+         HOW IT WORKS
+         ========================================== -->
+    <section id="how-it-works" class="section" aria-labelledby="how-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="badge badge-blue">Process</span>
+          </div>
+          <h2 class="display-lg reveal" id="how-heading">From goal to keys in<br>four intelligent steps</h2>
+          <p class="body-lg text-muted reveal reveal-delay-1" style="margin-top:16px;">
+            Aurevia guides you from first intention to final closing — with AI at every checkpoint.
+          </p>
+        </div>
+
+        <div class="steps-container">
+
+          <div class="step-card reveal" id="step-1">
+            <div class="step-number active">1</div>
+            <h3>Tell Aurevia your goals</h3>
+            <p>Set your budget, location, lifestyle priorities, and investment objectives. Our onboarding AI asks the right questions — and remembers every answer.</p>
+          </div>
+
+          <div class="step-card reveal reveal-delay-1" id="step-2">
+            <div class="step-number inactive">2</div>
+            <h3>AI curates your matches</h3>
+            <p>Within minutes, your personalized property feed is live. Every listing is scored and ranked by how well it fits your unique profile across 200+ parameters.</p>
+          </div>
+
+          <div class="step-card reveal reveal-delay-2" id="step-3">
+            <div class="step-number inactive">3</div>
+            <h3>Analyze investment potential</h3>
+            <p>Dive into any property's financial profile: cap rate, rental yield, risk score, appreciation forecast — all pre-calculated, no spreadsheets needed.</p>
+          </div>
+
+          <div class="step-card reveal reveal-delay-3" id="step-4">
+            <div class="step-number inactive">4</div>
+            <h3>Transact with guided support</h3>
+            <p>Make an offer with AI negotiation hints, sign digitally, track milestones, and coordinate your closing — all from your Aurevia workspace.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <!-- ==========================================
+         SOCIAL PROOF
+         ========================================== -->
+    <section id="social-proof" class="section" aria-labelledby="proof-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="badge badge-gold">Trusted by Investors</span>
+          </div>
+          <h2 class="display-lg reveal" id="proof-heading">Numbers that speak for themselves</h2>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar reveal" role="list" aria-label="Platform statistics">
+
+          <div class="stat-item" role="listitem">
+            <div class="stat-value" id="stat-properties" aria-live="polite">0</div>
+            <p class="stat-label">Properties Analyzed<br>Across 42 Markets</p>
+          </div>
+
+          <div class="stat-item" role="listitem">
+            <div class="stat-value" id="stat-time" aria-live="polite">0</div>
+            <p class="stat-label">Average Hours Saved<br>Per Investor</p>
+          </div>
+
+          <div class="stat-item" role="listitem">
+            <div class="stat-value" id="stat-match" aria-live="polite">0</div>
+            <p class="stat-label">Match Accuracy<br>Satisfaction Rate</p>
+          </div>
+
+          <div class="stat-item" role="listitem">
+            <div class="stat-value" id="stat-volume" aria-live="polite">0</div>
+            <p class="stat-label">Transaction Volume<br>Facilitated</p>
+          </div>
+
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials-grid">
+
+          <article class="testimonial-card reveal" id="testimonial-1">
+            <div class="testimonial-stars" aria-label="5 stars">
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+            </div>
+            <p class="testimonial-quote">
+              "Aurevia completely changed how I evaluate properties. The <strong>cap rate analysis and risk scoring</strong> saved me from a deal that looked great on the surface — the AI flagged a 12% vacancy trend I would have missed. I've since closed two properties with a combined 9.1% average yield."
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">JR</div>
+              <div>
+                <p class="testimonial-name">James R.</p>
+                <p class="testimonial-role">Real Estate Investor · 12 Properties · Austin, TX</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card reveal reveal-delay-1" id="testimonial-2">
+            <div class="testimonial-stars" aria-label="5 stars">
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+            </div>
+            <p class="testimonial-quote">
+              "I was skeptical of another 'AI real estate app.' But Aurevia's <strong>match score actually works</strong> — the first property on my feed became my first investment purchase. The end-to-end transaction flow meant I didn't need a separate agent for the paperwork."
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">SL</div>
+              <div>
+                <p class="testimonial-name">Sarah L.</p>
+                <p class="testimonial-role">First-Time Investor · Miami, FL</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card reveal reveal-delay-2" id="testimonial-3">
+            <div class="testimonial-stars" aria-label="5 stars">
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+              <span class="testimonial-star" aria-hidden="true">★</span>
+            </div>
+            <p class="testimonial-quote">
+              "As a fund manager, I need data-density without complexity. Aurevia's <strong>market insights dashboard</strong> is the closest thing to a Bloomberg Terminal for residential real estate I've used. The demand forecasting alone is worth the subscription."
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">DK</div>
+              <div>
+                <p class="testimonial-name">David K., CFA</p>
+                <p class="testimonial-role">Portfolio Manager · $80M AUM · New York, NY</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         CTA SECTION
+         ========================================== -->
+    <section id="cta" class="section" aria-labelledby="cta-heading">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="cta-inner">
+
+          <div class="section-eyebrow" style="justify-content:center;margin-bottom:var(--space-6);">
+            <span class="badge badge-gold">Early Access</span>
+          </div>
+
+          <h2 class="display-lg reveal" id="cta-heading">
+            The intelligent path<br>to your next property
+          </h2>
+          <p class="body-lg text-muted reveal reveal-delay-1" style="margin-top:16px;">
+            Join 12,000+ investors and homebuyers already using Aurevia to make 
+            smarter real estate decisions. Early access is limited — reserve your spot today.
+          </p>
+
+          <form class="email-capture reveal reveal-delay-2" id="emailForm" aria-label="Email capture form" onsubmit="handleEmailSubmit(event)">
+            <label for="emailInput" class="sr-only">Your email address</label>
+            <input
+              type="email"
+              class="email-input"
+              id="emailInput"
+              name="email"
+              placeholder="Enter your email address"
+              required
+              aria-required="true"
+              autocomplete="email"
+            />
+            <button type="submit" class="btn btn-primary" id="cta-submit-btn">
+              <span>Request Early Access</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2 7H12M12 7L8.5 3.5M12 7L8.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </form>
+
+          <!-- Success message (hidden by default) -->
+          <div id="formSuccess" style="display:none;text-align:center;padding:24px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:var(--radius-lg);max-width:480px;margin:0 auto;" role="alert">
+            <div style="font-size:32px;margin-bottom:12px;" aria-hidden="true">✓</div>
+            <p style="font-weight:700;font-size:16px;margin-bottom:4px;">You're on the list!</p>
+            <p class="text-muted body-sm">We'll reach out shortly with your early access details.</p>
+          </div>
+
+          <p class="cta-disclaimer reveal reveal-delay-3" style="margin-top:var(--space-4);">
+            No credit card required · Cancel anytime · GDPR compliant
+          </p>
+
+          <!-- Trust Badges -->
+          <div style="display:flex;align-items:center;justify-content:center;gap:var(--space-8);margin-top:var(--space-10);padding-top:var(--space-8);border-top:1px solid var(--color-border);flex-wrap:wrap;" class="reveal reveal-delay-4">
+            <div style="text-align:center;">
+              <p style="font-size:20px;font-weight:800;letter-spacing:-0.02em;color:var(--color-text-gold);">SOC 2</p>
+              <p class="body-sm text-muted">Type II Certified</p>
+            </div>
+            <div style="height:40px;width:1px;background:var(--color-border);" aria-hidden="true"></div>
+            <div style="text-align:center;">
+              <p style="font-size:20px;font-weight:800;letter-spacing:-0.02em;">256-bit</p>
+              <p class="body-sm text-muted">AES Encryption</p>
+            </div>
+            <div style="height:40px;width:1px;background:var(--color-border);" aria-hidden="true"></div>
+            <div style="text-align:center;">
+              <p style="font-size:20px;font-weight:800;letter-spacing:-0.02em;color:var(--color-text-gold);">GDPR</p>
+              <p class="body-sm text-muted">Fully Compliant</p>
+            </div>
+            <div style="height:40px;width:1px;background:var(--color-border);" aria-hidden="true"></div>
+            <div style="text-align:center;">
+              <p style="font-size:20px;font-weight:800;letter-spacing:-0.02em;">99.9%</p>
+              <p class="body-sm text-muted">Uptime SLA</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer>
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <!-- Brand Column -->
+        <div class="footer-brand">
+          <a href="#hero" class="nav-logo" aria-label="Aurevia home">
+            <div class="nav-logo-icon" aria-hidden="true">
+              <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M9 1L16 14H2L9 1Z"/></svg>
+            </div>
+            <span class="nav-logo-text">Aure<span>via</span></span>
+          </a>
+          <p>
+            The intelligent path to property. Aurevia brings together AI-driven personalization, 
+            live market intelligence, and investment analytics — so every real estate decision is 
+            backed by data.
+          </p>
+          <!-- Social Links -->
+          <div style="display:flex;gap:12px;margin-top:20px;">
+            <a href="#" class="btn btn-ghost btn-sm" style="padding:7px 10px;" aria-label="Aurevia on Twitter/X">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 1.5L5.5 8M1 1.5H3.5L7 6.5L10.5 1.5H13M13 1.5L8.5 8M8.5 8L13 13H10.5L7 8.5L3.5 13H1L5.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#" class="btn btn-ghost btn-sm" style="padding:7px 10px;" aria-label="Aurevia on LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M4 5.5V9.5M4 3.5V4M7 9.5V7C7 6.17 7.67 5.5 8.5 5.5C9.33 5.5 10 6.17 10 7V9.5M7 5.5V9.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Product Column -->
+        <nav class="footer-col" aria-label="Product links">
+          <h4>Product</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="#features" class="footer-link">Features</a></li>
+            <li><a href="#product" class="footer-link">Dashboard</a></li>
+            <li><a href="#how-it-works" class="footer-link">How It Works</a></li>
+            <li><a href="#cta" class="footer-link">Pricing</a></li>
+            <li><a href="#" class="footer-link">API Docs</a></li>
+          </ul>
+        </nav>
+
+        <!-- Company Column -->
+        <nav class="footer-col" aria-label="Company links">
+          <h4>Company</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="#" class="footer-link">About Aurevia</a></li>
+            <li><a href="#" class="footer-link">Careers</a></li>
+            <li><a href="#" class="footer-link">Press Kit</a></li>
+            <li><a href="#" class="footer-link">Blog</a></li>
+            <li><a href="#" class="footer-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Legal Column -->
+        <nav class="footer-col" aria-label="Legal links">
+          <h4>Legal</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer-link">Terms of Service</a></li>
+            <li><a href="#" class="footer-link">Cookie Policy</a></li>
+            <li><a href="#" class="footer-link">Security</a></li>
+            <li><a href="#" class="footer-link">Accessibility</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p>© 2025 Aurevia Technologies, Inc. All rights reserved. Real estate analytics for informational purposes only.</p>
+        <div class="footer-legal" role="list">
+          <a href="#" class="footer-link" role="listitem">Privacy</a>
+          <a href="#" class="footer-link" role="listitem">Terms</a>
+          <a href="#" class="footer-link" role="listitem">Cookies</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Screen reader only class -->
+  <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}</style>
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+  <script>
+    /* ==========================================
+       NAV: Scroll behavior
+       ========================================== */
+    const nav = document.getElementById('mainNav');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+      if (currentScroll > 60) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+      lastScroll = currentScroll;
+    }, { passive: true });
+
+    /* ==========================================
+       MOBILE MENU
+       ========================================== */
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    hamburgerBtn.addEventListener('click', openMobileMenu);
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
+
+    /* ==========================================
+       SCROLL REVEAL
+       ========================================== */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ==========================================
+       AI SEARCH BAR: Typewriter effect
+       ========================================== */
+    const queries = [
+      'Find me a 2-bed investment property with 8%+ yield in Austin',
+      'What are cap rates trending in Miami Beach right now?',
+      'Compare 3-bed townhouses under $900k in Brooklyn vs Hoboken',
+      'Show neighborhoods with rising demand and low vacancy in Denver',
+      'Analyze 401 Riverside Drive — what\'s the fair value?',
+    ];
+
+    const aiInput = document.getElementById('aiSearchInput');
+    const typingIndicator = document.getElementById('typingIndicator');
+    let queryIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isWaiting = false;
+
+    function typeQuery() {
+      if (document.hidden) {
+        setTimeout(typeQuery, 300);
+        return;
+      }
+
+      const currentQuery = queries[queryIndex];
+
+      if (isWaiting) {
+        isWaiting = false;
+        isDeleting = true;
+        typingIndicator.classList.remove('active');
+        setTimeout(typeQuery, 80);
+        return;
+      }
+
+      if (!isDeleting) {
+        aiInput.placeholder = currentQuery.substring(0, charIndex + 1) + '|';
+        charIndex++;
+        typingIndicator.classList.add('active');
+
+        if (charIndex === currentQuery.length) {
+          isWaiting = true;
+          setTimeout(typeQuery, 2800);
+        } else {
+          setTimeout(typeQuery, 52 + Math.random() * 30);
+        }
+      } else {
+        aiInput.placeholder = currentQuery.substring(0, charIndex - 1) + (charIndex > 1 ? '|' : '');
+        charIndex--;
+        typingIndicator.classList.remove('active');
+
+        if (charIndex === 0) {
+          isDeleting = false;
+          queryIndex = (queryIndex + 1) % queries.length;
+          aiInput.placeholder = 'Ask Aurevia anything about real estate...';
+          setTimeout(typeQuery, 700);
+        } else {
+          setTimeout(typeQuery, 28 + Math.random() * 20);
+        }
+      }
+    }
+
+    // Start typewriter after a short delay
+    setTimeout(typeQuery, 1800);
+
+    /* ==========================================
+       ANIMATED COUNTERS
+       ========================================== */
+    const counterTargets = [
+      { id: 'stat-properties', target: 2800000, suffix: '+', prefix: '', format: 'abbreviated' },
+      { id: 'stat-time',       target: 127, suffix: 'hrs', prefix: '', format: 'number' },
+      { id: 'stat-match',      target: 94, suffix: '%', prefix: '', format: 'number' },
+      { id: 'stat-volume',     target: 4.2, suffix: 'B', prefix: '$', format: 'decimal' },
+    ];
+
+    function formatNumber(value, format, prefix, suffix) {
+      if (format === 'abbreviated') {
+        if (value >= 1000000) return prefix + (value / 1000000).toFixed(1) + 'M' + suffix;
+        if (value >= 1000) return prefix + Math.round(value / 1000) + 'K' + suffix;
+        return prefix + Math.round(value) + suffix;
+      } else if (format === 'decimal') {
+        return prefix + value.toFixed(1) + suffix;
+      } else {
+        return prefix + Math.round(value).toLocaleString() + suffix;
+      }
+    }
+
+    function animateCounter(el, target, prefix, suffix, format, duration = 2000) {
+      const start = performance.now();
+      const initial = 0;
+
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+
+        const current = initial + (target - initial) * eased;
+        el.textContent = formatNumber(current, format, prefix, suffix);
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = formatNumber(target, format, prefix, suffix);
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    let countersAnimated = false;
+    const statsBar = document.querySelector('.stats-bar');
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !countersAnimated) {
+        countersAnimated = true;
+        counterTargets.forEach(({ id, target, suffix, prefix, format }) => {
+          const el = document.getElementById(id);
+          if (el) animateCounter(el, target, prefix, suffix, format);
+        });
+        statsObserver.disconnect();
+      }
+    }, { threshold: 0.3 });
+
+    if (statsBar) statsObserver.observe(statsBar);
+
+    /* ==========================================
+       RISK BAR ANIMATION
+       ========================================== */
+    const riskBarObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setTimeout(() => {
+          const riskBar = document.getElementById('riskBar');
+          if (riskBar) riskBar.style.width = '25%';
+        }, 600);
+        riskBarObserver.disconnect();
+      }
+    }, { threshold: 0.3 });
+
+    const dashboardShell = document.getElementById('dashboardShell');
+    if (dashboardShell) riskBarObserver.observe(dashboardShell);
+
+    /* ==========================================
+       EMAIL FORM SUBMISSION
+       ========================================== */
+    function handleEmailSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('emailForm');
+      const success = document.getElementById('formSuccess');
+      const btn = document.getElementById('cta-submit-btn');
+
+      btn.innerHTML = '<span>Submitting...</span>';
+      btn.disabled = true;
+
+      // Simulate network delay
+      setTimeout(() => {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      }, 1000);
+    }
+
+    /* ==========================================
+       SMOOTH HERO PARALLAX
+       ========================================== */
+    const heroBg = document.querySelector('.hero-bg');
+    window.addEventListener('scroll', () => {
+      if (heroBg && window.scrollY < window.innerHeight) {
+        heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+      }
+    }, { passive: true });
+
+    /* ==========================================
+       DASHBOARD: AI query cycling
+       ========================================== */
+    const dashboardQueries = [
+      'Find me a 2-bed investment property with 8%+ yield in Austin, TX',
+      'Show properties with appreciation above 10% YoY in Miami',
+      'What\'s the fair value for 1140 Congress Ave, Austin?',
+      'Compare cap rates: Austin vs Nashville vs Denver 2024',
+    ];
+
+    let dbQueryIdx = 0;
+    const dbQueryEl = document.getElementById('dashboardQuery');
+
+    setInterval(() => {
+      if (!dbQueryEl) return;
+      dbQueryIdx = (dbQueryIdx + 1) % dashboardQueries.length;
+      dbQueryEl.style.opacity = '0';
+      dbQueryEl.style.transform = 'translateY(4px)';
+      dbQueryEl.style.transition = 'all 0.3s ease';
+
+      setTimeout(() => {
+        dbQueryEl.textContent = dashboardQueries[dbQueryIdx];
+        dbQueryEl.style.opacity = '1';
+        dbQueryEl.style.transform = 'translateY(0)';
+      }, 350);
+    }, 4500);
+
+    /* ==========================================
+       STEP CARDS: Progressive activation
+       ========================================== */
+    const stepCards = document.querySelectorAll('.step-card');
+
+    const stepObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        let delay = 0;
+        stepCards.forEach((card, idx) => {
+          setTimeout(() => {
+            const numEl = card.querySelector('.step-number');
+            if (numEl && idx > 0) {
+              numEl.classList.remove('inactive');
+              numEl.classList.add('active');
+            }
+          }, delay);
+          delay += 300;
+        });
+        stepObserver.disconnect();
+      }
+    }, { threshold: 0.4 });
+
+    const howSection = document.getElementById('how-it-works');
+    if (howSection) stepObserver.observe(howSection);
+
+    /* ==========================================
+       KEYBOARD ACCESSIBILITY: Search bar focus
+       ========================================== */
+    const heroSearchBar = document.getElementById('heroSearchBar');
+    if (heroSearchBar) {
+      heroSearchBar.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const input = heroSearchBar.querySelector('input');
+          if (input) input.focus();
+        }
+      });
+    }
+
+    /* ==========================================
+       FEATURE CARDS: Gold border on hover
+       ========================================== */
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.setProperty('--hover-glow', '1');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.removeProperty('--hover-glow');
+      });
+    });
+
+    /* ==========================================
+       PERFORMANCE: Reduce motion
+       ========================================== */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (prefersReducedMotion.matches) {
+      document.querySelectorAll('.reveal').forEach(el => {
+        el.classList.add('visible');
+      });
+    }
+
+  </script>
+
+</body>
+</html>
