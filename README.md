@@ -1,17 +1,9 @@
-<div align="center">
-  <img src="img_hero.png" alt="Aurevia Header" width="100%" style="border-radius: 12px; margin-bottom: 24px;" />
-  
-  <h1>Aurevia — Real Estate Intelligence Platform</h1>
-  
-  <p><b>Real estate, decoded.</b></p>
-  <p>Aurevia is an AI-powered real estate intelligence platform that helps investors and buyers discover, analyze, and transact properties smarter through AI-driven personalization, market analytics, and investment scoring.</p>
+![Aurevia Header](img_hero.png)
 
-  <p>
-    <a href="#-saas-product-demo-video">View Demo</a> •
-    <a href="#-platform-architecture--features">Features</a> •
-    <a href="#-quick-start--local-setup">Quick Start</a>
-  </p>
-</div>
+# Aurevia — Real Estate Intelligence Platform
+
+**Real estate, decoded.**  
+Aurevia is an AI-powered real estate intelligence platform that helps investors and buyers discover, analyze, and transact properties smarter through AI-driven personalization, market analytics, and investment scoring.
 
 ---
 
@@ -21,28 +13,22 @@ Aurevia's core experience is showcased in a high-fidelity, fully code-driven pro
 
 ### 16:9 Landscape Launch Video (57s)
 
-<a href="demo.html">
-  <img src="aurevia_demo_16x9.webp" alt="Aurevia Product Demo Video 16:9" width="100%" style="border-radius: 8px;" />
-</a>
+[![Aurevia Product Demo Video 16:9](aurevia_demo_16x9.webp)](demo.html)
 
-> **Note on playback**: The animated WebP above plays automatically. To experience the high-frame-rate, interactive HTML animation with its ambient soundtrack, you need to run it locally. Clone this repository and open [`demo.html`](demo.html) in your browser.
+> **Note on playback**: The animated WebP above plays automatically. To experience the high-frame-rate, interactive HTML animation with its ambient soundtrack, you need to run it locally. Clone this repository and open `demo.html` in your browser.
 
 ### 📱 9:16 Vertical Mobile & Social Cutdown (55s)
 
-<div align="center">
-  <a href="demo_9x16.html">
-    <img src="aurevia_demo_9x16.webp" alt="Aurevia Product Demo Video 9:16 Vertical" width="320" style="border-radius: 16px;" />
-  </a>
-  <br/>
-  <p><em>Vertical cutdown for mobile and social media. <br/>Clone and open <a href="demo_9x16.html"><code>demo_9x16.html</code></a> locally to experience the interactive version.</em></p>
-</div>
+[![Aurevia Product Demo Video 9:16 Vertical](aurevia_demo_9x16.webp)](demo_9x16.html)
+
+*Vertical cutdown for mobile and social media. Clone and open `demo_9x16.html` locally to experience the interactive version.*
 
 ---
 
 ## 📽️ Video Shot List & Timestamp Structure
 
 | Timestamp | Scene | Key Motion & Content | Text Overlay |
-|:---:|---|---|---|
+| :---: | :--- | :--- | :--- |
 | **0:00–0:05** | **Logo Reveal** | Deep black screen, gold Aurevia logo fades in with soft radial pulse glow. Tagline types out with cursor. | *"Real estate, decoded."* |
 | **0:05–0:12** | **Problem Framing** | Rapid cut sequence of cluttered, overwhelming listing pages with noise filter bars fading to black. | *"Endless listings. **No real answers.**"* |
 | **0:12–0:20** | **Product Reveal** | Aurevia browser chrome dashboard slides up with spring motion. AI search bar animates natural typing query. Property cards slide in with AI match percentage badges. | *"AI Match Engine"* |
@@ -100,6 +86,4 @@ Because the interactive demos use local assets and precise timing, they are best
 
 ---
 
-<div align="center">
-  <p>© 2026 Aurevia Intelligence Inc. All rights reserved.</p>
-</div>
+© 2026 Aurevia Intelligence Inc. All rights reserved.
