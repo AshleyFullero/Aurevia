@@ -1,5 +1,3 @@
-![Aurevia Header](img_hero.png)
-
 # Aurevia — Real Estate Intelligence Platform
 
 **Real estate, decoded.**  
