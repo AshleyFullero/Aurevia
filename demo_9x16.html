@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurevia Demo — 9:16 Vertical</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:    #E8A820;
+  --gold-lt: #FFD160;
+  --gold-dk: #CC7A00;
+  --bg:      #09090E;
+  --bg2:     #0F1018;
+  --card:    #12131C;
+  --border:  rgba(255,255,255,0.07);
+  --b-gold:  rgba(232,168,32,0.3);
+  --txt1:    #F4F4F6;
+  --txt2:    #9DA3B4;
+  --txt3:    #5C6278;
+  --green:   #34D399;
+  --blue:    #9AAEDD;
+  --purple:  #A78BFA;
+  --red:     #F87171;
+}
+
+html { background: #000; overflow: hidden; }
+
+body {
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: 'Inter', sans-serif;
+  color: var(--txt1);
+  -webkit-font-smoothing: antialiased;
+  transform-origin: top left;
+}
+
+#stage {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.scene.active { opacity: 1; pointer-events: all; z-index: 10; }
+
+#progress {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold-dk), var(--gold), var(--gold-lt));
+  width: 0%;
+  z-index: 999;
+  box-shadow: 0 0 10px rgba(232,168,32,0.7);
+}
+
+#wm {
+  position: absolute;
+  top: 40px; right: 40px;
+  display: flex; align-items: center; gap: 10px;
+  z-index: 998;
+}
+.wm-ic {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.wm-tx { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
+.wm-tx span { color: var(--gold); }
+
+/* Keyframes */
+@keyframes fadeIn  { to { opacity: 1; } }
+@keyframes fadeUp  { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+@keyframes logoReveal { to { opacity: 1; transform: scale(1); box-shadow: 0 0 80px rgba(232,168,32,0.5); } }
+@keyframes blink    { 0%,100% { opacity:1; } 50% { opacity:0; } }
+@keyframes barGrow  { to { width: var(--w); } }
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+@keyframes countUp  { from { opacity:0; } to { opacity:1; } }
+@keyframes checkPop { to { opacity: 1; transform: scale(1); } }
+@keyframes taglineReveal { 0% { width:0; opacity:1; } 100% { width:490px; opacity:1; } }
+@keyframes pulse-dot { 0%,100% { box-shadow:0 0 0 0 rgba(52,211,153,0.4); } 50% { box-shadow:0 0 0 8px rgba(52,211,153,0); } }
+
+/* ═══ SCENE 1 — LOGO ═══ */
+#s1 { background: #000; gap: 28px; }
+.v-logo-icon {
+  width: 110px; height: 110px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+  border-radius: 28px;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: scale(0.6);
+}
+#s1.active .v-logo-icon { animation: logoReveal 1s 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.v-wordmark {
+  font-size: 80px; font-weight: 800; letter-spacing: -0.04em;
+  opacity: 0;
+}
+#s1.active .v-wordmark { animation: fadeUp 0.7s 0.9s ease forwards; }
+.v-wordmark span { color: var(--gold); }
+.v-tagline {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 30px; color: var(--txt2);
+  overflow: hidden; white-space: nowrap;
+  border-right: 2px solid var(--gold);
+  width: 0; opacity: 0;
+}
+#s1.active .v-tagline { animation: taglineReveal 1.4s 1.6s steps(24,end) forwards; }
+
+/* ═══ SCENE 2 — PROBLEM ═══ */
+#s2 { gap: 0; }
+.v-clutter {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 80px 40px;
+  opacity: 0;
+}
+#s2.active .v-clutter { animation: fadeIn 0.4s 0.1s ease forwards; }
+.v-cc {
+  background: #16161E;
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 10px;
+  padding: 12px;
+  opacity: 0; transform: translateY(8px);
+}
+#s2.active .v-cc:nth-child(1) { animation: fadeUp 0.3s 0.1s ease forwards; }
+#s2.active .v-cc:nth-child(2) { animation: fadeUp 0.3s 0.15s ease forwards; }
+#s2.active .v-cc:nth-child(3) { animation: fadeUp 0.3s 0.2s ease forwards; }
+#s2.active .v-cc:nth-child(4) { animation: fadeUp 0.3s 0.25s ease forwards; }
+#s2.active .v-cc:nth-child(5) { animation: fadeUp 0.3s 0.13s ease forwards; }
+#s2.active .v-cc:nth-child(6) { animation: fadeUp 0.3s 0.18s ease forwards; }
+#s2.active .v-cc:nth-child(7) { animation: fadeUp 0.3s 0.22s ease forwards; }
+#s2.active .v-cc:nth-child(8) { animation: fadeUp 0.3s 0.28s ease forwards; }
+.vcc-img { height: 100px; background: #1E1F2E; border-radius: 6px; margin-bottom: 8px; }
+.vcc-l { height: 9px; background: #1E1F2E; border-radius: 3px; margin-bottom: 5px; }
+.vcc-l.s { width: 55%; }
+.vcc-l.p { background: rgba(255,255,255,0.06); width: 35%; }
+.v2-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: linear-gradient(to bottom, rgba(9,9,14,0) 0%, rgba(9,9,14,0.9) 35%, rgba(9,9,14,0.98) 60%);
+  opacity: 0;
+}
+#s2.active .v2-overlay { animation: fadeIn 0.6s 1.3s ease forwards; }
+.v2-head {
+  font-family: 'DM Serif Display', serif;
+  font-size: 66px; text-align: center; line-height: 1.08;
+  color: var(--txt2); opacity: 0; transform: translateY(20px);
+  padding: 0 40px;
+}
+.v2-head strong { color: var(--red); font-weight: 400; }
+#s2.active .v2-head { animation: fadeUp 0.7s 1.9s ease forwards; }
+.v2-sub {
+  font-size: 20px; color: var(--txt3); text-transform: uppercase;
+  letter-spacing: 0.08em; font-weight: 500; margin-top: 18px;
+  opacity: 0;
+}
+#s2.active .v2-sub { animation: fadeIn 0.6s 2.5s ease forwards; }
+
+/* ═══ SCENE 3 — PRODUCT REVEAL ═══ */
+#s3 { padding: 60px 40px; justify-content: flex-start; padding-top: 120px; }
+.v3-label { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); opacity: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+.v3-label::before { content:''; width: 20px; height: 2px; background: var(--gold); }
+#s3.active .v3-label { animation: fadeIn 0.4s 0.2s ease forwards; }
+.v3-searchbar {
+  background: rgba(232,168,32,0.05);
+  border: 1px solid rgba(232,168,32,0.2);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 16px; color: var(--txt2);
+  width: 100%;
+  opacity: 0; transform: translateY(16px);
+  margin-bottom: 24px;
+}
+#s3.active .v3-searchbar { animation: fadeUp 0.6s 0.4s ease forwards; }
+.v3-ai-b {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+  color: #0F0E09; font-size: 9px; font-weight: 900;
+  letter-spacing: 0.1em; padding: 3px 8px;
+  border-radius: 4px; text-transform: uppercase; flex-shrink: 0;
+}
+.v3-typed { font-size: 15px; font-weight: 500; color: var(--txt1); }
+.v3-cur { display: inline-block; width: 2px; height: 16px; background: var(--gold); margin-left: 2px; vertical-align: middle; }
+#s3.active .v3-cur { animation: blink 0.8s step-end infinite; }
+
+/* Vertical property cards */
+.v3-cards { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+.v3-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  opacity: 0;
+}
+#s3.active .v3-card:nth-child(1) { animation: fadeUp 0.5s 2.0s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+#s3.active .v3-card:nth-child(2) { animation: fadeUp 0.5s 2.4s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+#s3.active .v3-card:nth-child(3) { animation: fadeUp 0.5s 2.8s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+.v3c-img { width: 140px; height: 130px; flex-shrink: 0; position: relative; overflow: hidden; }
+.v3c-img img { width: 100%; height: 100%; object-fit: cover; }
+.v3c-match {
+  position: absolute; bottom: 6px; left: 6px;
+  background: rgba(9,9,14,0.9);
+  border: 1px solid rgba(232,168,32,0.5);
+  border-radius: 5px; padding: 2px 8px;
+  font-size: 11px; font-weight: 800; color: var(--gold);
+  opacity: 0;
+}
+#s3.active .v3-card:nth-child(1) .v3c-match { animation: fadeIn 0.4s 2.5s forwards; }
+#s3.active .v3-card:nth-child(2) .v3c-match { animation: fadeIn 0.4s 2.9s forwards; }
+#s3.active .v3-card:nth-child(3) .v3c-match { animation: fadeIn 0.4s 3.3s forwards; }
+.v3c-body { padding: 16px 18px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.v3c-price { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 3px; }
+.v3c-loc { font-size: 12px; color: var(--txt2); margin-bottom: 10px; }
+.v3c-row { display: flex; gap: 12px; }
+.v3c-tag { font-size: 11px; padding: 3px 9px; border-radius: 4px; font-weight: 600; }
+.tg { background: rgba(52,211,153,0.1); color: var(--green); border: 1px solid rgba(52,211,153,0.2); }
+.ty { background: rgba(232,168,32,0.1); color: var(--gold); border: 1px solid rgba(232,168,32,0.2); }
+
+/* ═══ SCENE 4 — FEATURES MONTAGE ═══ */
+#s4 { padding: 80px 50px; gap: 24px; justify-content: center; }
+.v4-label { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); opacity: 0; display: flex; align-items: center; gap: 8px; }
+.v4-label::before { content:''; width: 20px; height: 2px; background: var(--gold); }
+.scene.active .v4-label { animation: fadeIn 0.4s 0.2s ease forwards; }
+
+.v4-head {
+  font-family: 'DM Serif Display', serif;
+  font-size: 72px; font-weight: 400; line-height: 1.05;
+  letter-spacing: -0.02em; text-align: center;
+  opacity: 0;
+}
+.scene.active .v4-head { animation: fadeUp 0.7s 0.4s ease forwards; }
+.v4-head span { background: linear-gradient(135deg, var(--gold), var(--gold-lt)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+.v4-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  opacity: 0;
+}
+.scene.active .v4-stats-grid { animation: fadeUp 0.6s 0.8s ease forwards; }
+.v4-stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.v4-stat-card.highlight {
+  border-color: rgba(232,168,32,0.25);
+  box-shadow: 0 0 30px rgba(232,168,32,0.07);
+}
+.v4-sc-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--txt3); }
+.v4-sc-val { font-size: 40px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+.v4-sc-sub { font-size: 12px; color: var(--txt2); }
+
+/* ═══ SCENE 5 — ANALYTICS ═══ */
+#s5 { padding: 80px 50px; gap: 28px; justify-content: center; }
+.v5-chart-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  width: 100%;
+  opacity: 0;
+}
+#s5.active .v5-chart-panel { animation: fadeUp 0.7s 0.4s ease forwards; }
+.v5-svg { width: 100%; height: 200px; }
+.v5-line { fill: none; stroke: var(--gold); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 700; stroke-dashoffset: 700; }
+#s5.active .v5-line { animation: drawLine 2s 0.9s ease forwards; }
+.v5-area { fill: url(#v5Grad); opacity: 0; }
+#s5.active .v5-area { animation: fadeIn 0.5s 2.2s ease forwards; }
+
+.v5-metrics {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px; width: 100%;
+  opacity: 0;
+}
+#s5.active .v5-metrics { animation: fadeUp 0.6s 0.8s ease forwards; }
+.v5-metric {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-align: center;
+}
+.v5-m-val { font-size: 32px; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 4px; }
+.v5-m-label { font-size: 11px; color: var(--txt3); }
+
+/* ═══ SCENE 6 — TRANSACTIONS ═══ */
+#s6 { padding: 80px 50px; gap: 28px; justify-content: center; }
+.v6-pipeline {
+  display: flex; flex-direction: column; gap: 0;
+  width: 100%;
+  opacity: 0;
+}
+#s6.active .v6-pipeline { animation: fadeIn 0.4s 0.3s ease forwards; }
+.v6-step {
+  display: flex; align-items: flex-start; gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+}
+.v6-step:last-child { border-bottom: none; }
+#s6.active .v6-step:nth-child(1) { animation: fadeUp 0.4s 0.4s ease forwards; }
+#s6.active .v6-step:nth-child(2) { animation: fadeUp 0.4s 0.7s ease forwards; }
+#s6.active .v6-step:nth-child(3) { animation: fadeUp 0.4s 1.0s ease forwards; }
+#s6.active .v6-step:nth-child(4) { animation: fadeUp 0.4s 1.3s ease forwards; }
+#s6.active .v6-step:nth-child(5) { animation: fadeUp 0.4s 1.6s ease forwards; }
+
+.v6-icon {
+  width: 60px; height: 60px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+}
+.v6i-done { background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.3); }
+.v6i-active { background: rgba(232,168,32,0.12); border: 1px solid rgba(232,168,32,0.4); box-shadow: 0 0 20px rgba(232,168,32,0.15); }
+.v6i-pending { background: var(--card); border: 1px solid var(--border); opacity: 0.5; }
+.v6-info { flex: 1; }
+.v6-step-name { font-size: 17px; font-weight: 700; margin-bottom: 3px; }
+.v6-step-sub { font-size: 13px; color: var(--txt3); }
+.v6-check {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--green); color: #000; font-size: 14px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 16px;
+  opacity: 0; transform: scale(0);
+}
+#s6.active .v6-step:nth-child(1) .v6-check { animation: checkPop 0.4s 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+#s6.active .v6-step:nth-child(2) .v6-check { animation: checkPop 0.4s 1.1s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+#s6.active .v6-step:nth-child(3) .v6-check { animation: checkPop 0.4s 1.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+#s6.active .v6-step:nth-child(4) .v6-check { animation: checkPop 0.4s 1.7s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+#s6.active .v6-step:nth-child(5) .v6-check { animation: checkPop 0.4s 2.0s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+/* ═══ SCENE 7 — STATS ═══ */
+#s7 { gap: 0; position: relative; }
+.v7-glow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(ellipse, rgba(232,168,32,0.1) 0%, transparent 65%);
+}
+.v7-stats {
+  display: flex; flex-direction: column; gap: 24px;
+  padding: 0 50px;
+  width: 100%;
+}
+.v7-stat {
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px 30px;
+  opacity: 0;
+}
+#s7.active .v7-stat:nth-child(1) { animation: scaleIn 0.5s 0.4s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+#s7.active .v7-stat:nth-child(2) { animation: scaleIn 0.5s 0.65s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+#s7.active .v7-stat:nth-child(3) { animation: scaleIn 0.5s 0.9s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+#s7.active .v7-stat:nth-child(4) { animation: scaleIn 0.5s 1.15s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+.v7-val {
+  font-size: 68px; font-weight: 900; letter-spacing: -0.05em; line-height: 1;
+  background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+.v7-label { font-size: 17px; color: var(--txt2); font-weight: 500; }
+
+/* ═══ SCENE 8 — CLOSING CTA ═══ */
+#s8 { background: #000; gap: 32px; position: relative; }
+.v8-glow {
+  position: absolute; top: 40%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 600px;
+  background: radial-gradient(ellipse, rgba(232,168,32,0.13) 0%, transparent 65%);
+  opacity: 0;
+}
+#s8.active .v8-glow { animation: fadeIn 1s 0.2s ease forwards; }
+.v8-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+  opacity: 0; transform: translateY(24px); position: relative; z-index: 1;
+  padding: 0 60px;
+}
+#s8.active .v8-wrap { animation: fadeUp 0.8s 0.4s ease forwards; }
+.v8-icon {
+  width: 120px; height: 120px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+  border-radius: 30px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 60px rgba(232,168,32,0.4);
+}
+.v8-wm { font-size: 88px; font-weight: 800; letter-spacing: -0.04em; }
+.v8-wm span { color: var(--gold); }
+.v8-tag { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 32px; color: var(--txt2); letter-spacing: 0.02em; text-align: center; }
+.v8-btn {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+  color: #0F0E09; font-size: 22px; font-weight: 800;
+  padding: 22px 56px; border-radius: 100px;
+  letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 14px;
+  box-shadow: 0 8px 40px rgba(232,168,32,0.4);
+  opacity: 0; transform: translateY(16px);
+}
+#s8.active .v8-btn { animation: fadeUp 0.6s 1.6s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+.v8-sub {
+  font-size: 15px; color: var(--txt3); letter-spacing: 0.08em; text-transform: uppercase;
+  opacity: 0; text-align: center;
+}
+#s8.active .v8-sub { animation: fadeIn 0.6s 2.2s ease forwards; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- Watermark -->
+  <div id="wm">
+    <div class="wm-ic"><svg width="18" height="18" viewBox="0 0 18 18" fill="#0F0E09"><path d="M9 1L17 16H1L9 1Z"/></svg></div>
+    <span class="wm-tx">Aure<span>via</span></span>
+  </div>
+  <div id="progress"></div>
+
+  <!-- SCENE 1: Logo -->
+  <section class="scene" id="s1">
+    <div class="v-logo-icon"><svg width="60" height="60" viewBox="0 0 60 60" fill="#0F0E09"><path d="M30 4L56 52H4L30 4Z"/></svg></div>
+    <div class="v-wordmark">Aure<span>via</span></div>
+    <div class="v-tagline">Real estate, decoded.</div>
+  </section>
+
+  <!-- SCENE 2: Problem -->
+  <section class="scene" id="s2">
+    <div class="v-clutter">
+      <div class="v-cc"><div class="vcc-img"></div><div class="vcc-l"></div><div class="vcc-l s"></div><div class="vcc-l p"></div></div>
+      <div class="v-cc"><div class="vcc-img"></div><div class="vcc-l"></div><div class="vcc-l s"></div><div class="vcc-l p"></div></div>
+      <div class="v-cc"><div class="vcc-img"></div><div class="vcc-l"></div><div class="vcc-l s"></div><div class="vcc-l p"></div></div>
+      <div class="v-cc"><div class="vcc-img"></div><div class="vcc-l"></div><div class="vcc-l s"></div><div class="vcc-l p"></div></div>
+      <div class="v-cc"><div class="vcc-img"></div><div class="vcc-l"></div><div class="vcc-l s"></div><div class="vcc-l p"></div></div>
+      <div class="v-cc"><div class="vcc-img"></div><div class="vcc-l"></div><div class="vcc-l s"></div><div class="vcc-l p"></div></div>
+      <div class="v-cc"><div class="vcc-img"></div><div class="vcc-l"></div><div class="vcc-l s"></div><div class="vcc-l p"></div></div>
+      <div class="v-cc"><div class="vcc-img"></div><div class="vcc-l"></div><div class="vcc-l s"></div><div class="vcc-l p"></div></div>
+    </div>
+    <div class="v2-overlay">
+      <div class="v2-head">Endless listings.<br><strong>No real answers.</strong></div>
+      <div class="v2-sub">There has to be a smarter way.</div>
+    </div>
+  </section>
+
+  <!-- SCENE 3: Product Reveal -->
+  <section class="scene" id="s3">
+    <div class="v3-label">Aurevia AI Dashboard</div>
+    <div class="v3-searchbar">
+      <div class="v3-ai-b">AI</div>
+      <div class="v3-typed" id="v3t"></div><div class="v3-cur"></div>
+    </div>
+    <div class="v3-cards">
+      <div class="v3-card">
+        <div class="v3c-img"><img src="img_austin.png" alt="Austin"><div class="v3c-match">96% Match</div></div>
+        <div class="v3c-body">
+          <div class="v3c-price">$1,245,000</div>
+          <div class="v3c-loc">2BR · South Congress, Austin TX</div>
+          <div class="v3c-row"><span class="v3c-tag tg">8.4% Cap</span><span class="v3c-tag ty">↑12%/yr</span></div>
+        </div>
+      </div>
+      <div class="v3-card">
+        <div class="v3c-img"><img src="img_miami.png" alt="Miami"><div class="v3c-match">89% Match</div></div>
+        <div class="v3c-body">
+          <div class="v3c-price">$2,180,000</div>
+          <div class="v3c-loc">2BR · Brickell, Miami FL</div>
+          <div class="v3c-row"><span class="v3c-tag tg">8.7% Cap</span><span class="v3c-tag ty">↑9%/yr</span></div>
+        </div>
+      </div>
+      <div class="v3-card">
+        <div class="v3c-img"><img src="img_nyc.png" alt="NYC"><div class="v3c-match" style="color:var(--txt2);border-color:rgba(255,255,255,0.15);">81% Match</div></div>
+        <div class="v3c-body">
+          <div class="v3c-price">$3,750,000</div>
+          <div class="v3c-loc">3BR · West Village, NY</div>
+          <div class="v3c-row"><span class="v3c-tag ty">6.2% Cap</span><span class="v3c-tag tg">↑6%/yr</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 4: Features Callout -->
+  <section class="scene" id="s4">
+    <div class="v4-label">4 Intelligent Pillars</div>
+    <div class="v4-head">Intelligence at <span>every stage.</span></div>
+    <div class="v4-stats-grid">
+      <div class="v4-stat-card highlight">
+        <div class="v4-sc-label">Match Scores</div>
+        <div class="v4-sc-val" style="background:linear-gradient(135deg,var(--gold),var(--gold-lt));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">94%</div>
+        <div class="v4-sc-sub">AI accuracy</div>
+      </div>
+      <div class="v4-stat-card">
+        <div class="v4-sc-label">Market Data</div>
+        <div class="v4-sc-val" style="color:var(--blue);">Live</div>
+        <div class="v4-sc-sub">Real-time pricing</div>
+      </div>
+      <div class="v4-stat-card">
+        <div class="v4-sc-label">Cap Rate</div>
+        <div class="v4-sc-val" style="color:var(--green);">8.4%</div>
+        <div class="v4-sc-sub">Instant calc</div>
+      </div>
+      <div class="v4-stat-card">
+        <div class="v4-sc-label">Time to Close</div>
+        <div class="v4-sc-val" style="color:var(--purple);">24d</div>
+        <div class="v4-sc-sub">Avg guided deal</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 5: Market Insights Chart -->
+  <section class="scene" id="s5">
+    <div class="v4-label">Market Insights</div>
+    <div class="v4-head" style="font-size:62px;margin-bottom:24px;">Know where the <span>market is going.</span></div>
+    <div class="v5-chart-panel">
+      <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--txt3);margin-bottom:6px;">Austin Metro · Price Appreciation</div>
+      <div style="font-size:46px;font-weight:800;letter-spacing:-0.04em;background:linear-gradient(135deg,var(--gold),var(--gold-lt));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px;">+12.4%</div>
+      <div style="font-size:14px;color:var(--green);margin-bottom:24px;">↑ YoY outpacing national avg by 4.1pp</div>
+      <svg viewBox="0 0 980 200" class="v5-svg" style="overflow:visible;">
+        <defs>
+          <linearGradient id="v5Grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E8A820" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#E8A820" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path class="v5-area" d="M0,170 C150,155 300,130 450,100 C600,70 750,40 980,10 L980,200 L0,200 Z"/>
+        <path class="v5-line" d="M0,170 C150,155 300,130 450,100 C600,70 750,40 980,10"/>
+        <circle cx="0"   cy="170" r="5" fill="#E8A820" opacity="0.5"/>
+        <circle cx="245" cy="125" r="5" fill="#E8A820" opacity="0.6"/>
+        <circle cx="490" cy="95"  r="5" fill="#E8A820" opacity="0.7"/>
+        <circle cx="735" cy="38"  r="5" fill="#E8A820" opacity="0.9"/>
+        <circle cx="980" cy="10"  r="7" fill="#E8A820"/>
+      </svg>
+    </div>
+    <div class="v5-metrics">
+      <div class="v5-metric"><div class="v5-m-val" style="color:var(--green);">8.4%</div><div class="v5-m-label">Cap Rate</div></div>
+      <div class="v5-metric"><div class="v5-m-val" style="color:var(--gold);">12.4%</div><div class="v5-m-label">YoY Growth</div></div>
+      <div class="v5-metric"><div class="v5-m-val">2.1%</div><div class="v5-m-label">Vacancy</div></div>
+    </div>
+  </section>
+
+  <!-- SCENE 6: Transactions -->
+  <section class="scene" id="s6">
+    <div class="v4-label">End-to-End Transactions</div>
+    <div class="v4-head" style="font-size:62px;margin-bottom:24px;">From offer to keys, <span>guided.</span></div>
+    <div class="v6-pipeline">
+      <div class="v6-step">
+        <div class="v6-icon v6i-done">📝</div>
+        <div class="v6-info"><div class="v6-step-name">Offer Made</div><div class="v6-step-sub">AI negotiation hints · $1,220,000 accepted</div></div>
+        <div class="v6-check">✓</div>
+      </div>
+      <div class="v6-step">
+        <div class="v6-icon v6i-done">🔍</div>
+        <div class="v6-info"><div class="v6-step-name">Inspection</div><div class="v6-step-sub">Coordinated &amp; completed</div></div>
+        <div class="v6-check">✓</div>
+      </div>
+      <div class="v6-step">
+        <div class="v6-icon v6i-done">📄</div>
+        <div class="v6-info"><div class="v6-step-name">Documents</div><div class="v6-step-sub">E-signed &amp; secured in vault</div></div>
+        <div class="v6-check">✓</div>
+      </div>
+      <div class="v6-step">
+        <div class="v6-icon v6i-active">🏦</div>
+        <div class="v6-info"><div class="v6-step-name">Escrow</div><div class="v6-step-sub">Active · Day 12 of 30</div></div>
+        <div class="v6-check">✓</div>
+      </div>
+      <div class="v6-step">
+        <div class="v6-icon v6i-pending">🔑</div>
+        <div class="v6-info"><div class="v6-step-name">Closing Day</div><div class="v6-step-sub">Estimated Aug 14, 2025</div></div>
+        <div class="v6-check">✓</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 7: Stats -->
+  <section class="scene" id="s7">
+    <div class="v7-glow"></div>
+    <div class="v7-stats" style="position:relative;z-index:1;">
+      <div class="v7-stat">
+        <div class="v7-val"><span id="vc1">0</span>+</div>
+        <div class="v7-label">Properties Analyzed</div>
+      </div>
+      <div class="v7-stat">
+        <div class="v7-val"><span id="vc2">0</span>x</div>
+        <div class="v7-label">Faster Decisions</div>
+      </div>
+      <div class="v7-stat">
+        <div class="v7-val"><span id="vc3">0</span>%</div>
+        <div class="v7-label">Match Satisfaction</div>
+      </div>
+      <div class="v7-stat">
+        <div class="v7-val">$<span id="vc4">0</span>B</div>
+        <div class="v7-label">Transaction Volume</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 8: Closing CTA -->
+  <section class="scene" id="s8">
+    <div class="v8-glow"></div>
+    <div class="v8-wrap">
+      <div class="v8-icon"><svg width="66" height="66" viewBox="0 0 66 66" fill="#0F0E09"><path d="M33 4L60 58H6L33 4Z"/></svg></div>
+      <div class="v8-wm">Aure<span>via</span></div>
+      <div class="v8-tag">Real estate, decoded.</div>
+      <div class="v8-btn">
+        Request Early Access
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11h14M11 4l7 7-7 7" stroke="#0F0E09" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="v8-sub">aurevia.com · AI-Powered Real Estate</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const TOTAL_MS = 55000;
+
+const scenes = [
+  { id: 's1', startMs: 0     },
+  { id: 's2', startMs: 5500  },
+  { id: 's3', startMs: 12500 },
+  { id: 's4', startMs: 20500 },
+  { id: 's5', startMs: 27500 },
+  { id: 's6', startMs: 34000 },
+  { id: 's7', startMs: 41500 },
+  { id: 's8', startMs: 49000 },
+];
+
+// Scale to fit
+function applyScale() {
+  const s = Math.min(window.innerWidth / 1080, window.innerHeight / 1920);
+  document.body.style.transform = `scale(${s})`;
+  document.body.style.marginLeft = (window.innerWidth  - 1080 * s) / 2 + 'px';
+  document.body.style.marginTop  = (window.innerHeight - 1920 * s) / 2 + 'px';
+}
+applyScale();
+window.addEventListener('resize', applyScale);
+
+let startTime = null;
+let curScene = -1;
+let s3Done = false, s7Done = false;
+const prog = document.getElementById('progress');
+
+function showScene(idx) {
+  if (idx === curScene) return;
+  if (curScene >= 0) document.getElementById(scenes[curScene].id)?.classList.remove('active');
+  curScene = idx;
+  document.getElementById(scenes[idx].id)?.classList.add('active');
+  if (scenes[idx].id === 's3' && !s3Done) { s3Done = true; runS3Typer(); }
+  if (scenes[idx].id === 's7' && !s7Done) { s7Done = true; runS7Counters(); }
+}
+
+function runS3Typer() {
+  const el = document.getElementById('v3t');
+  const txt = 'Find 2-bed properties with 8%+ yield in Austin';
+  let i = 0;
+  const iv = setInterval(() => {
+    el.textContent = txt.substring(0, i++);
+    if (i > txt.length) clearInterval(iv);
+  }, 55);
+}
+
+function runS7Counters() {
+  setTimeout(() => {
+    count('vc1', 0, 10000, 2000, v => (Math.round(v/1000)*1000).toLocaleString());
+    count('vc2', 0, 3.5,  1800, v => v.toFixed(1));
+    count('vc3', 0, 98,   1600, v => Math.round(v).toString());
+    count('vc4', 0, 4.2,  1800, v => v.toFixed(1));
+  }, 600);
+}
+
+function count(id, from, to, dur, fmt) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const t0 = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - t0) / dur, 1);
+    const e = 1 - Math.pow(1-p, 3);
+    el.textContent = fmt(from + (to-from) * e);
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+}
+
+function loop(ts) {
+  if (!startTime) startTime = ts;
+  const el = ts - startTime;
+  prog.style.width = Math.min(el / TOTAL_MS * 100, 100) + '%';
+  for (let i = scenes.length - 1; i >= 0; i--) {
+    if (el >= scenes[i].startMs) { showScene(i); break; }
+  }
+  if (el < TOTAL_MS + 1000) requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'r' || e.key === 'R') location.reload();
+});
+</script>
+</body>
+</html>

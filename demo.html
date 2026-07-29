@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurevia — Product Demo</title>
+<style>
+/* =====================================================
+   AUREVIA DEMO VIDEO — 55 SECONDS, 9 SCENES
+   Canvas: 1920 × 1080px
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:    #E8A820;
+  --gold-lt: #FFD160;
+  --gold-dk: #CC7A00;
+  --bg:      #09090E;
+  --bg2:     #0F1018;
+  --bg3:     #141520;
+  --card:    #12131C;
+  --border:  rgba(255,255,255,0.07);
+  --b-gold:  rgba(232,168,32,0.3);
+  --txt1:    #F4F4F6;
+  --txt2:    #9DA3B4;
+  --txt3:    #5C6278;
+  --green:   #34D399;
+  --blue:    #9AAEDD;
+  --purple:  #A78BFA;
+  --teal:    #2DD4BF;
+  --red:     #F87171;
+}
+
+html {
+  background: #000;
+  overflow: hidden;
+}
+
+body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: 'Inter', sans-serif;
+  color: var(--txt1);
+  -webkit-font-smoothing: antialiased;
+  /* Scale to fit viewport while keeping 1920×1080 canvas */
+  transform-origin: top left;
+}
+
+/* ── SCENE CONTAINER ── */
+#stage {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ── SCENE BASE ── */
+.scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scene.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 10;
+}
+
+/* ── PROGRESS BAR ── */
+#progress {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-dk), var(--gold), var(--gold-lt));
+  width: 0%;
+  z-index: 999;
+  transition: none;
+  box-shadow: 0 0 8px rgba(232,168,32,0.6);
+}
+
+/* ── WATERMARK ── */
+#watermark {
+  position: absolute;
+  top: 32px; right: 40px;
+  display: flex; align-items: center; gap: 10px;
+  z-index: 998;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+#watermark.show { opacity: 1; }
+.wm-icon {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+}
+.wm-text { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
+.wm-text span { color: var(--gold); }
+
+/* ── GLOBAL NOISE OVERLAY (subtle film grain) ── */
+#noise {
+  position: absolute; inset: 0; z-index: 997;
+  opacity: 0.025;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* ══════════════════════════════════════════
+   SCENE 1 — LOGO REVEAL (0:00 → 0:05)
+   ══════════════════════════════════════════ */
+#s1 { background: #000; flex-direction: column; gap: 28px; }
+
+.s1-logo-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 22px;
+}
+
+.s1-icon {
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transform: scale(0.7);
+  box-shadow: 0 0 0 0 rgba(232,168,32,0);
+  animation: none;
+}
+#s1.active .s1-icon {
+  animation: logoReveal 0.9s 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards,
+             logoPulse 2s 1.5s ease-in-out infinite;
+}
+@keyframes logoReveal {
+  to { opacity: 1; transform: scale(1); box-shadow: 0 0 60px rgba(232,168,32,0.4); }
+}
+@keyframes logoPulse {
+  0%,100% { box-shadow: 0 0 60px rgba(232,168,32,0.4); }
+  50%      { box-shadow: 0 0 90px rgba(232,168,32,0.65); }
+}
+
+.s1-wordmark {
+  font-size: 64px; font-weight: 800; letter-spacing: -0.04em;
+  opacity: 0; transform: translateY(16px);
+}
+#s1.active .s1-wordmark {
+  animation: fadeUp 0.7s 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.s1-wordmark span { color: var(--gold); }
+
+.s1-tagline {
+  font-size: 26px; font-weight: 400; letter-spacing: 0.04em;
+  color: var(--txt2);
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  overflow: hidden; white-space: nowrap;
+  border-right: 2px solid var(--gold);
+  width: 0; opacity: 0;
+}
+#s1.active .s1-tagline {
+  animation: taglineReveal 1.4s 1.4s steps(22, end) forwards,
+             cursorBlink 0.7s 2.8s step-end 3,
+             taglineFadeOut 0.5s 4.5s ease forwards;
+}
+@keyframes taglineReveal {
+  0%  { width: 0; opacity: 1; }
+  100% { width: 380px; opacity: 1; }
+}
+@keyframes cursorBlink {
+  0%,100% { border-color: var(--gold); }
+  50% { border-color: transparent; }
+}
+@keyframes taglineFadeOut {
+  to { border-color: transparent; }
+}
+
+/* ══════════════════════════════════════════
+   SCENE 2 — PROBLEM FRAMING (0:05 → 0:12)
+   ══════════════════════════════════════════ */
+#s2 { flex-direction: column; background: var(--bg); }
+
+.s2-clutter {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 60px;
+  opacity: 0;
+}
+#s2.active .s2-clutter {
+  animation: clutterIn 0.4s 0.1s ease forwards;
+}
+@keyframes clutterIn { to { opacity: 1; } }
+
+.clutter-card {
+  background: #16161E;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+}
+#s2.active .clutter-card:nth-child(1) { animation: cardIn 0.35s 0.15s ease forwards; }
+#s2.active .clutter-card:nth-child(2) { animation: cardIn 0.35s 0.22s ease forwards; }
+#s2.active .clutter-card:nth-child(3) { animation: cardIn 0.35s 0.29s ease forwards; }
+#s2.active .clutter-card:nth-child(4) { animation: cardIn 0.35s 0.36s ease forwards; }
+#s2.active .clutter-card:nth-child(5) { animation: cardIn 0.35s 0.18s ease forwards; }
+#s2.active .clutter-card:nth-child(6) { animation: cardIn 0.35s 0.25s ease forwards; }
+#s2.active .clutter-card:nth-child(7) { animation: cardIn 0.35s 0.32s ease forwards; }
+#s2.active .clutter-card:nth-child(8) { animation: cardIn 0.35s 0.38s ease forwards; }
+#s2.active .clutter-card:nth-child(9) { animation: cardIn 0.35s 0.21s ease forwards; }
+#s2.active .clutter-card:nth-child(10) { animation: cardIn 0.35s 0.28s ease forwards; }
+#s2.active .clutter-card:nth-child(11) { animation: cardIn 0.35s 0.35s ease forwards; }
+#s2.active .clutter-card:nth-child(12) { animation: cardIn 0.35s 0.41s ease forwards; }
+@keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+
+.cc-img { height: 80px; background: #1E1F2E; border-radius: 4px; margin-bottom: 8px; }
+.cc-line { height: 8px; background: #1E1F2E; border-radius: 2px; margin-bottom: 5px; }
+.cc-line.short { width: 60%; }
+.cc-line.price { background: rgba(255,255,255,0.08); width: 40%; }
+
+/* Chaos overlay: orange filter bars */
+.s2-chaos-bar {
+  position: absolute;
+  left: 0; right: 0; height: 2px;
+  background: rgba(255,100,50,0.15);
+  pointer-events: none;
+}
+.s2-chaos-bar:nth-child(1) { top: 30%; }
+.s2-chaos-bar:nth-child(2) { top: 55%; }
+.s2-chaos-bar:nth-child(3) { top: 75%; }
+
+/* Overlay text */
+.s2-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, rgba(9,9,14,0) 0%, rgba(9,9,14,0.88) 40%, rgba(9,9,14,0.97) 70%);
+  opacity: 0;
+}
+#s2.active .s2-overlay {
+  animation: fadeIn 0.5s 1.2s ease forwards;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+.s2-headline {
+  font-family: 'DM Serif Display', serif;
+  font-size: 72px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  color: var(--txt2);
+}
+.s2-headline strong { color: var(--red); font-weight: 400; }
+#s2.active .s2-headline {
+  animation: fadeUp 0.7s 1.8s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.s2-sub {
+  font-size: 22px;
+  color: var(--txt3);
+  margin-top: 14px;
+  opacity: 0;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+#s2.active .s2-sub {
+  animation: fadeUp 0.6s 2.4s ease forwards;
+}
+
+/* ══════════════════════════════════════════
+   SCENE 3 — PRODUCT REVEAL (0:12 → 0:20)
+   ══════════════════════════════════════════ */
+#s3 { background: var(--bg); padding: 40px 80px; align-items: flex-start; justify-content: flex-start; flex-direction: column; gap: 0; }
+
+.s3-dashboard {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.8);
+}
+#s3.active .s3-dashboard {
+  animation: dashReveal 0.9s 0.3s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes dashReveal {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Dashboard topbar */
+.db-topbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 22px;
+  display: flex; align-items: center; gap: 16px;
+}
+.db-dots { display: flex; gap: 7px; }
+.db-dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-r { background: #FF5F57; }
+.dot-y { background: #FFBD2E; }
+.dot-g { background: #28CA42; }
+
+/* AI search bar inside */
+.db-searchbar {
+  flex: 1;
+  background: rgba(232,168,32,0.06);
+  border: 1px solid rgba(232,168,32,0.2);
+  border-radius: 10px;
+  padding: 10px 18px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 15px; color: var(--txt2);
+}
+.db-ai-badge {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+  color: #0F0E09; font-size: 9px; font-weight: 900;
+  letter-spacing: 0.1em; padding: 2px 7px;
+  border-radius: 4px; text-transform: uppercase; flex-shrink: 0;
+}
+.db-typed { flex: 1; color: var(--txt1); font-size: 15px; font-weight: 500; }
+.db-cursor { display: inline-block; width: 2px; height: 16px; background: var(--gold); margin-left: 2px; vertical-align: middle; }
+#s3.active .db-cursor { animation: blink 0.8s step-end infinite; }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Dashboard body */
+.db-body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  height: 860px;
+}
+.db-sidebar {
+  border-right: 1px solid var(--border);
+  padding: 18px;
+  background: rgba(0,0,0,0.15);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.db-nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 8px;
+  font-size: 13px; color: var(--txt2); cursor: pointer;
+}
+.db-nav-item.active-nav {
+  background: rgba(232,168,32,0.1);
+  border: 1px solid rgba(232,168,32,0.2);
+  color: var(--gold);
+}
+.db-nav-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+.db-main { padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+
+/* Property card grid inside dashboard */
+.db-prop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.db-prop-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+}
+#s3.active .db-prop-card:nth-child(1) { animation: cardIn 0.5s 2.2s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+#s3.active .db-prop-card:nth-child(2) { animation: cardIn 0.5s 2.5s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+#s3.active .db-prop-card:nth-child(3) { animation: cardIn 0.5s 2.8s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+
+.dpc-img { height: 160px; position: relative; overflow: hidden; }
+.dpc-img img { width: 100%; height: 100%; object-fit: cover; }
+.dpc-match {
+  position: absolute; top: 8px; right: 8px;
+  background: rgba(12,13,20,0.9);
+  border: 1px solid rgba(232,168,32,0.5);
+  border-radius: 6px; padding: 3px 10px;
+  font-size: 12px; font-weight: 800; color: var(--gold);
+  opacity: 0;
+}
+#s3.active .db-prop-card:nth-child(1) .dpc-match { animation: fadeIn 0.4s 2.7s ease forwards; }
+#s3.active .db-prop-card:nth-child(2) .dpc-match { animation: fadeIn 0.4s 3.0s ease forwards; }
+#s3.active .db-prop-card:nth-child(3) .dpc-match { animation: fadeIn 0.4s 3.3s ease forwards; }
+
+.dpc-body { padding: 14px 16px; }
+.dpc-price { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 3px; }
+.dpc-loc { font-size: 12px; color: var(--txt2); margin-bottom: 8px; }
+.dpc-stats { display: flex; gap: 14px; }
+.dpc-stat { font-size: 11px; color: var(--txt3); }
+.dpc-stat strong { color: var(--green); font-weight: 600; }
+
+/* ══════════════════════════════════════════
+   SCENE 4 — PERSONALIZED MATCHES (0:20 → 0:27)
+   ══════════════════════════════════════════ */
+#s4 { flex-direction: column; background: var(--bg); }
+
+.scene-label {
+  position: absolute;
+  top: 60px; left: 80px;
+  font-size: 15px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 10px;
+  opacity: 0;
+}
+.scene-label::before {
+  content: '';
+  width: 24px; height: 2px;
+  background: var(--gold);
+}
+.scene.active .scene-label { animation: fadeIn 0.5s 0.2s ease forwards; }
+
+.scene-headline {
+  position: absolute;
+  bottom: 80px; left: 80px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 78px; font-weight: 400; letter-spacing: -0.02em;
+  opacity: 0; transform: translateY(20px);
+  line-height: 1.05;
+}
+.scene.active .scene-headline { animation: fadeUp 0.7s 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+/* Match card grid for S4 */
+.s4-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 360px);
+  gap: 20px;
+  padding: 0 80px;
+  margin-top: 80px;
+}
+.s4-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px) scale(0.96);
+}
+#s4.active .s4-card:nth-child(1) { animation: cardIn 0.55s 0.3s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+#s4.active .s4-card:nth-child(2) { animation: cardIn 0.55s 0.5s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+#s4.active .s4-card:nth-child(3) { animation: cardIn 0.55s 0.7s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+#s4.active .s4-card:nth-child(4) { animation: cardIn 0.55s 0.9s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+
+/* AI sort reorder animation */
+#s4.active .s4-card { animation-fill-mode: both; }
+#s4.active .s4-card:nth-child(1) { order: 1; }
+#s4.active .s4-card:nth-child(2) { order: 2; }
+#s4.active .s4-card:nth-child(3) { order: 3; }
+#s4.active .s4-card:nth-child(4) { order: 4; }
+
+.s4c-img { height: 190px; position: relative; overflow: hidden; }
+.s4c-img img { width: 100%; height: 100%; object-fit: cover; }
+.s4c-match-badge {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(9,9,14,0.9);
+  border: 1px solid var(--b-gold);
+  border-radius: 6px; padding: 4px 12px;
+  font-size: 13px; font-weight: 800; color: var(--gold);
+  opacity: 0;
+}
+#s4.active .s4-card:nth-child(1) .s4c-match-badge { animation: fadeIn 0.4s 0.8s forwards; }
+#s4.active .s4-card:nth-child(2) .s4c-match-badge { animation: fadeIn 0.4s 1.0s forwards; }
+#s4.active .s4-card:nth-child(3) .s4c-match-badge { animation: fadeIn 0.4s 1.2s forwards; }
+#s4.active .s4-card:nth-child(4) .s4c-match-badge { animation: fadeIn 0.4s 1.4s forwards; }
+
+.s4c-body { padding: 14px 16px; }
+.s4c-price { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2px; }
+.s4c-loc { font-size: 13px; color: var(--txt2); margin-bottom: 8px; }
+.s4c-row { display: flex; justify-content: space-between; }
+.s4c-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: 600; }
+.tag-green { background: rgba(52,211,153,0.12); color: var(--green); border: 1px solid rgba(52,211,153,0.2); }
+.tag-gold  { background: rgba(232,168,32,0.1); color: var(--gold); border: 1px solid rgba(232,168,32,0.2); }
+.tag-blue  { background: rgba(154,174,221,0.1); color: var(--blue); border: 1px solid rgba(154,174,221,0.2); }
+
+/* Match score bar */
+.s4c-bar-wrap { margin-top: 10px; }
+.s4c-bar-label { display: flex; justify-content: space-between; font-size: 10px; color: var(--txt3); margin-bottom: 4px; }
+.s4c-bar-track { height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+.s4c-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--gold-dk), var(--gold)); width: 0; }
+#s4.active .s4-card:nth-child(1) .s4c-bar-fill { animation: barGrow 0.8s 1.0s ease forwards; --w: 96%; }
+#s4.active .s4-card:nth-child(2) .s4c-bar-fill { animation: barGrow 0.8s 1.2s ease forwards; --w: 89%; }
+#s4.active .s4-card:nth-child(3) .s4c-bar-fill { animation: barGrow 0.8s 1.4s ease forwards; --w: 82%; }
+#s4.active .s4-card:nth-child(4) .s4c-bar-fill { animation: barGrow 0.8s 1.6s ease forwards; --w: 76%; }
+@keyframes barGrow { to { width: var(--w); } }
+
+/* ══════════════════════════════════════════
+   SCENE 5 — MARKET INSIGHTS (0:27 → 0:33)
+   ══════════════════════════════════════════ */
+#s5 { flex-direction: column; background: var(--bg); padding: 80px; align-items: flex-start; }
+
+.s5-grid {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 24px;
+  width: 100%;
+  margin-top: 100px;
+}
+
+/* Large chart panel */
+.s5-chart-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  opacity: 0; transform: translateX(-30px);
+}
+#s5.active .s5-chart-panel { animation: slideRight 0.7s 0.3s cubic-bezier(0.4,0,0.2,1) forwards; }
+@keyframes slideRight { to { opacity: 1; transform: translateX(0); } }
+
+.s5-chart-title { font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--txt3); margin-bottom: 4px; }
+.s5-chart-val { font-size: 42px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px; }
+.s5-chart-val span { background: linear-gradient(135deg, var(--gold), var(--gold-lt)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.s5-chart-sub { font-size: 14px; color: var(--green); margin-bottom: 28px; }
+
+/* SVG animated chart */
+.s5-svg { width: 100%; height: 240px; }
+.s5-chart-path {
+  fill: none; stroke: var(--gold); stroke-width: 3;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+}
+#s5.active .s5-chart-path { animation: drawLine 2s 0.8s ease forwards; }
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+
+.s5-area-fill {
+  fill: url(#areaGrad);
+  opacity: 0;
+}
+#s5.active .s5-area-fill { animation: fadeIn 0.5s 2.0s ease forwards; }
+
+/* Right: heatmap + mini stats */
+.s5-right { display: flex; flex-direction: column; gap: 20px; }
+
+.s5-heatmap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  opacity: 0; transform: translateX(30px);
+}
+#s5.active .s5-heatmap { animation: slideLeft 0.7s 0.5s cubic-bezier(0.4,0,0.2,1) forwards; }
+@keyframes slideLeft { to { opacity: 1; transform: translateX(0); } }
+
+.s5-hm-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--txt3); margin-bottom: 16px; }
+.s5-hm-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; }
+.hm-cell {
+  height: 36px; border-radius: 5px;
+  opacity: 0;
+  transform: scale(0.5);
+}
+#s5.active .hm-cell { animation: cellIn 0.3s ease forwards; }
+#s5.active .hm-cell:nth-child(1)  { animation-delay: 0.7s; } #s5.active .hm-cell:nth-child(2)  { animation-delay: 0.75s; }
+#s5.active .hm-cell:nth-child(3)  { animation-delay: 0.8s; }  #s5.active .hm-cell:nth-child(4)  { animation-delay: 0.85s; }
+#s5.active .hm-cell:nth-child(5)  { animation-delay: 0.9s; }  #s5.active .hm-cell:nth-child(6)  { animation-delay: 0.95s; }
+#s5.active .hm-cell:nth-child(7)  { animation-delay: 1.0s; }  #s5.active .hm-cell:nth-child(8)  { animation-delay: 1.05s; }
+#s5.active .hm-cell:nth-child(9)  { animation-delay: 1.1s; }  #s5.active .hm-cell:nth-child(10) { animation-delay: 1.15s; }
+#s5.active .hm-cell:nth-child(11) { animation-delay: 1.2s; }  #s5.active .hm-cell:nth-child(12) { animation-delay: 1.25s; }
+#s5.active .hm-cell:nth-child(13) { animation-delay: 1.3s; }  #s5.active .hm-cell:nth-child(14) { animation-delay: 1.35s; }
+#s5.active .hm-cell:nth-child(15) { animation-delay: 1.4s; }  #s5.active .hm-cell:nth-child(16) { animation-delay: 1.45s; }
+@keyframes cellIn { to { opacity: 1; transform: scale(1); } }
+
+/* Neighborhood row stats */
+.s5-nbhd-row { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+.s5-nbhd-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.s5-nbhd-name { font-size: 13px; color: var(--txt2); flex: 1; }
+.s5-nbhd-val { font-size: 13px; font-weight: 700; }
+
+.s5-trend-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  opacity: 0; transform: translateX(30px);
+}
+#s5.active .s5-trend-panel { animation: slideLeft 0.7s 0.8s cubic-bezier(0.4,0,0.2,1) forwards; }
+.s5-trend-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.s5-trend-row:last-child { border-bottom: none; }
+.s5-tr-city { font-size: 14px; font-weight: 600; }
+.s5-tr-vals { display: flex; gap: 16px; text-align: right; }
+.s5-tr-v { font-size: 12px; }
+.s5-tr-v span { font-size: 14px; font-weight: 800; }
+
+/* ══════════════════════════════════════════
+   SCENE 6 — INVESTMENT ANALYSIS (0:33 → 0:40)
+   ══════════════════════════════════════════ */
+#s6 { flex-direction: column; background: var(--bg); padding: 80px; align-items: flex-start; }
+
+.s6-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+  margin-top: 100px;
+}
+.s6-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  opacity: 0; transform: translateY(30px);
+}
+#s6.active .s6-panel:nth-child(1) { animation: fadeUp 0.6s 0.3s cubic-bezier(0.4,0,0.2,1) forwards; }
+#s6.active .s6-panel:nth-child(2) { animation: fadeUp 0.6s 0.5s cubic-bezier(0.4,0,0.2,1) forwards; }
+#s6.active .s6-panel:nth-child(3) { animation: fadeUp 0.6s 0.7s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+.s6-panel-label { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--txt3); margin-bottom: 12px; }
+.s6-panel-val {
+  font-size: 64px; font-weight: 800; letter-spacing: -0.04em;
+  margin-bottom: 6px; line-height: 1;
+}
+.s6-panel-sub { font-size: 14px; color: var(--txt2); margin-bottom: 24px; }
+.s6-metric-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.s6-metric-label { font-size: 13px; color: var(--txt3); }
+.s6-metric-val { font-size: 14px; font-weight: 700; }
+
+/* Risk Score Gauge */
+.s6-gauge { margin-top: 24px; }
+.s6-gauge-label { font-size: 12px; color: var(--txt3); margin-bottom: 8px; display: flex; justify-content: space-between; }
+.s6-gauge-track { height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
+.s6-gauge-fill { height: 100%; border-radius: 4px; width: 0; }
+.fill-green { background: linear-gradient(90deg, #34D399, #6EE7B7); }
+.fill-gold  { background: linear-gradient(90deg, var(--gold-dk), var(--gold)); }
+.fill-purple { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+#s6.active .s6-panel:nth-child(1) .s6-gauge-fill { animation: barGrow 1s 1.0s ease forwards; --w: 22%; }
+#s6.active .s6-panel:nth-child(2) .s6-gauge-fill { animation: barGrow 1s 1.2s ease forwards; --w: 78%; }
+#s6.active .s6-panel:nth-child(3) .s6-gauge-fill { animation: barGrow 1s 1.4s ease forwards; --w: 91%; }
+
+/* ══════════════════════════════════════════
+   SCENE 7 — TRANSACTIONS (0:40 → 0:46)
+   ══════════════════════════════════════════ */
+#s7 { flex-direction: column; background: var(--bg); padding: 80px; align-items: center; justify-content: center; }
+
+.s7-pipeline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 80px;
+  width: 1500px;
+}
+.s7-step {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center;
+  opacity: 0;
+}
+#s7.active .s7-step:nth-child(1) { animation: fadeIn 0.4s 0.4s ease forwards; }
+#s7.active .s7-step:nth-child(2) { animation: fadeIn 0.4s 0.8s ease forwards; }
+#s7.active .s7-step:nth-child(3) { animation: fadeIn 0.4s 1.2s ease forwards; }
+#s7.active .s7-step:nth-child(4) { animation: fadeIn 0.4s 1.6s ease forwards; }
+#s7.active .s7-step:nth-child(5) { animation: fadeIn 0.4s 2.0s ease forwards; }
+/* Connector lines */
+#s7.active .s7-connector:nth-child(2) { animation: connectorIn 0.4s 0.7s ease forwards; }
+#s7.active .s7-connector:nth-child(4) { animation: connectorIn 0.4s 1.1s ease forwards; }
+#s7.active .s7-connector:nth-child(6) { animation: connectorIn 0.4s 1.5s ease forwards; }
+#s7.active .s7-connector:nth-child(8) { animation: connectorIn 0.4s 1.9s ease forwards; }
+@keyframes connectorIn { from { width: 0; } to { width: 100%; } }
+
+.s7-step-icon {
+  width: 72px; height: 72px;
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  font-size: 28px;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+.s7-step-icon.done {
+  background: rgba(52,211,153,0.12);
+  border-color: rgba(52,211,153,0.3);
+}
+.s7-step-icon.active-step {
+  background: rgba(232,168,32,0.12);
+  border-color: rgba(232,168,32,0.4);
+  box-shadow: 0 0 24px rgba(232,168,32,0.2);
+}
+.s7-step-icon.pending {
+  opacity: 0.5;
+}
+
+.s7-step-label { font-size: 15px; font-weight: 700; margin-bottom: 4px; text-align: center; }
+.s7-step-sub { font-size: 12px; color: var(--txt3); text-align: center; }
+
+.s7-connector {
+  flex: 0 0 60px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(232,168,32,0.4), rgba(232,168,32,0.15));
+  overflow: hidden;
+  opacity: 0;
+  margin-bottom: 58px;
+}
+#s7.active .s7-connector { animation: connFadeIn 0.4s ease forwards; }
+#s7.active .s7-connector:nth-child(2) { animation-delay: 0.7s; }
+#s7.active .s7-connector:nth-child(4) { animation-delay: 1.1s; }
+#s7.active .s7-connector:nth-child(6) { animation-delay: 1.5s; }
+#s7.active .s7-connector:nth-child(8) { animation-delay: 1.9s; }
+@keyframes connFadeIn { to { opacity: 1; } }
+
+/* Checkmarks */
+.s7-check {
+  width: 24px; height: 24px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: #000; font-weight: 900;
+  margin-top: 12px;
+  opacity: 0; transform: scale(0);
+}
+#s7.active .s7-step:nth-child(1) .s7-check { animation: checkPop 0.4s 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+#s7.active .s7-step:nth-child(2) .s7-check { animation: checkPop 0.4s 1.2s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+#s7.active .s7-step:nth-child(3) .s7-check { animation: checkPop 0.4s 1.6s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+#s7.active .s7-step:nth-child(4) .s7-check { animation: checkPop 0.4s 2.0s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+#s7.active .s7-step:nth-child(5) .s7-check { animation: checkPop 0.4s 2.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+@keyframes checkPop { to { opacity: 1; transform: scale(1); } }
+
+/* Deal info card */
+.s7-deal-card {
+  background: var(--card);
+  border: 1px solid rgba(232,168,32,0.25);
+  border-radius: 16px;
+  padding: 28px 36px;
+  margin-top: 50px;
+  display: flex; align-items: center; gap: 40px;
+  opacity: 0; transform: translateY(20px);
+  box-shadow: 0 0 40px rgba(232,168,32,0.06);
+  width: 1500px;
+}
+#s7.active .s7-deal-card { animation: fadeUp 0.6s 0.6s cubic-bezier(0.4,0,0.2,1) forwards; }
+.s7-deal-prop { display: flex; align-items: center; gap: 16px; flex: 1; }
+.s7-deal-img { width: 80px; height: 60px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+.s7-deal-img img { width: 100%; height: 100%; object-fit: cover; }
+.s7-deal-info { flex: 1; }
+.s7-deal-addr { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.s7-deal-sub { font-size: 13px; color: var(--txt2); }
+.s7-deal-divider { width: 1px; height: 40px; background: var(--border); }
+.s7-deal-stat { text-align: center; }
+.s7-deal-stat-val { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+.s7-deal-stat-label { font-size: 11px; color: var(--txt3); margin-top: 2px; }
+
+/* ══════════════════════════════════════════
+   SCENE 8 — SOCIAL PROOF / STATS (0:46 → 0:52)
+   ══════════════════════════════════════════ */
+#s8 { flex-direction: column; background: var(--bg); }
+
+.s8-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px; height: 600px;
+  background: radial-gradient(ellipse, rgba(232,168,32,0.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.s8-stats {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  padding: 60px 100px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  opacity: 0; transform: scale(0.95);
+}
+#s8.active .s8-stats { animation: scaleIn 0.7s 0.3s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+@keyframes scaleIn { to { opacity: 1; transform: scale(1); } }
+
+.s8-divider { width: 1px; height: 80px; background: var(--border); flex-shrink: 0; }
+
+.s8-stat { text-align: center; }
+.s8-stat-val {
+  font-size: 72px; font-weight: 900; letter-spacing: -0.05em; line-height: 1;
+  background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+.s8-stat-label { font-size: 16px; color: var(--txt2); font-weight: 500; }
+
+.s8-trust {
+  display: flex; gap: 40px; margin-top: 48px;
+  opacity: 0;
+}
+#s8.active .s8-trust { animation: fadeIn 0.6s 1.5s ease forwards; }
+.s8-trust-badge {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  font-size: 13px; color: var(--txt2); font-weight: 500;
+}
+
+/* ══════════════════════════════════════════
+   SCENE 9 — CLOSING CTA (0:52 → 0:58)
+   ══════════════════════════════════════════ */
+#s9 { background: #000; flex-direction: column; gap: 28px; }
+
+.s9-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -60%);
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse, rgba(232,168,32,0.12) 0%, transparent 65%);
+  opacity: 0;
+}
+#s9.active .s9-glow { animation: fadeIn 1s 0.2s ease forwards; }
+
+.s9-logo-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  opacity: 0; transform: translateY(20px);
+}
+#s9.active .s9-logo-wrap { animation: fadeUp 0.8s 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+.s9-cta-btn {
+  margin-top: 12px;
+  display: inline-flex; align-items: center; gap: 12px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+  color: #0F0E09; font-size: 20px; font-weight: 800;
+  padding: 18px 48px; border-radius: 100px;
+  letter-spacing: -0.01em;
+  box-shadow: 0 8px 40px rgba(232,168,32,0.4);
+  opacity: 0; transform: translateY(16px);
+}
+#s9.active .s9-cta-btn { animation: fadeUp 0.6s 1.6s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+
+.s9-sub {
+  font-size: 17px; color: var(--txt3); letter-spacing: 0.06em; text-transform: uppercase;
+  opacity: 0;
+}
+#s9.active .s9-sub { animation: fadeIn 0.6s 2.2s ease forwards; }
+
+/* ── SHARED KEYFRAMES ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── TRANSITION OVERLAY ── */
+#transition {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- Persistent elements -->
+  <div id="noise"></div>
+  <div id="progress"></div>
+  <div id="watermark" class="show">
+    <div class="wm-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="#0F0E09"><path d="M8 1L15 14H1L8 1Z"/></svg>
+    </div>
+    <span class="wm-text">Aure<span>via</span></span>
+  </div>
+  <div id="transition"></div>
+
+  <!-- ═══════════════════════════════════════
+       SCENE 1 — LOGO REVEAL
+       ═══════════════════════════════════════ -->
+  <section class="scene" id="s1">
+    <div class="s1-logo-wrap">
+      <div class="s1-icon">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="#0F0E09">
+          <path d="M22 3L40 38H4L22 3Z"/>
+        </svg>
+      </div>
+      <div class="s1-wordmark">Aure<span>via</span></div>
+      <div class="s1-tagline">Real estate, decoded.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SCENE 2 — PROBLEM FRAMING
+       ═══════════════════════════════════════ -->
+  <section class="scene" id="s2">
+    <div class="s2-clutter">
+      <!-- 12 fake listing cards -->
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+      <div class="clutter-card"><div class="cc-img"></div><div class="cc-line"></div><div class="cc-line short"></div><div class="cc-line price"></div></div>
+    </div>
+    <div class="s2-chaos-bar"></div>
+    <div class="s2-chaos-bar"></div>
+    <div class="s2-chaos-bar"></div>
+    <div class="s2-overlay">
+      <div class="s2-headline">Endless listings.<br><strong>No real answers.</strong></div>
+      <div class="s2-sub">There has to be a smarter way.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SCENE 3 — PRODUCT REVEAL
+       ═══════════════════════════════════════ -->
+  <section class="scene" id="s3">
+    <div class="s3-dashboard" style="width:1760px;">
+      <div class="db-topbar">
+        <div class="db-dots"><div class="db-dot dot-r"></div><div class="db-dot dot-y"></div><div class="db-dot dot-g"></div></div>
+        <div class="db-searchbar">
+          <div class="db-ai-badge">AI</div>
+          <div class="db-typed" id="s3typed"></div><div class="db-cursor" id="s3cursor"></div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:12px;align-items:center;">
+          <div style="font-size:11px;font-weight:600;color:var(--txt3);">Austin, TX · 12 results</div>
+        </div>
+      </div>
+      <div class="db-body">
+        <!-- Sidebar -->
+        <div class="db-sidebar">
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--txt3);margin-bottom:8px;">Navigation</div>
+          <div class="db-nav-item active-nav"><div class="db-nav-dot"></div> Property Feed</div>
+          <div class="db-nav-item"><div class="db-nav-dot"></div> Market Insights</div>
+          <div class="db-nav-item"><div class="db-nav-dot"></div> Analytics</div>
+          <div class="db-nav-item"><div class="db-nav-dot"></div> Saved</div>
+          <div class="db-nav-item"><div class="db-nav-dot"></div> Transactions</div>
+          <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dk));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#0F0E09;">JK</div>
+            <div><p style="font-size:12px;font-weight:600;">Jamie K.</p><p style="font-size:10px;color:var(--txt3);">Premium Investor</p></div>
+          </div>
+        </div>
+        <!-- Main -->
+        <div class="db-main">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <p style="font-size:20px;font-weight:800;letter-spacing:-0.01em;">Your AI Match Feed</p>
+              <p style="font-size:13px;color:var(--txt2);margin-top:2px;">Sorted by match score · Updated 2 min ago</p>
+            </div>
+            <div style="display:flex;gap:10px;">
+              <div style="padding:8px 16px;border-radius:8px;border:1px solid var(--border);font-size:12px;color:var(--txt2);">Filter</div>
+              <div style="padding:8px 16px;border-radius:8px;background:rgba(232,168,32,0.1);border:1px solid rgba(232,168,32,0.25);font-size:12px;color:var(--gold);font-weight:600;">Sort by AI Score</div>
+            </div>
+          </div>
+          <div class="db-prop-grid">
+            <article class="db-prop-card">
+              <div class="dpc-img"><img src="img_austin.png" alt="Austin property"><div class="dpc-match">96% Match</div></div>
+              <div class="dpc-body"><div class="dpc-price">$1,245,000</div><div class="dpc-loc">2BR · 2BA · South Congress, Austin TX</div><div class="dpc-stats"><span class="dpc-stat">Cap: <strong>8.4%</strong></span><span class="dpc-stat" style="color:var(--txt3);">Yield: <strong style="color:var(--green);">8.1%</strong></span><span class="dpc-stat" style="color:var(--txt3);">↑12%/yr</span></div></div>
+            </article>
+            <article class="db-prop-card">
+              <div class="dpc-img"><img src="img_miami.png" alt="Miami property"><div class="dpc-match">89% Match</div></div>
+              <div class="dpc-body"><div class="dpc-price">$2,180,000</div><div class="dpc-loc">2BR · 2BA · Brickell, Miami FL</div><div class="dpc-stats"><span class="dpc-stat">Cap: <strong>8.7%</strong></span><span class="dpc-stat" style="color:var(--txt3);">Yield: <strong style="color:var(--green);">8.9%</strong></span><span class="dpc-stat" style="color:var(--txt3);">↑9%/yr</span></div></div>
+            </article>
+            <article class="db-prop-card">
+              <div class="dpc-img"><img src="img_nyc.png" alt="NYC property"><div class="dpc-match" style="color:var(--txt2);border-color:rgba(255,255,255,0.15);">81% Match</div></div>
+              <div class="dpc-body"><div class="dpc-price">$3,750,000</div><div class="dpc-loc">3BR · 2.5BA · West Village, NY</div><div class="dpc-stats"><span class="dpc-stat" style="color:var(--txt3);">Cap: <strong style="color:var(--gold);">6.2%</strong></span><span class="dpc-stat" style="color:var(--txt3);">Yield: <strong style="color:var(--green);">7.1%</strong></span><span class="dpc-stat" style="color:var(--txt3);">↑6%/yr</span></div></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SCENE 4 — PERSONALIZED MATCHES
+       ═══════════════════════════════════════ -->
+  <section class="scene" id="s4">
+    <div class="scene-label">Personalized Matches</div>
+    <div class="scene-headline" style="position:absolute;bottom:80px;left:80px;">AI learns what<br><span style="background:linear-gradient(135deg,var(--gold),var(--gold-lt));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">matters to you.</span></div>
+    <div class="s4-cards">
+      <!-- Card 1 -->
+      <div class="s4-card">
+        <div class="s4c-img"><img src="img_austin.png" alt="Austin"><div class="s4c-match-badge">96% Match</div></div>
+        <div class="s4c-body">
+          <div class="s4c-price">$1,245,000</div>
+          <div class="s4c-loc">South Congress, Austin TX · 2BR</div>
+          <div class="s4c-row"><span class="s4c-tag tag-green">8.4% Cap Rate</span><span class="s4c-tag tag-gold">High Yield</span></div>
+          <div class="s4c-bar-wrap"><div class="s4c-bar-label"><span>AI Score</span><span>96%</span></div><div class="s4c-bar-track"><div class="s4c-bar-fill"></div></div></div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="s4-card">
+        <div class="s4c-img"><img src="img_miami.png" alt="Miami"><div class="s4c-match-badge">89% Match</div></div>
+        <div class="s4c-body">
+          <div class="s4c-price">$2,180,000</div>
+          <div class="s4c-loc">Brickell, Miami FL · 2BR</div>
+          <div class="s4c-row"><span class="s4c-tag tag-green">8.7% Cap Rate</span><span class="s4c-tag tag-blue">Waterfront</span></div>
+          <div class="s4c-bar-wrap"><div class="s4c-bar-label"><span>AI Score</span><span>89%</span></div><div class="s4c-bar-track"><div class="s4c-bar-fill"></div></div></div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="s4-card">
+        <div class="s4c-img"><img src="img_nyc.png" alt="NYC"><div class="s4c-match-badge" style="color:var(--txt2);border-color:rgba(255,255,255,0.2);">82% Match</div></div>
+        <div class="s4c-body">
+          <div class="s4c-price">$3,750,000</div>
+          <div class="s4c-loc">West Village, New York NY · 3BR</div>
+          <div class="s4c-row"><span class="s4c-tag tag-gold">6.2% Cap Rate</span><span class="s4c-tag tag-blue">Historic</span></div>
+          <div class="s4c-bar-wrap"><div class="s4c-bar-label"><span>AI Score</span><span>82%</span></div><div class="s4c-bar-track"><div class="s4c-bar-fill" style="--w:82%;"></div></div></div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="s4-card">
+        <div class="s4c-img" style="background:linear-gradient(135deg,#1A1B2E,#0F1020);display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;color:var(--txt3);">
+            <div style="font-size:32px;margin-bottom:6px;">+</div>
+            <div style="font-size:12px;">8 more matches</div>
+          </div>
+        </div>
+        <div class="s4c-body">
+          <div class="s4c-price" style="color:var(--txt2);">Denver · Nashville · Phoenix</div>
+          <div class="s4c-loc">Explore all AI-curated results</div>
+          <div class="s4c-row"><span class="s4c-tag tag-gold">8%+ Yield Markets</span></div>
+          <div class="s4c-bar-wrap"><div class="s4c-bar-label"><span>Avg. Score</span><span>84%</span></div><div class="s4c-bar-track"><div class="s4c-bar-fill" style="--w:84%;"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SCENE 5 — MARKET INSIGHTS
+       ═══════════════════════════════════════ -->
+  <section class="scene" id="s5">
+    <div class="scene-label">Market Insights</div>
+    <div class="scene-headline" style="position:absolute;bottom:80px;left:80px;">Know where the<br><span style="background:linear-gradient(135deg,var(--gold),var(--gold-lt));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">market is going.</span></div>
+    <div class="s5-grid" style="position:absolute;top:130px;left:80px;right:80px;">
+      <!-- Chart Panel -->
+      <div class="s5-chart-panel">
+        <div class="s5-chart-title">Austin Metro · Price Appreciation</div>
+        <div class="s5-chart-val"><span>+12.4%</span></div>
+        <div class="s5-chart-sub">↑ YoY — outpacing national average by 4.1pp</div>
+        <svg viewBox="0 0 900 240" class="s5-svg" style="overflow:visible;">
+          <defs>
+            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#E8A820" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#E8A820" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="0" y1="200" x2="900" y2="200" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="0" y1="150" x2="900" y2="150" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="0" y1="100" x2="900" y2="100" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="0" y1="50"  x2="900" y2="50"  stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <!-- Area fill -->
+          <path class="s5-area-fill" d="M0,185 C80,175 160,160 260,135 C360,110 450,95 560,72 C660,50 760,30 900,12 L900,220 L0,220 Z"/>
+          <!-- Line -->
+          <path class="s5-chart-path" d="M0,185 C80,175 160,160 260,135 C360,110 450,95 560,72 C660,50 760,30 900,12"/>
+          <!-- Data points -->
+          <circle cx="0" cy="185" r="5" fill="#E8A820" opacity="0.6"/>
+          <circle cx="180" cy="155" r="5" fill="#E8A820" opacity="0.6"/>
+          <circle cx="360" cy="110" r="5" fill="#E8A820" opacity="0.6"/>
+          <circle cx="540" cy="75" r="5" fill="#E8A820" opacity="0.8"/>
+          <circle cx="720" cy="32" r="5" fill="#E8A820" opacity="0.9"/>
+          <circle cx="900" cy="12" r="7" fill="#E8A820"/>
+          <!-- Labels -->
+          <text x="0"   y="216" font-size="11" fill="#5C6278" font-family="Inter">2020</text>
+          <text x="170" y="216" font-size="11" fill="#5C6278" font-family="Inter">2021</text>
+          <text x="350" y="216" font-size="11" fill="#5C6278" font-family="Inter">2022</text>
+          <text x="530" y="216" font-size="11" fill="#5C6278" font-family="Inter">2023</text>
+          <text x="710" y="216" font-size="11" fill="#5C6278" font-family="Inter">2024</text>
+          <text x="877" y="216" font-size="11" fill="#5C6278" font-family="Inter">2025</text>
+          <!-- Value callout -->
+          <rect x="852" y="0" width="48" height="20" rx="4" fill="rgba(232,168,32,0.15)" stroke="rgba(232,168,32,0.3)" stroke-width="1"/>
+          <text x="876" y="14" font-size="10" fill="#E8A820" font-family="Inter" font-weight="700" text-anchor="middle">$684K</text>
+        </svg>
+      </div>
+
+      <!-- Right column -->
+      <div class="s5-right">
+        <!-- Heatmap -->
+        <div class="s5-heatmap">
+          <div class="s5-hm-title">Demand Heatmap · Austin Neighborhoods</div>
+          <div class="s5-hm-grid">
+            <div class="hm-cell" style="background:rgba(232,168,32,0.85);"></div>
+            <div class="hm-cell" style="background:rgba(232,168,32,0.60);"></div>
+            <div class="hm-cell" style="background:rgba(232,168,32,0.90);"></div>
+            <div class="hm-cell" style="background:rgba(52,211,153,0.70);"></div>
+            <div class="hm-cell" style="background:rgba(232,168,32,0.45);"></div>
+            <div class="hm-cell" style="background:rgba(154,174,221,0.50);"></div>
+            <div class="hm-cell" style="background:rgba(232,168,32,0.30);"></div>
+            <div class="hm-cell" style="background:rgba(52,211,153,0.40);"></div>
+            <div class="hm-cell" style="background:rgba(52,211,153,0.55);"></div>
+            <div class="hm-cell" style="background:rgba(232,168,32,0.75);"></div>
+            <div class="hm-cell" style="background:rgba(154,174,221,0.35);"></div>
+            <div class="hm-cell" style="background:rgba(232,168,32,0.95);"></div>
+            <div class="hm-cell" style="background:rgba(52,211,153,0.65);"></div>
+            <div class="hm-cell" style="background:rgba(232,168,32,0.50);"></div>
+            <div class="hm-cell" style="background:rgba(154,174,221,0.45);"></div>
+            <div class="hm-cell" style="background:rgba(52,211,153,0.80);"></div>
+          </div>
+          <div class="s5-nbhd-row">
+            <div class="s5-nbhd-dot" style="background:rgba(232,168,32,0.9);"></div>
+            <span class="s5-nbhd-name">South Congress</span>
+            <span class="s5-nbhd-val" style="color:var(--gold);">↑ 18.2%</span>
+          </div>
+          <div class="s5-nbhd-row">
+            <div class="s5-nbhd-dot" style="background:rgba(52,211,153,0.8);"></div>
+            <span class="s5-nbhd-name">East Austin</span>
+            <span class="s5-nbhd-val" style="color:var(--green);">↑ 14.7%</span>
+          </div>
+          <div class="s5-nbhd-row">
+            <div class="s5-nbhd-dot" style="background:rgba(154,174,221,0.7);"></div>
+            <span class="s5-nbhd-name">Mueller District</span>
+            <span class="s5-nbhd-val" style="color:var(--blue);">↑ 9.3%</span>
+          </div>
+        </div>
+
+        <!-- Trend comparison -->
+        <div class="s5-trend-panel">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--txt3);margin-bottom:14px;">Market Comparison · 2024 YoY</div>
+          <div class="s5-trend-row">
+            <span class="s5-tr-city">Austin, TX</span>
+            <div class="s5-tr-vals"><div class="s5-tr-v" style="color:var(--green);"><span>+12.4%</span></div><div class="s5-tr-v" style="color:var(--txt3);">8.4% cap</div></div>
+          </div>
+          <div class="s5-trend-row">
+            <span class="s5-tr-city">Nashville, TN</span>
+            <div class="s5-tr-vals"><div class="s5-tr-v" style="color:var(--gold);"><span>+9.8%</span></div><div class="s5-tr-v" style="color:var(--txt3);">7.9% cap</div></div>
+          </div>
+          <div class="s5-trend-row">
+            <span class="s5-tr-city">Denver, CO</span>
+            <div class="s5-tr-vals"><div class="s5-tr-v" style="color:var(--blue);"><span>+7.2%</span></div><div class="s5-tr-v" style="color:var(--txt3);">6.8% cap</div></div>
+          </div>
+          <div class="s5-trend-row">
+            <span class="s5-tr-city">Miami, FL</span>
+            <div class="s5-tr-vals"><div class="s5-tr-v" style="color:var(--green);"><span>+11.1%</span></div><div class="s5-tr-v" style="color:var(--txt3);">8.7% cap</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SCENE 6 — INVESTMENT ANALYSIS
+       ═══════════════════════════════════════ -->
+  <section class="scene" id="s6">
+    <div class="scene-label">Investment Analysis</div>
+    <div class="scene-headline" style="position:absolute;bottom:80px;left:80px;">Hard numbers,<br><span style="background:linear-gradient(135deg,var(--gold),var(--gold-lt));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">before you commit.</span></div>
+    <div class="s6-grid" style="position:absolute;top:130px;left:80px;right:80px;">
+
+      <!-- Panel 1: ROI -->
+      <div class="s6-panel">
+        <div class="s6-panel-label">Return on Investment</div>
+        <div class="s6-panel-val" style="color:var(--green);" id="s6roi">0<span style="font-size:40px;">%</span></div>
+        <div class="s6-panel-sub">Projected 5-year IRR · 401 Congress Ave</div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Purchase Price</span><span class="s6-metric-val">$1,245,000</span></div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Annual Rental Income</span><span class="s6-metric-val" style="color:var(--green);">$104,400</span></div>
+        <div class="s6-metric-row"><span class="s6-metric-label">5-Year Appreciation</span><span class="s6-metric-val" style="color:var(--green);">+$287,000</span></div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Total Return (5yr)</span><span class="s6-metric-val" style="color:var(--green);font-size:16px;">+$809,000</span></div>
+        <div class="s6-gauge">
+          <div class="s6-gauge-label"><span>ROI Performance</span><span style="color:var(--green);">Excellent</span></div>
+          <div class="s6-gauge-track"><div class="s6-gauge-fill fill-green"></div></div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Cap Rate -->
+      <div class="s6-panel">
+        <div class="s6-panel-label">Cap Rate Analysis</div>
+        <div class="s6-panel-val" style="color:var(--gold);" id="s6cap">0<span style="font-size:40px;">%</span></div>
+        <div class="s6-panel-sub">Net operating income ÷ asset value</div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Gross Yield</span><span class="s6-metric-val" style="color:var(--green);">8.1%</span></div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Operating Expenses</span><span class="s6-metric-val" style="color:var(--red);">-1.8%</span></div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Vacancy Rate (est.)</span><span class="s6-metric-val">2.1%</span></div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Net Cap Rate</span><span class="s6-metric-val" style="color:var(--gold);font-size:16px;">8.4%</span></div>
+        <div class="s6-gauge">
+          <div class="s6-gauge-label"><span>vs. Market Avg (6.1%)</span><span style="color:var(--gold);">+2.3pp above avg</span></div>
+          <div class="s6-gauge-track"><div class="s6-gauge-fill fill-gold"></div></div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Risk Score -->
+      <div class="s6-panel">
+        <div class="s6-panel-label">Aurevia Risk Score</div>
+        <div class="s6-panel-val" id="s6risk">0<span style="font-size:30px; color:var(--txt2);"> /100</span></div>
+        <div class="s6-panel-sub" style="color:var(--green);">Low Risk · Recommended</div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Market Volatility</span><span class="s6-metric-val" style="color:var(--green);">Low</span></div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Employment Growth</span><span class="s6-metric-val" style="color:var(--green);">+4.2%</span></div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Price/Rent Ratio</span><span class="s6-metric-val">14.8x</span></div>
+        <div class="s6-metric-row"><span class="s6-metric-label">Supply Pressure</span><span class="s6-metric-val" style="color:var(--green);">Minimal</span></div>
+        <div class="s6-gauge">
+          <div class="s6-gauge-label"><span>Risk Level</span><span style="color:var(--purple);">Top 8th percentile</span></div>
+          <div class="s6-gauge-track"><div class="s6-gauge-fill fill-purple"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SCENE 7 — TRANSACTIONS
+       ═══════════════════════════════════════ -->
+  <section class="scene" id="s7">
+    <div class="scene-label">End-to-End Transactions</div>
+    <div class="scene-headline" style="position:absolute;bottom:60px;left:80px;font-size:64px;">From offer to keys,<br><span style="background:linear-gradient(135deg,var(--gold),var(--gold-lt));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">guided every step.</span></div>
+
+    <!-- Pipeline -->
+    <div class="s7-pipeline" style="position:absolute;top:200px;left:50%;transform:translateX(-50%);">
+      <div class="s7-step">
+        <div class="s7-step-icon done">📝</div>
+        <div class="s7-step-label">Offer Made</div>
+        <div class="s7-step-sub">AI negotiation hints</div>
+        <div class="s7-check">✓</div>
+      </div>
+      <div class="s7-connector"></div>
+      <div class="s7-step">
+        <div class="s7-step-icon done">🔍</div>
+        <div class="s7-step-label">Inspection</div>
+        <div class="s7-step-sub">Coordinated &amp; booked</div>
+        <div class="s7-check">✓</div>
+      </div>
+      <div class="s7-connector"></div>
+      <div class="s7-step">
+        <div class="s7-step-icon done">📄</div>
+        <div class="s7-step-label">Documents</div>
+        <div class="s7-step-sub">E-signed &amp; secured</div>
+        <div class="s7-check">✓</div>
+      </div>
+      <div class="s7-connector"></div>
+      <div class="s7-step">
+        <div class="s7-step-icon active-step">🏦</div>
+        <div class="s7-step-label">Escrow</div>
+        <div class="s7-step-sub">In progress · Day 12</div>
+        <div class="s7-check">✓</div>
+      </div>
+      <div class="s7-connector"></div>
+      <div class="s7-step">
+        <div class="s7-step-icon pending">🔑</div>
+        <div class="s7-step-label">Closing</div>
+        <div class="s7-step-sub">Est. Aug 14, 2025</div>
+        <div class="s7-check">✓</div>
+      </div>
+    </div>
+
+    <!-- Deal card -->
+    <div class="s7-deal-card" style="position:absolute;bottom:100px;left:50%;transform:translateX(-50%);">
+      <div class="s7-deal-prop">
+        <div class="s7-deal-img"><img src="img_austin.png" alt="Austin property"></div>
+        <div class="s7-deal-info">
+          <div class="s7-deal-addr">401 S Congress Ave, Austin TX 78704</div>
+          <div class="s7-deal-sub">2BR · 2BA · 1,180 sqft · Closing Aug 14</div>
+        </div>
+      </div>
+      <div class="s7-deal-divider"></div>
+      <div class="s7-deal-stat"><div class="s7-deal-stat-val">$1,220,000</div><div class="s7-deal-stat-label">Agreed Price</div></div>
+      <div class="s7-deal-divider"></div>
+      <div class="s7-deal-stat"><div class="s7-deal-stat-val" style="color:var(--green);">$25,000</div><div class="s7-deal-stat-label">Below Asking</div></div>
+      <div class="s7-deal-divider"></div>
+      <div class="s7-deal-stat"><div class="s7-deal-stat-val" style="color:var(--gold);">8.4%</div><div class="s7-deal-stat-label">Cap Rate Locked</div></div>
+      <div class="s7-deal-divider"></div>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);border-radius:8px;padding:10px 18px;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse-dot 1.5s infinite;"></div>
+        <span style="font-size:13px;font-weight:700;color:var(--green);">Escrow Active</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SCENE 8 — SOCIAL PROOF
+       ═══════════════════════════════════════ -->
+  <section class="scene" id="s8">
+    <div class="s8-glow"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:48px;position:relative;z-index:1;">
+
+      <div style="opacity:0;animation:none;" id="s8headline">
+        <h2 style="font-family:'DM Serif Display',serif;font-size:56px;font-weight:400;text-align:center;letter-spacing:-0.02em;color:var(--txt2);">
+          The numbers behind the platform.
+        </h2>
+      </div>
+
+      <div class="s8-stats">
+        <div class="s8-stat">
+          <div class="s8-stat-val"><span id="s8c1">0</span><span style="-webkit-text-fill-color:var(--gold);">+</span></div>
+          <div class="s8-stat-label">Properties Analyzed</div>
+        </div>
+        <div class="s8-divider"></div>
+        <div class="s8-stat">
+          <div class="s8-stat-val"><span id="s8c2">0</span><span style="-webkit-text-fill-color:var(--gold);">x</span></div>
+          <div class="s8-stat-label">Faster Decisions</div>
+        </div>
+        <div class="s8-divider"></div>
+        <div class="s8-stat">
+          <div class="s8-stat-val"><span id="s8c3">0</span><span style="-webkit-text-fill-color:var(--gold);">%</span></div>
+          <div class="s8-stat-label">Match Satisfaction</div>
+        </div>
+        <div class="s8-divider"></div>
+        <div class="s8-stat">
+          <div class="s8-stat-val"><span style="-webkit-text-fill-color:var(--gold);">$</span><span id="s8c4">0</span><span style="-webkit-text-fill-color:var(--gold);">B</span></div>
+          <div class="s8-stat-label">Transaction Volume</div>
+        </div>
+      </div>
+
+      <div class="s8-trust">
+        <div class="s8-trust-badge">✓ &nbsp;SOC 2 Type II</div>
+        <div class="s8-trust-badge">✓ &nbsp;GDPR Compliant</div>
+        <div class="s8-trust-badge">✓ &nbsp;256-bit Encryption</div>
+        <div class="s8-trust-badge">✓ &nbsp;99.9% Uptime SLA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SCENE 9 — CLOSING CTA
+       ═══════════════════════════════════════ -->
+  <section class="scene" id="s9">
+    <div class="s9-glow"></div>
+    <div class="s9-logo-wrap">
+      <div class="s1-icon" style="width:88px;height:88px;border-radius:22px;opacity:1;transform:none;">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="#0F0E09"><path d="M24 3L44 42H4L24 3Z"/></svg>
+      </div>
+      <div class="s1-wordmark" style="font-size:72px;opacity:1;transform:none;">Aure<span>via</span></div>
+      <div style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--txt2);font-style:italic;letter-spacing:0.02em;">Real estate, decoded.</div>
+      <div class="s9-cta-btn">
+        Request Early Access
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 5l5 5-5 5" stroke="#0F0E09" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="s9-sub">aurevia.com · AI-Powered Real Estate Intelligence</div>
+    </div>
+  </section>
+
+</div><!-- /stage -->
+
+<style>
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(52,211,153,0); }
+}
+</style>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   AUREVIA DEMO VIDEO — SCENE CONTROLLER
+   Total runtime: ~57 seconds
+   Each scene defined with: startMs, durationMs, id
+   ═══════════════════════════════════════════════════════════ */
+
+const TOTAL_MS = 57000;
+
+const scenes = [
+  { id: 's1', startMs: 0,     durationMs: 5500  },  // Logo reveal
+  { id: 's2', startMs: 5500,  durationMs: 7000  },  // Problem framing
+  { id: 's3', startMs: 12500, durationMs: 8000  },  // Product reveal
+  { id: 's4', startMs: 20500, durationMs: 7000  },  // Personalized matches
+  { id: 's5', startMs: 27500, durationMs: 6500  },  // Market insights
+  { id: 's6', startMs: 34000, durationMs: 6500  },  // Investment analysis
+  { id: 's7', startMs: 40500, durationMs: 6000  },  // Transactions
+  { id: 's8', startMs: 46500, durationMs: 6000  },  // Social proof
+  { id: 's9', startMs: 52500, durationMs: 5500  },  // Closing CTA
+];
+
+const progressEl  = document.getElementById('progress');
+const transitionEl = document.getElementById('transition');
+let startTime = null;
+let currentSceneIdx = -1;
+let rafId = null;
+
+// Scene-specific animation controllers
+let s3TyperDone = false;
+let s6AnimDone  = false;
+let s8AnimDone  = false;
+
+function showScene(idx) {
+  if (idx === currentSceneIdx) return;
+
+  // Deactivate previous
+  if (currentSceneIdx >= 0) {
+    const prev = document.getElementById(scenes[currentSceneIdx].id);
+    if (prev) prev.classList.remove('active');
+  }
+
+  currentSceneIdx = idx;
+  const scene = scenes[idx];
+  const el = document.getElementById(scene.id);
+  if (!el) return;
+
+  // Flash transition
+  transitionEl.style.transition = 'none';
+  transitionEl.style.opacity = '0.6';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      transitionEl.style.transition = 'opacity 0.25s ease';
+      transitionEl.style.opacity = '0';
+    });
+  });
+
+  el.classList.add('active');
+
+  // Trigger scene-specific JS
+  if (scene.id === 's3') { triggerS3Typer(); }
+  if (scene.id === 's6') { triggerS6Counters(); }
+  if (scene.id === 's8') { triggerS8Counters(); }
+}
+
+/* ── S3: AI Typewriter ── */
+function triggerS3Typer() {
+  if (s3TyperDone) return;
+  s3TyperDone = true;
+  const el = document.getElementById('s3typed');
+  const text = 'Find me a 2-bed investment with 8%+ yield in Austin, TX';
+  let i = 0;
+  const iv = setInterval(() => {
+    if (i <= text.length) {
+      el.textContent = text.substring(0, i);
+      i++;
+    } else {
+      clearInterval(iv);
+    }
+  }, 52);
+}
+
+/* ── S6: Counter animations ── */
+function triggerS6Counters() {
+  if (s6AnimDone) return;
+  s6AnimDone = true;
+  animateCount('s6roi', 0, 24.7, 1800, v => v.toFixed(1));
+  setTimeout(() => animateCount('s6cap', 0, 8.4, 1600, v => v.toFixed(1)), 200);
+  setTimeout(() => animateCount('s6risk', 0, 14, 1400, v => Math.round(v).toString()), 400);
+
+  function animateCount(id, from, to, dur, fmt) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const unit = id === 's6risk' ? '<span style="font-size:30px; color:var(--txt2);"> /100</span>' :
+                 id === 's6roi'  ? '<span style="font-size:40px;">%</span>' :
+                                   '<span style="font-size:40px;">%</span>';
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = from + (to - from) * eased;
+      el.innerHTML = fmt(val) + unit;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+}
+
+/* ── S8: Counter animations ── */
+function triggerS8Counters() {
+  if (s8AnimDone) return;
+  s8AnimDone = true;
+
+  // Headline fade in
+  const hl = document.getElementById('s8headline');
+  if (hl) {
+    hl.style.animation = 'fadeUp 0.7s 0.2s ease forwards';
+  }
+
+  // Animate counts
+  setTimeout(() => {
+    countUp('s8c1', 0, 10000, 2200, v => (Math.round(v / 1000) * 1000).toLocaleString() + '+');
+    setTimeout(() => countUp('s8c2', 0, 3.5, 1800, v => v.toFixed(1)), 100);
+    setTimeout(() => countUp('s8c3', 0, 98, 1600, v => Math.round(v).toString()), 200);
+    setTimeout(() => countUp('s8c4', 0, 4.2, 1800, v => v.toFixed(1)), 300);
+  }, 500);
+
+  function countUp(id, from, to, dur, fmt) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = from + (to - from) * eased;
+      el.textContent = fmt(val);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+}
+
+/* ── MAIN LOOP ── */
+function tick(ts) {
+  if (!startTime) startTime = ts;
+  const elapsed = ts - startTime;
+
+  // Update progress bar
+  const pct = Math.min((elapsed / TOTAL_MS) * 100, 100);
+  progressEl.style.width = pct + '%';
+
+  // Determine current scene
+  for (let i = scenes.length - 1; i >= 0; i--) {
+    if (elapsed >= scenes[i].startMs) {
+      showScene(i);
+      break;
+    }
+  }
+
+  if (elapsed < TOTAL_MS + 1000) {
+    rafId = requestAnimationFrame(tick);
+  } else {
+    // End of video: loop or freeze on last scene
+    progressEl.style.width = '100%';
+  }
+}
+
+// ── SCALE-TO-FIT ──
+// Scales the 1920×1080 body to fit the actual browser viewport
+function applyScale() {
+  const scaleX = window.innerWidth  / 1920;
+  const scaleY = window.innerHeight / 1080;
+  const scale  = Math.min(scaleX, scaleY);
+  document.body.style.transform = `scale(${scale})`;
+  document.body.style.transformOrigin = 'top left';
+  // Center horizontally and vertically
+  const offsetX = (window.innerWidth  - 1920 * scale) / 2;
+  const offsetY = (window.innerHeight - 1080 * scale) / 2;
+  document.body.style.marginLeft = offsetX + 'px';
+  document.body.style.marginTop  = offsetY + 'px';
+}
+applyScale();
+window.addEventListener('resize', applyScale);
+
+// Start
+requestAnimationFrame(tick);
+
+// Keyboard shortcut: R = restart
+document.addEventListener('keydown', e => {
+  if (e.key === 'r' || e.key === 'R') {
+    startTime = null;
+    s3TyperDone = false;
+    s6AnimDone  = false;
+    s8AnimDone  = false;
+    if (rafId) cancelAnimationFrame(rafId);
+    document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+    progressEl.style.width = '0%';
+    requestAnimationFrame(tick);
+  }
+  // Space = pause (toggle)
+  if (e.key === ' ') {
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    } else {
+      const pausedAt = performance.now() - startTime;
+      startTime = performance.now() - pausedAt;
+      rafId = requestAnimationFrame(tick);
+    }
+  }
+});
+</script>
+</body>
+</html>
