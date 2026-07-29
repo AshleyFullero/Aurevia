@@ -1339,6 +1339,121 @@ body {
 
 <script>
 /* ═══════════════════════════════════════════════════════════
+   AUREVIA AMBIENT SCORE — Web Audio API Procedural Music
+   3-layer ambient drone: sub bass + mid pad (LFO-modulated) + shimmer
+   ═══════════════════════════════════════════════════════════ */
+
+let audioCtx = null;
+let masterGain = null;
+let audioStarted = false;
+
+function initAudio() {
+  if (audioStarted) return;
+  audioStarted = true;
+
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+  masterGain.gain.linearRampToValueAtTime(0.32, audioCtx.currentTime + 3.5);
+  masterGain.connect(audioCtx.destination);
+
+  const now = audioCtx.currentTime;
+  const root = 110;
+
+  createDrone(root,       0.18, 0, now);
+  createDrone(root * 2,   0.10, 4, now);
+  createDrone(root * 0.5, 0.08, 0, now);
+
+  createBreathingPad(root * 1.5,  0.09, 0.05, 8,  now);
+  createBreathingPad(root * 2,    0.07, 0.04, 12, now);
+  createBreathingPad(root * 3,    0.05, 0.03, 16, now);
+
+  createShimmer(root * 4,   0.04, now + 2);
+  createShimmer(root * 6,   0.025, now + 4);
+}
+
+function createDrone(freq, gainVal, detuneCents, startTime) {
+  const osc = audioCtx.createOscillator();
+  const g   = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+
+  osc.type = 'sine';
+  osc.frequency.value = freq;
+  osc.detune.value = detuneCents;
+
+  filter.type = 'lowpass';
+  filter.frequency.value = freq * 3.5;
+  filter.Q.value = 0.5;
+
+  g.gain.value = gainVal;
+
+  osc.connect(filter);
+  filter.connect(g);
+  g.connect(masterGain);
+  osc.start(startTime);
+}
+
+function createBreathingPad(freq, gainVal, lfoDepth, lfoRateSeconds, startTime) {
+  [-3, 3].forEach(detune => {
+    const osc    = audioCtx.createOscillator();
+    const g      = audioCtx.createGain();
+    const lfo    = audioCtx.createOscillator();
+    const lfoGain = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+
+    osc.type = 'triangle';
+    osc.frequency.value = freq;
+    osc.detune.value = detune;
+
+    lfo.type = 'sine';
+    lfo.frequency.value = 1 / lfoRateSeconds;
+    lfoGain.gain.value = lfoDepth;
+
+    filter.type = 'lowpass';
+    filter.frequency.value = freq * 2.2;
+    filter.Q.value = 0.3;
+
+    g.gain.value = gainVal / 2;
+
+    lfo.connect(lfoGain);
+    lfoGain.connect(g.gain);
+    osc.connect(filter);
+    filter.connect(g);
+    g.connect(masterGain);
+
+    osc.start(startTime);
+    lfo.start(startTime);
+  });
+}
+
+function createShimmer(freq, gainVal, startTime) {
+  const osc = audioCtx.createOscillator();
+  const g   = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+
+  osc.type = 'sine';
+  osc.frequency.value = freq;
+
+  filter.type = 'bandpass';
+  filter.frequency.value = freq;
+  filter.Q.value = 2.0;
+
+  g.gain.setValueAtTime(0, startTime);
+  g.gain.linearRampToValueAtTime(gainVal, startTime + 5);
+
+  osc.connect(filter);
+  filter.connect(g);
+  g.connect(masterGain);
+  osc.start(startTime);
+}
+
+document.addEventListener('click', initAudio, { once: false });
+document.addEventListener('keydown', initAudio, { once: false });
+setTimeout(() => { try { initAudio(); } catch(e) {} }, 100);
+</script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
    AUREVIA DEMO VIDEO — SCENE CONTROLLER
    Total runtime: ~57 seconds
    Each scene defined with: startMs, durationMs, id
