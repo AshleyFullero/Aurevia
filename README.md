@@ -10,7 +10,7 @@
 
 ### *Real estate, decoded.*
 
-**Aurevia is an AI-powered real estate intelligence platform** that helps investors and buyers discover, analyze, and transact properties smarter — through AI-driven personalization, live market analytics, and automated investment scoring.
+**Aurevia is an AI-powered real estate intelligence platform** that helps investors and buyers discover, analyze, and transact properties smarter, through AI-driven personalization, live market analytics, and automated investment scoring.
 
 <br/>
 
