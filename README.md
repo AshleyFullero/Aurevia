@@ -12,50 +12,23 @@
 
 **Aurevia is an AI-powered real estate intelligence platform** that helps investors and buyers discover, analyze, and transact properties smarter — through AI-driven personalization, live market analytics, and automated investment scoring.
 
+<br/>
+
 </div>
 
 ---
 
 <div align="center">
 
-## 🎬 Live Product Demo
+## 🎬 Product Demo
 
-> ▶️ **Animated preview auto-plays below** — click to open the full interactive HTML demo
+> ▶️ **Auto-playing demo below** — 9 scenes, 57 seconds, all 9 core features
 
-<a href="demo.html" title="Watch the Aurevia Product Demo — 16:9 Landscape">
-  <img src="aurevia_demo_16x9.webp" alt="Aurevia Product Demo — AI-Powered Real Estate Intelligence Platform" width="100%"/>
+<a href="demo.html" title="Open interactive Aurevia demo with full animations + ambient soundtrack">
+  <img src="aurevia_demo.gif" alt="Aurevia Product Demo — AI-Powered Real Estate Intelligence Platform" width="100%"/>
 </a>
 
-<sub>⬆️ <em>Animated WebP auto-plays &middot; Click the image to open the interactive demo with ambient soundtrack</em></sub>
-
-<br/>
-
-<table>
-<tr>
-<td align="center" width="50%">
-
-**📱 Mobile &amp; Social Cutdown (9:16)**
-
-<a href="demo_9x16.html" title="Vertical Mobile Demo">
-  <img src="aurevia_demo_9x16.webp" alt="Aurevia 9:16 Vertical Demo" width="240"/>
-</a>
-
-<sub><em>Vertical format &middot; Click for interactive version</em></sub>
-
-</td>
-<td align="center" width="50%">
-
-**🌐 Platform Landing Page**
-
-<a href="index.html" title="Aurevia Platform Landing Page">
-  <img src="aurevia_demo_16x9.webp" alt="Aurevia Landing Page" width="100%"/>
-</a>
-
-<sub><em>Open <code>index.html</code> for the full premium UI</em></sub>
-
-</td>
-</tr>
-</table>
+<sub>⬆️ <em>Animated GIF loops automatically · Click to open <code>demo.html</code> for the full interactive version with ambient soundtrack</em></sub>
 
 </div>
 
@@ -96,11 +69,11 @@ A streamlined digital transaction pipeline covering offer submission, inspection
 | **0:00–0:05** | **Logo Reveal** | Deep black screen, gold Aurevia logo fades in with soft radial pulse glow. Tagline types out with cursor. |
 | **0:05–0:12** | **Problem Framing** | Rapid-cut sequence of cluttered listing pages fading to black. *"Endless listings. No real answers."* |
 | **0:12–0:20** | **Product Reveal** | Dashboard slides up with spring motion. AI search bar animates a natural-language query. Property cards slide in with AI match % badges. |
-| **0:20–0:27** | **Personalized Matches** | 4-card grid filters and reorders dynamically. Match score bars fill: 96% &middot; 89% &middot; 82% &middot; 84%. |
+| **0:20–0:27** | **Personalized Matches** | 4-card grid filters and reorders dynamically. Match score bars fill: 96% · 89% · 82% · 84%. |
 | **0:27–0:33** | **Market Insights** | Gold SVG price-appreciation curve draws itself live across 2020–2025 timeline. Neighborhood heatmap cells animate. |
 | **0:33–0:40** | **Investment Analysis** | ROI counter 24.7%, Cap Rate 8.4%, Risk Score 14/100 — all count up with performance gauges filling. |
 | **0:40–0:46** | **Deal Pipeline** | 5-step transaction pipeline (Offer → Inspection → Documents → Escrow → Closing) with animated green checkmarks. |
-| **0:46–0:52** | **Social Proof** | Bold stat counters zoom in: 10,000+ properties &middot; 3.5× faster &middot; 98% satisfaction &middot; $4.2B volume. SOC 2 & GDPR badges. |
+| **0:46–0:52** | **Social Proof** | Bold stat counters zoom in: 10,000+ properties · 3.5× faster · 98% satisfaction · $4.2B volume. SOC 2 & GDPR badges. |
 | **0:52–0:57** | **Closing CTA** | Aurevia hero logo returns with gold radial glow aura. *"Request Early Access →"* |
 
 ---
@@ -114,7 +87,7 @@ Aurevia’s design language aims for a premium, calm, and trustworthy consumer e
 | **Base Background** | Deep Charcoal `#09090E` / `#0F1018` |
 | **Brand Accent** | Aureate Gold `#E8A820` / `#FFD160` |
 | **Positive Indicator** | Mint Green `#34D399` |
-| **Data Accents** | Navy Blue `#9AAEDD` &middot; Purple `#A78BFA` |
+| **Data Accents** | Navy Blue `#9AAEDD` · Purple `#A78BFA` |
 | **Headline Font** | *DM Serif Display* — editorial precision |
 | **UI & Data Font** | *Inter* — clean, high-legibility sans-serif |
 | **Audio (Demo)** | Custom Web Audio API 3-layer ambient synthesizer — sub bass, LFO-modulated breathing pad, high shimmer pad |
@@ -137,7 +110,7 @@ Open any of these files in a modern browser:
 | [`demo.html`](demo.html) | 16:9 landscape product demo (57s) |
 | [`demo_9x16.html`](demo_9x16.html) | 9:16 vertical mobile / social cutdown (55s) |
 
-> **Demo Controls:** Press `R` to restart &middot; `Space` to pause/resume &middot; Enable audio for the procedural ambient soundtrack.
+> **Demo Controls:** Press `R` to restart · `Space` to pause/resume · Enable audio for the procedural ambient soundtrack.
 
 ---
 

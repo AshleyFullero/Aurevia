@@ -1,2 +1,11 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Binary files - do not modify
+*.gif binary
+*.png binary
+*.webp binary
+*.jpg binary
+*.jpeg binary
+*.mp4 binary
+*.webm binary
