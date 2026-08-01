@@ -48,16 +48,16 @@
 
 ## ⚡ Platform Features
 
-### 🤖 AI Search & Match Engine
+### AI Search & Match Engine
 Natural language property search with a **multi-dimensional match scoring algorithm**. Each property receives a personalized match score based on target yield, risk tolerance, and appreciation potential — ranked dynamically in real time.
 
-### 📊 Market Analytics Layer
+### Market Analytics Layer
 **Real-time price appreciation tracking** across top investment markets (Austin, Miami, NYC, Denver, Nashville). Neighborhood demand heatmaps and macro market trend comparisons help you spot the next high-yield opportunity before the crowd.
 
-### 📈 Investment Scorecard
+### Investment Scorecard
 Automated **ROI calculations (IRR)**, cap rate breakdown, gross vs. net yield comparisons, and a proprietary **100-point Risk Score** — all generated instantly for any property.
 
-### 🔄 Guided Deal Pipeline
+### Guided Deal Pipeline
 A streamlined digital transaction pipeline covering offer submission, inspection coordination, vault document e-signing, and escrow tracking. From discovery to closing in one unified flow.
 
 ---
@@ -78,7 +78,7 @@ A streamlined digital transaction pipeline covering offer submission, inspection
 
 ---
 
-## 🎨 Brand Identity & Design System
+## Brand Identity & Design System
 
 Aurevia’s design language aims for a premium, calm, and trustworthy consumer experience, avoiding generic startup clichés.
 
@@ -94,7 +94,7 @@ Aurevia’s design language aims for a premium, calm, and trustworthy consumer e
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # 1. Clone the repository
@@ -114,7 +114,7 @@ Open any of these files in a modern browser:
 
 ---
 
-## 🛡️ Security & Compliance
+## Security & Compliance
 
 <div align="center">
 
