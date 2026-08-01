@@ -62,22 +62,6 @@ A streamlined digital transaction pipeline covering offer submission, inspection
 
 ---
 
-## 📽️ Demo Scene Breakdown
-
-| Timestamp | Scene | Description |
-| :---: | :--- | :--- |
-| **0:00–0:05** | **Logo Reveal** | Deep black screen, gold Aurevia logo fades in with soft radial pulse glow. Tagline types out with cursor. |
-| **0:05–0:12** | **Problem Framing** | Rapid-cut sequence of cluttered listing pages fading to black. *"Endless listings. No real answers."* |
-| **0:12–0:20** | **Product Reveal** | Dashboard slides up with spring motion. AI search bar animates a natural-language query. Property cards slide in with AI match % badges. |
-| **0:20–0:27** | **Personalized Matches** | 4-card grid filters and reorders dynamically. Match score bars fill: 96% · 89% · 82% · 84%. |
-| **0:27–0:33** | **Market Insights** | Gold SVG price-appreciation curve draws itself live across 2020–2025 timeline. Neighborhood heatmap cells animate. |
-| **0:33–0:40** | **Investment Analysis** | ROI counter 24.7%, Cap Rate 8.4%, Risk Score 14/100 — all count up with performance gauges filling. |
-| **0:40–0:46** | **Deal Pipeline** | 5-step transaction pipeline (Offer → Inspection → Documents → Escrow → Closing) with animated green checkmarks. |
-| **0:46–0:52** | **Social Proof** | Bold stat counters zoom in: 10,000+ properties · 3.5× faster · 98% satisfaction · $4.2B volume. SOC 2 & GDPR badges. |
-| **0:52–0:57** | **Closing CTA** | Aurevia hero logo returns with gold radial glow aura. *"Request Early Access →"* |
-
----
-
 ## Brand Identity & Design System
 
 Aurevia’s design language aims for a premium, calm, and trustworthy consumer experience, avoiding generic startup clichés.
