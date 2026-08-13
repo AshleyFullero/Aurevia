@@ -60,6 +60,18 @@ Automated **ROI calculations (IRR)**, cap rate breakdown, gross vs. net yield co
 ### Guided Deal Pipeline
 A streamlined digital transaction pipeline covering offer submission, inspection coordination, vault document e-signing, and escrow tracking. From discovery to closing in one unified flow.
 
+### Engineering Tech Stack
+A new dedicated section showcasing the full Aurevia engineering stack with an **infinite-scrolling dual-row marquee** and a **6-category grid**. Technologies include:
+
+| Category | Technologies |
+|:---|:---|
+| **Languages** | Python, TypeScript, Go, Rust, JavaScript, Scala, SQL, GraphQL, R, Kotlin, Swift |
+| **Frontend & Mobile** | React, Next.js, Vue.js, React Native, Expo, Three.js, Framer Motion, Vite |
+| **Backend & APIs** | Node.js, FastAPI, Django, Express.js, tRPC, gRPC, REST, WebSockets |
+| **AI / ML** | TensorFlow, PyTorch, OpenAI API, LangChain, Hugging Face, Scikit-learn, Pandas, NumPy |
+| **Data & Databases** | PostgreSQL, Redis, MongoDB, ClickHouse, Apache Kafka, Elasticsearch, Pinecone, Snowflake |
+| **Cloud & DevOps** | AWS, Google Cloud, Vercel, Docker, Kubernetes, Terraform, GitHub Actions, Datadog |
+
 ---
 
 ## Brand Identity & Design System
