@@ -37,6 +37,7 @@
           <li><a href="#features" class="nav-link">Features</a></li>
           <li><a href="#product" class="nav-link">Product</a></li>
           <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="#tech-stack" class="nav-link">Stack</a></li>
           <li><a href="#social-proof" class="nav-link">About</a></li>
         </ul>
 
@@ -62,6 +63,7 @@
     <a href="#features" class="mobile-menu-link" onclick="closeMobileMenu()">Features</a>
     <a href="#product" class="mobile-menu-link" onclick="closeMobileMenu()">Product</a>
     <a href="#how-it-works" class="mobile-menu-link" onclick="closeMobileMenu()">How It Works</a>
+    <a href="#tech-stack" class="mobile-menu-link" onclick="closeMobileMenu()">Stack</a>
     <a href="#social-proof" class="mobile-menu-link" onclick="closeMobileMenu()">About</a>
     <a href="#cta" class="btn btn-primary" onclick="closeMobileMenu()"><span>Get Early Access</span></a>
   </div>
@@ -551,7 +553,34 @@
                     </p>
                     <div style="display:flex;gap:6px;">
                       <button class="btn btn-ghost btn-sm" style="font-size:11px;padding:4px 10px;" aria-label="Filter results">Filter</button>
-                      <button class="btn btn-ghost btn-sm" style="font-size:11px;padding:4px 10px;" aria-label="Sort results">Sort</button>
+                      <button class="btn .btn-lg { padding: 15px 36px; font-size: 15px; }
+.btn-sm { padding: 8px 18px; font-size: 13px; }
+
+.btn-gold {
+  background: linear-gradient(135deg, #E8A820 0%, #CC7A00 100%);
+  color: #0F0E09;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(232,168,32,0.35);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #FFD160 0%, #E8A820 100%);
+  box-shadow: 0 6px 28px rgba(232,168,32,0.5);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.btn-outline:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.15);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}results">Sort</button>
                     </div>
                   </div>
 
@@ -862,6 +891,298 @@
       </div>
     </section>
 
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <!-- ==========================================
+         TECH STACK SECTION
+         ========================================== -->
+    <section id="tech-stack" class="section" aria-labelledby="tech-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="badge badge-blue">Engineering</span>
+          </div>
+          <h2 class="display-lg reveal" id="tech-heading">
+            Built with the best<br>tools in the industry
+          </h2>
+          <p class="body-lg text-muted reveal reveal-delay-1" style="margin-top:16px;">
+            From AI model inference to real-time data pipelines — Aurevia is engineered with a modern,
+            battle-tested stack across every layer.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Marquee: Row 1 (LTR) -->
+      <div class="tech-marquee-wrapper">
+        <div class="tech-marquee-row" aria-hidden="true">
+          <!-- Track 1A -->
+          <div class="tech-marquee-track" id="marquee-row1">
+            <span class="tech-pill"><span class="tech-pill-dot dot-python"></span>Python</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-typescript"></span>TypeScript</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-react"></span>React</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-nextjs"></span>Next.js</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-fastapi"></span>FastAPI</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-postgres"></span>PostgreSQL</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-tensorflow"></span>TensorFlow</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-pytorch"></span>PyTorch</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-aws"></span>AWS</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-redis"></span>Redis</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-go"></span>Go</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-docker"></span>Docker</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-graphql"></span>GraphQL</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-openai"></span>OpenAI API</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-kafka"></span>Apache Kafka</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-k8s"></span>Kubernetes</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-rust"></span>Rust</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-langchain"></span>LangChain</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-snowflake"></span>Snowflake</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-gcp"></span>Google Cloud</span>
+          </div>
+          <!-- Track 1B (duplicate for infinite loop) -->
+          <div class="tech-marquee-track" aria-hidden="true">
+            <span class="tech-pill"><span class="tech-pill-dot dot-python"></span>Python</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-typescript"></span>TypeScript</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-react"></span>React</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-nextjs"></span>Next.js</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-fastapi"></span>FastAPI</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-postgres"></span>PostgreSQL</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-tensorflow"></span>TensorFlow</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-pytorch"></span>PyTorch</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-aws"></span>AWS</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-redis"></span>Redis</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-go"></span>Go</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-docker"></span>Docker</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-graphql"></span>GraphQL</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-openai"></span>OpenAI API</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-kafka"></span>Apache Kafka</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-k8s"></span>Kubernetes</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-rust"></span>Rust</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-langchain"></span>LangChain</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-snowflake"></span>Snowflake</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-gcp"></span>Google Cloud</span>
+          </div>
+        </div>
+
+        <!-- Marquee: Row 2 (RTL — reversed direction) -->
+        <div class="tech-marquee-row" aria-hidden="true">
+          <!-- Track 2A -->
+          <div class="tech-marquee-track reverse" id="marquee-row2">
+            <span class="tech-pill"><span class="tech-pill-dot dot-javascript"></span>JavaScript</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-vue"></span>Vue.js</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-nodejs"></span>Node.js</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-django"></span>Django</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-scala"></span>Scala</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-mongodb"></span>MongoDB</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-elastic"></span>Elasticsearch</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-huggingface"></span>Hugging Face</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-pinecone"></span>Pinecone</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-terraform"></span>Terraform</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-vercel"></span>Vercel</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-trpc"></span>tRPC</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-clickhouse"></span>ClickHouse</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-kotlin"></span>Kotlin</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-swift"></span>Swift</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-sql"></span>SQL</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-r"></span>R</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-express"></span>Express.js</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-threejs"></span>Three.js</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-react"></span>React Native</span>
+          </div>
+          <!-- Track 2B (duplicate for infinite loop) -->
+          <div class="tech-marquee-track reverse" aria-hidden="true">
+            <span class="tech-pill"><span class="tech-pill-dot dot-javascript"></span>JavaScript</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-vue"></span>Vue.js</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-nodejs"></span>Node.js</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-django"></span>Django</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-scala"></span>Scala</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-mongodb"></span>MongoDB</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-elastic"></span>Elasticsearch</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-huggingface"></span>Hugging Face</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-pinecone"></span>Pinecone</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-terraform"></span>Terraform</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-vercel"></span>Vercel</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-trpc"></span>tRPC</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-clickhouse"></span>ClickHouse</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-kotlin"></span>Kotlin</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-swift"></span>Swift</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-sql"></span>SQL</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-r"></span>R</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-express"></span>Express.js</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-threejs"></span>Three.js</span>
+            <span class="tech-pill"><span class="tech-pill-dot dot-react"></span>React Native</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Grid -->
+      <div class="container">
+        <div class="tech-categories">
+
+          <!-- Languages -->
+          <div class="tech-category-card cat-languages reveal" id="cat-languages">
+            <div class="tech-category-header">
+              <div class="tech-category-icon cat-icon-languages" aria-hidden="true">⌨️</div>
+              <div>
+                <p class="tech-category-title">01 — Core</p>
+                <p class="tech-category-name">Languages</p>
+              </div>
+            </div>
+            <div class="tech-tag-list" role="list">
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-python"></span>Python</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-typescript"></span>TypeScript</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-go"></span>Go</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-rust"></span>Rust</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-javascript"></span>JavaScript</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-scala"></span>Scala</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-sql"></span>SQL</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-graphql"></span>GraphQL</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-r"></span>R</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-kotlin"></span>Kotlin</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-swift"></span>Swift</span>
+            </div>
+          </div>
+
+          <!-- Frontend -->
+          <div class="tech-category-card cat-frontend reveal reveal-delay-1" id="cat-frontend">
+            <div class="tech-category-header">
+              <div class="tech-category-icon cat-icon-frontend" aria-hidden="true">🎨</div>
+              <div>
+                <p class="tech-category-title">02 — UI</p>
+                <p class="tech-category-name">Frontend & Mobile</p>
+              </div>
+            </div>
+            <div class="tech-tag-list" role="list">
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-react"></span>React</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-nextjs"></span>Next.js</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-vue"></span>Vue.js</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-react"></span>React Native</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-swift"></span>Expo</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-threejs"></span>Three.js</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-trpc"></span>Framer Motion</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-vercel"></span>Vite</span>
+            </div>
+          </div>
+
+          <!-- Backend -->
+          <div class="tech-category-card cat-backend reveal reveal-delay-2" id="cat-backend">
+            <div class="tech-category-header">
+              <div class="tech-category-icon cat-icon-backend" aria-hidden="true">⚙️</div>
+              <div>
+                <p class="tech-category-title">03 — API</p>
+                <p class="tech-category-name">Backend & APIs</p>
+              </div>
+            </div>
+            <div class="tech-tag-list" role="list">
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-nodejs"></span>Node.js</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-fastapi"></span>FastAPI</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-django"></span>Django</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-express"></span>Express.js</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-trpc"></span>tRPC</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-graphql"></span>gRPC</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-go"></span>REST APIs</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-kafka"></span>WebSockets</span>
+            </div>
+          </div>
+
+          <!-- AI / ML -->
+          <div class="tech-category-card cat-ai reveal reveal-delay-3" id="cat-ai">
+            <div class="tech-category-header">
+              <div class="tech-category-icon cat-icon-ai" aria-hidden="true">🧠</div>
+              <div>
+                <p class="tech-category-title">04 — Intelligence</p>
+                <p class="tech-category-name">AI / ML Stack</p>
+              </div>
+            </div>
+            <div class="tech-tag-list" role="list">
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-tensorflow"></span>TensorFlow</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-pytorch"></span>PyTorch</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-openai"></span>OpenAI API</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-langchain"></span>LangChain</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-huggingface"></span>Hugging Face</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-python"></span>Scikit-learn</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-python"></span>Pandas</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-python"></span>NumPy</span>
+            </div>
+          </div>
+
+          <!-- Data -->
+          <div class="tech-category-card cat-data reveal" id="cat-data">
+            <div class="tech-category-header">
+              <div class="tech-category-icon cat-icon-data" aria-hidden="true">🗄️</div>
+              <div>
+                <p class="tech-category-title">05 — Storage</p>
+                <p class="tech-category-name">Data & Databases</p>
+              </div>
+            </div>
+            <div class="tech-tag-list" role="list">
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-postgres"></span>PostgreSQL</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-redis"></span>Redis</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-mongodb"></span>MongoDB</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-clickhouse"></span>ClickHouse</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-kafka"></span>Apache Kafka</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-elastic"></span>Elasticsearch</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-pinecone"></span>Pinecone</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-snowflake"></span>Snowflake</span>
+            </div>
+          </div>
+
+          <!-- Cloud & DevOps -->
+          <div class="tech-category-card cat-cloud reveal reveal-delay-1" id="cat-cloud">
+            <div class="tech-category-header">
+              <div class="tech-category-icon cat-icon-cloud" aria-hidden="true">☁️</div>
+              <div>
+                <p class="tech-category-title">06 — Infrastructure</p>
+                <p class="tech-category-name">Cloud & DevOps</p>
+              </div>
+            </div>
+            <div class="tech-tag-list" role="list">
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-aws"></span>AWS</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-gcp"></span>Google Cloud</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-vercel"></span>Vercel</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-docker"></span>Docker</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-k8s"></span>Kubernetes</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-terraform"></span>Terraform</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-gcp"></span>GitHub Actions</span>
+              <span class="tech-tag" role="listitem"><span class="tech-tag-dot dot-elastic"></span>Datadog</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Trust / Open Source strip -->
+        <div class="tech-trusted-strip reveal">
+          <p class="tech-trusted-label">Open standards · Production-grade · SOC 2 compliant infrastructure</p>
+          <div class="tech-trust-pills" role="list">
+            <span class="tech-trust-badge" role="listitem">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="#34D399" stroke-width="1.2"/><path d="M4 6l1.5 1.5L8 4" stroke="#34D399" stroke-width="1.2" stroke-linecap="round"/></svg>
+              99.9% Uptime SLA
+            </span>
+            <span class="tech-trust-badge" role="listitem">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="1.5" y="3.5" width="9" height="7" rx="1" stroke="#9AAEDD" stroke-width="1.2"/><path d="M4 3.5V3a2 2 0 0 1 4 0v.5" stroke="#9AAEDD" stroke-width="1.2" stroke-linecap="round"/></svg>
+              End-to-End Encryption
+            </span>
+            <span class="tech-trust-badge" role="listitem">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1l1.5 3h3L8 6l1 3.5L6 8l-3 1.5L4 6 1.5 4h3z" stroke="#E8A820" stroke-width="1.2" stroke-linejoin="round"/></svg>
+              SOC 2 Type II Certified
+            </span>
+            <span class="tech-trust-badge" role="listitem">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="#A78BFA" stroke-width="1.2"/><path d="M6 4v3M6 8.5v.5" stroke="#A78BFA" stroke-width="1.2" stroke-linecap="round"/></svg>
+              GDPR Compliant
+            </span>
+            <span class="tech-trust-badge" role="listitem">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 5h8M5 2v3M7 2v3M3 7.5h6" stroke="#2DD4BF" stroke-width="1.2" stroke-linecap="round"/></svg>
+              &lt; 50ms p99 API Latency
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
     <!-- ==========================================
          CTA SECTION
          ========================================== -->
@@ -981,6 +1302,7 @@
             <li><a href="#features" class="footer-link">Features</a></li>
             <li><a href="#product" class="footer-link">Dashboard</a></li>
             <li><a href="#how-it-works" class="footer-link">How It Works</a></li>
+            <li><a href="#tech-stack" class="footer-link">Tech Stack</a></li>
             <li><a href="#cta" class="footer-link">Pricing</a></li>
             <li><a href="#" class="footer-link">API Docs</a></li>
           </ul>
