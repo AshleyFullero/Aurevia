@@ -234,6 +234,32 @@ ul, ol { list-style: none; }
 .btn-lg { padding: 15px 36px; font-size: 15px; }
 .btn-sm { padding: 8px 18px; font-size: 13px; }
 
+.btn-gold {
+  background: linear-gradient(135deg, #E8A820 0%, #CC7A00 100%);
+  color: #0F0E09;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(232,168,32,0.35);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #FFD160 0%, #E8A820 100%);
+  box-shadow: 0 6px 28px rgba(232,168,32,0.5);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.btn-outline:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.15);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}
+
 /* === Cards === */
 .card {
   background: var(--color-bg-card);
