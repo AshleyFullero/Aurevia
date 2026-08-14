@@ -10,7 +10,7 @@ Endpoints:
 from __future__ import annotations
 
 import math
-from typing import Optional
+from typing import Literal, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -64,8 +64,8 @@ async def search_properties(
     # Pagination & sort
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
-    sort_by: str = Query("created_at", description="list_price|cap_rate|rental_yield|days_on_market|created_at"),
-    sort_order: str = Query("desc", description="asc|desc"),
+    sort_by: Literal["list_price", "cap_rate", "rental_yield", "match_score", "days_on_market", "created_at"] = Query("created_at"),
+    sort_order: Literal["asc", "desc"] = Query("desc"),
     db: AsyncSession = Depends(get_db),
 ):
     params = PropertySearchParams(
