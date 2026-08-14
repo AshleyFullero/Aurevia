@@ -48,6 +48,7 @@ async def search_properties(
     bedrooms: Optional[int] = Query(None, ge=0),
     min_bedrooms: Optional[int] = Query(None, ge=0),
     max_bedrooms: Optional[int] = Query(None, le=20),
+    bathrooms: Optional[float] = Query(None, ge=0, description="Exact bathroom count, e.g. 2.0 or 2.5"),
     # Price
     min_price: Optional[float] = Query(None, ge=0),
     max_price: Optional[float] = Query(None, ge=0),
@@ -71,6 +72,7 @@ async def search_properties(
         city=city, state=state, zip_code=zip_code,
         property_type=property_type, bedrooms=bedrooms,
         min_bedrooms=min_bedrooms, max_bedrooms=max_bedrooms,
+        bathrooms=bathrooms,
         min_price=min_price, max_price=max_price,
         min_cap_rate=min_cap_rate, max_cap_rate=max_cap_rate,
         min_yield=min_yield, max_risk_score=max_risk_score,

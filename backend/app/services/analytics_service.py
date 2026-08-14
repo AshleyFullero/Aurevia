@@ -46,7 +46,7 @@ class AnalyticsService:
         )
 
         if city:
-            stmt = stmt.having(Property.city.ilike(f"%{city}%"))
+            stmt = stmt.where(Property.city.ilike(f"%{city}%"))
 
         result = await self.db.execute(stmt)
         rows = result.all()
