@@ -22,7 +22,8 @@ from fastapi.responses import JSONResponse
 
 from app.config import settings
 from app.database import create_tables
-from app.routers import analytics, properties, waitlist
+from app.models import contact as _contact_model  # noqa: F401 — registers table with Base
+from app.routers import analytics, contact, properties, search, stats, waitlist
 
 
 # ── Lifespan (startup / shutdown) ─────────────────────────────────────────────
@@ -78,6 +79,9 @@ app.add_middleware(
 app.include_router(properties.router, prefix=settings.api_v1_prefix)
 app.include_router(analytics.router, prefix=settings.api_v1_prefix)
 app.include_router(waitlist.router, prefix=settings.api_v1_prefix)
+app.include_router(stats.router, prefix=settings.api_v1_prefix)
+app.include_router(search.router, prefix=settings.api_v1_prefix)
+app.include_router(contact.router, prefix=settings.api_v1_prefix)
 
 
 # ── Health Check ──────────────────────────────────────────────────────────────

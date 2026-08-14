@@ -13,6 +13,7 @@ from app.database import Base, get_db
 from app.main import app
 from app.models.property import Property
 from app.models.waitlist import WaitlistEntry  # noqa: F401 — ensure table is registered
+from app.models.contact import ContactSubmission  # noqa: F401 — ensure table is registered
 
 # ── In-memory SQLite database for tests ───────────────────────────────────────
 TEST_DATABASE_URL = "sqlite+aiosqlite:///:memory:"
