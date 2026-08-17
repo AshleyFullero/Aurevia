@@ -14,16 +14,28 @@ Interactive docs (auto-generated):
 
 from __future__ import annotations
 
+import time
+import uuid
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import settings
 from app.database import create_tables
-from app.models import contact as _contact_model  # noqa: F401 — registers table with Base
-from app.routers import analytics, contact, properties, search, stats, waitlist
+import app.models  # noqa: F401 — registers ALL models with Base via __init__.py
+from app.routers import (
+    admin,
+    analytics,
+    compare,
+    contact,
+    favorites,
+    properties,
+    search,
+    stats,
+    waitlist,
+)
 
 
 # ── Lifespan (startup / shutdown) ─────────────────────────────────────────────
@@ -52,12 +64,16 @@ for the world's most intelligent real estate investment platform.
 - 🧠 **AI Match Scoring** — Submit an investor profile and receive ranked property recommendations
 - 📊 **Market Analytics** — Aggregated investment metrics per city
 - 📈 **Property Analytics** — Detailed NOI, cash-on-cash, IRR, and appreciation estimates
+- 🔥 **Trending** — Hottest properties and top markets by momentum score
+- ❤️  **Favorites** — Session-based property bookmarking
+- ⚖️  **Compare** — Side-by-side comparison of 2–4 properties with metric winners
+- 🛠️  **Admin** — Internal dashboard for properties, waitlist, and contacts
 - 📬 **Waitlist** — Early-access email capture
 
 ### Authentication
 Currently open for development. JWT authentication will be added before production launch.
 """,
-    version="1.0.0",
+    version="1.1.0",
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",
@@ -72,7 +88,35 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["X-Request-ID", "X-Process-Time"],
 )
+
+
+# ── Request ID + Timing Middleware ─────────────────────────────────────────────
+@app.middleware("http")
+async def request_id_middleware(request: Request, call_next):
+    """Attach a unique X-Request-ID and X-Process-Time to every response."""
+    request_id = request.headers.get("X-Request-ID") or str(uuid.uuid4())
+    start = time.perf_counter()
+    response = await call_next(request)
+    elapsed_ms = round((time.perf_counter() - start) * 1000, 2)
+    response.headers["X-Request-ID"] = request_id
+    response.headers["X-Process-Time"] = f"{elapsed_ms}ms"
+    return response
+
+
+# ── Global Error Handlers ─────────────────────────────────────────────────────
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    """Catch all unhandled exceptions and return a structured JSON error."""
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "error": "internal_server_error",
+            "message": "An unexpected error occurred. Please try again later.",
+            "detail": str(exc) if settings.debug else None,
+        },
+    )
 
 
 # ── Routers ────────────────────────────────────────────────────────────────────
@@ -82,6 +126,9 @@ app.include_router(waitlist.router, prefix=settings.api_v1_prefix)
 app.include_router(stats.router, prefix=settings.api_v1_prefix)
 app.include_router(search.router, prefix=settings.api_v1_prefix)
 app.include_router(contact.router, prefix=settings.api_v1_prefix)
+app.include_router(favorites.router, prefix=settings.api_v1_prefix)
+app.include_router(compare.router, prefix=settings.api_v1_prefix)
+app.include_router(admin.router, prefix=settings.api_v1_prefix)
 
 
 # ── Health Check ──────────────────────────────────────────────────────────────
@@ -90,7 +137,7 @@ async def health_check():
     """Returns the current health and version of the API."""
     return {
         "status": "healthy",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "environment": settings.environment,
         "database": "connected",
         "project": settings.project_name,
@@ -104,5 +151,6 @@ async def root():
         "docs": "/docs",
         "redoc": "/redoc",
         "health": "/health",
-        "version": "1.0.0",
+        "version": "1.1.0",
     })
+
