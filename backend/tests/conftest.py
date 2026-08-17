@@ -12,8 +12,9 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 from app.database import Base, get_db
 from app.main import app
 from app.models.property import Property
-from app.models.waitlist import WaitlistEntry  # noqa: F401 — ensure table is registered
-from app.models.contact import ContactSubmission  # noqa: F401 — ensure table is registered
+from app.models.waitlist import WaitlistEntry      # noqa: F401 — ensure table is registered
+from app.models.contact import ContactSubmission   # noqa: F401 — ensure table is registered
+from app.models.favorite import Favorite           # noqa: F401 — ensure table is registered
 
 # ── In-memory SQLite database for tests ───────────────────────────────────────
 TEST_DATABASE_URL = "sqlite+aiosqlite:///:memory:"

@@ -335,3 +335,61 @@ async def test_contact_sequential_ids(client: AsyncClient):
     assert resp1.status_code == 201
     assert resp2.status_code == 201
     assert resp1.json()["id"] != resp2.json()["id"]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GET /api/v1/search/trending
+# ═══════════════════════════════════════════════════════════════════════════════
+
+async def test_trending_empty_db(client: AsyncClient):
+    """Returns empty lists when no properties exist."""
+    resp = await client.get("/api/v1/search/trending")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["hot_properties"] == []
+    assert data["top_markets"] == []
+
+
+async def test_trending_returns_structure(client: AsyncClient, multiple_properties):
+    """Response contains hot_properties and top_markets."""
+    resp = await client.get("/api/v1/search/trending")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "hot_properties" in data
+    assert "top_markets" in data
+    assert isinstance(data["hot_properties"], list)
+    assert isinstance(data["top_markets"], list)
+
+
+async def test_trending_limit_parameter(client: AsyncClient, multiple_properties):
+    """limit parameter caps the number of hot properties returned."""
+    resp = await client.get("/api/v1/search/trending", params={"limit": 2})
+    assert resp.status_code == 200
+    assert len(resp.json()["hot_properties"]) <= 2
+
+
+async def test_trending_top_markets_contain_metrics(client: AsyncClient, multiple_properties):
+    """Top markets include cap rate and city info."""
+    resp = await client.get("/api/v1/search/trending")
+    assert resp.status_code == 200
+    markets = resp.json()["top_markets"]
+    if markets:
+        market = markets[0]
+        assert "city" in market
+        assert "state" in market
+        assert "avg_cap_rate" in market
+
+
+async def test_trending_hot_properties_have_full_data(
+    client: AsyncClient, multiple_properties
+):
+    """Hot properties include all standard property response fields."""
+    resp = await client.get("/api/v1/search/trending")
+    assert resp.status_code == 200
+    props = resp.json()["hot_properties"]
+    if props:
+        prop = props[0]
+        assert "id" in prop
+        assert "address" in prop
+        assert "list_price" in prop
+        assert "metrics" in prop
