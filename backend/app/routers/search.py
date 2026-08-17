@@ -296,3 +296,84 @@ async def natural_language_search(
         "total_matches": total,
         "results": items,
     }
+
+
+# ── GET /search/trending ──────────────────────────────────────────────────────
+
+class TrendingResult(BaseModel):
+    """Combined trending response with hot properties and top markets."""
+    hot_properties: List[PropertyResponse]
+    top_markets: List[Dict[str, Any]]
+
+
+@router.get(
+    "/trending",
+    response_model=TrendingResult,
+    summary="Trending properties & top markets",
+    description=(
+        "Returns the hottest investment properties ranked by a composite "
+        "Momentum Score (cap rate + YoY growth – vacancy penalty), plus the "
+        "top markets by average cap rate. Useful for the dashboard 'Trending' widget."
+    ),
+)
+async def get_trending(
+    limit: int = Query(5, ge=1, le=20, description="Number of hot properties to return"),
+    db: AsyncSession = Depends(get_db),
+):
+    """Return hot properties and top markets based on momentum scoring."""
+    # ── Hot Properties ───────────────────────────────────────────────────────
+    # Fetch all active properties that have the metrics we need
+    stmt = select(Property).where(
+        Property.is_active == True,
+        Property.cap_rate.is_not(None),
+        Property.yoy_growth.is_not(None),
+    )
+    result = await db.execute(stmt)
+    properties = result.scalars().all()
+
+    def _momentum_score(p: Property) -> float:
+        """Composite momentum score: cap_rate * 50 + yoy_growth * 40 - vacancy * 10."""
+        cap = (p.cap_rate or 0) * 50
+        growth = (p.yoy_growth or 0) * 40
+        vacancy_penalty = (p.vacancy_rate or 0) * 10
+        recency_bonus = max(0, 10 - (p.days_on_market or 0) * 0.1)  # fresher = better
+        return cap + growth - vacancy_penalty + recency_bonus
+
+    scored = sorted(properties, key=_momentum_score, reverse=True)[:limit]
+    hot_properties = [PropertyResponse.from_orm_with_metrics(p) for p in scored]
+
+    # ── Top Markets ──────────────────────────────────────────────────────────
+    market_stmt = (
+        select(
+            Property.city,
+            Property.state,
+            func.count(Property.id).label("listing_count"),
+            func.avg(Property.cap_rate).label("avg_cap_rate"),
+            func.avg(Property.yoy_growth).label("avg_yoy_growth"),
+            func.avg(Property.risk_score).label("avg_risk_score"),
+            func.avg(Property.list_price).label("avg_price"),
+        )
+        .where(Property.is_active == True)
+        .group_by(Property.city, Property.state)
+        .order_by(func.avg(Property.cap_rate).desc())
+        .limit(6)
+    )
+    market_result = await db.execute(market_stmt)
+    top_markets = [
+        {
+            "city": row.city,
+            "state": row.state,
+            "market": f"{row.city}, {row.state}",
+            "listing_count": row.listing_count,
+            "avg_cap_rate": round(row.avg_cap_rate, 4) if row.avg_cap_rate else None,
+            "avg_cap_rate_pct": f"{row.avg_cap_rate * 100:.1f}%" if row.avg_cap_rate else None,
+            "avg_yoy_growth_pct": f"{row.avg_yoy_growth * 100:.1f}%" if row.avg_yoy_growth else None,
+            "avg_risk_score": round(row.avg_risk_score) if row.avg_risk_score else None,
+            "avg_price": round(row.avg_price) if row.avg_price else None,
+            "avg_price_formatted": f"${row.avg_price:,.0f}" if row.avg_price else None,
+        }
+        for row in market_result.all()
+    ]
+
+    return TrendingResult(hot_properties=hot_properties, top_markets=top_markets)
+
