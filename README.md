@@ -36,9 +36,9 @@
 
 <div align="center">
 
-## ✨ Platform Stats
+## Platform Stats
 
-| 🏘️ Properties Analyzed | ⚡ Faster Decisions | 🎯 Match Satisfaction | 💰 Transaction Volume |
+| Properties Analyzed | Faster Decisions | Match Satisfaction | Transaction Volume |
 |:---:|:---:|:---:|:---:|
 | **10,000+** | **3.5×** | **98%** | **$4.2B** |
 
@@ -46,7 +46,7 @@
 
 ---
 
-## ⚡ Platform Features
+## Platform Features
 
 ### AI Search & Match Engine
 Natural language property search with a **multi-dimensional match scoring algorithm**. Each property receives a personalized match score based on target yield, risk tolerance, and appreciation potential — ranked dynamically in real time.
