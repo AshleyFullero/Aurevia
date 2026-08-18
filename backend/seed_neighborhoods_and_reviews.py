@@ -657,14 +657,14 @@ async def seed():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
 
-    async with AsyncSessionLocal() as db:
-        print("[*] Clearing existing seed data...")
-        await db.execute(text("DELETE FROM price_history"))
-        await db.execute(text("DELETE FROM reviews"))
-        await db.execute(text("DELETE FROM neighborhoods"))
-        await db.commit()
+    # ── Truncate existing seed tables via raw engine connection ─────────────────
+    print("[*] Clearing existing seed data...")
+    async with engine.begin() as conn:
+        await conn.execute(text("DELETE FROM price_history"))
+        await conn.execute(text("DELETE FROM reviews"))
+        await conn.execute(text("DELETE FROM neighborhoods"))
 
-        # -- Neighborhoods -------------------------------------------------------
+    async with AsyncSessionLocal() as db:
         print(f"[+] Seeding {len(NEIGHBORHOODS)} neighborhoods...")
         for data in NEIGHBORHOODS:
             n = Neighborhood(**data)
