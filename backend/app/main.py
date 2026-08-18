@@ -31,7 +31,11 @@ from app.routers import (
     compare,
     contact,
     favorites,
+    market,
+    neighborhoods,
+    portfolio,
     properties,
+    reviews,
     search,
     stats,
     waitlist,
@@ -69,11 +73,15 @@ for the world's most intelligent real estate investment platform.
 - ⚖️  **Compare** — Side-by-side comparison of 2–4 properties with metric winners
 - 🛠️  **Admin** — Internal dashboard for properties, waitlist, and contacts
 - 📬 **Waitlist** — Early-access email capture
+- ⭐ **Reviews** — Investor testimonials and aggregate rating statistics
+- 🏘️  **Neighborhoods** — Livability intelligence (walk score, schools, crime, amenities)
+- 📉 **Market History** — Monthly price trends, heatmap, and 6-month linear forecast
+- 💼 **Portfolio** — Session-based investment portfolio with mortgage & cash flow modelling
 
 ### Authentication
 Currently open for development. JWT authentication will be added before production launch.
 """,
-    version="1.1.0",
+    version="1.2.0",
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",
@@ -120,6 +128,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 
 # ── Routers ────────────────────────────────────────────────────────────────────
+# ── Existing routers ──────────────────────────────────────────────────────────
 app.include_router(properties.router, prefix=settings.api_v1_prefix)
 app.include_router(analytics.router, prefix=settings.api_v1_prefix)
 app.include_router(waitlist.router, prefix=settings.api_v1_prefix)
@@ -130,6 +139,12 @@ app.include_router(favorites.router, prefix=settings.api_v1_prefix)
 app.include_router(compare.router, prefix=settings.api_v1_prefix)
 app.include_router(admin.router, prefix=settings.api_v1_prefix)
 
+# ── New domain routers ─────────────────────────────────────────────────────────
+app.include_router(reviews.router, prefix=settings.api_v1_prefix)
+app.include_router(neighborhoods.router, prefix=settings.api_v1_prefix)
+app.include_router(market.router, prefix=settings.api_v1_prefix)
+app.include_router(portfolio.router, prefix=settings.api_v1_prefix)
+
 
 # ── Health Check ──────────────────────────────────────────────────────────────
 @app.get("/health", tags=["System"], summary="API health check")
@@ -137,10 +152,15 @@ async def health_check():
     """Returns the current health and version of the API."""
     return {
         "status": "healthy",
-        "version": "1.1.0",
+        "version": "1.2.0",
         "environment": settings.environment,
         "database": "connected",
         "project": settings.project_name,
+        "domains": [
+            "properties", "analytics", "search", "stats", "favorites",
+            "compare", "contact", "waitlist", "admin",
+            "reviews", "neighborhoods", "market", "portfolio",
+        ],
     }
 
 
@@ -151,6 +171,6 @@ async def root():
         "docs": "/docs",
         "redoc": "/redoc",
         "health": "/health",
-        "version": "1.1.0",
+        "version": "1.2.0",
     })
 
