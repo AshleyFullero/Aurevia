@@ -48,10 +48,10 @@ async def lifespan(app: FastAPI):
     """Run startup tasks before accepting requests, and cleanup on shutdown."""
     # Create database tables (dev only — use Alembic migrations in production)
     await create_tables()
-    print("✅ Database tables ready")
-    print(f"🚀 Aurevia API running | env={settings.environment}")
+    print("[OK] Database tables ready")
+    print(f"[>>] Aurevia API running | env={settings.environment}")
     yield
-    print("👋 Aurevia API shutting down")
+    print("[..] Aurevia API shutting down")
 
 
 # ── Application ───────────────────────────────────────────────────────────────

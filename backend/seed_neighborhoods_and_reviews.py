@@ -652,47 +652,55 @@ def _generate_price_history() -> list[dict]:
 
 async def seed():
     """Drop & reseed neighborhoods, reviews, and price_history tables."""
-    import sys, io
-    # Reconfigure stdout to UTF-8 so emoji prints work on Windows
+    import sys
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
 
-    # ── Truncate existing seed tables via raw engine connection ─────────────────
-    print("[*] Clearing existing seed data...")
     async with engine.begin() as conn:
+        # ── Truncate in reverse FK order ──────────────────────────────────────
+        print("[*] Clearing existing seed data...")
         await conn.execute(text("DELETE FROM price_history"))
         await conn.execute(text("DELETE FROM reviews"))
         await conn.execute(text("DELETE FROM neighborhoods"))
 
-    async with AsyncSessionLocal() as db:
+        # ── Neighborhoods ─────────────────────────────────────────────────────
         print(f"[+] Seeding {len(NEIGHBORHOODS)} neighborhoods...")
         for data in NEIGHBORHOODS:
-            n = Neighborhood(**data)
-            db.add(n)
-        await db.commit()
+            cols = ", ".join(data.keys())
+            placeholders = ", ".join(f":{k}" for k in data.keys())
+            await conn.execute(
+                text(f"INSERT OR REPLACE INTO neighborhoods ({cols}) VALUES ({placeholders})"),
+                data,
+            )
         print("    OK: Neighborhoods done.")
 
-        # -- Reviews -------------------------------------------------------------
+        # ── Reviews ───────────────────────────────────────────────────────────
         print(f"[+] Seeding {len(REVIEWS)} reviews...")
         for data in REVIEWS:
-            r = Review(**data)
-            db.add(r)
-        await db.commit()
+            cols = ", ".join(data.keys())
+            placeholders = ", ".join(f":{k}" for k in data.keys())
+            await conn.execute(
+                text(f"INSERT OR REPLACE INTO reviews ({cols}) VALUES ({placeholders})"),
+                data,
+            )
         print("    OK: Reviews done.")
 
-        # -- Price History -------------------------------------------------------
+        # ── Price History ─────────────────────────────────────────────────────
         records = _generate_price_history()
         print(f"[+] Seeding {len(records)} price history records...")
         for data in records:
-            ph = PriceHistory(**data)
-            db.add(ph)
-        await db.commit()
+            cols = ", ".join(data.keys())
+            placeholders = ", ".join(f":{k}" for k in data.keys())
+            await conn.execute(
+                text(f"INSERT OR REPLACE INTO price_history ({cols}) VALUES ({placeholders})"),
+                data,
+            )
         print("    OK: Price history done.")
 
-        print("\n=== Seed complete! ===")
-        print(f"  * {len(NEIGHBORHOODS)} neighborhoods across 8 cities")
-        print(f"  * {len(REVIEWS)} investor reviews ({sum(1 for r in REVIEWS if r['is_featured'])} featured)")
-        print(f"  * {len(records)} monthly price history records (24 months x 8 cities x 4 types)")
+    print("\n=== Seed complete! ===")
+    print(f"  * {len(NEIGHBORHOODS)} neighborhoods across 8 cities")
+    print(f"  * {len(REVIEWS)} investor reviews ({sum(1 for r in REVIEWS if r['is_featured'])} featured)")
+    print(f"  * {len(records)} monthly price history records (24 months x 8 cities x 4 types)")
 
 
 if __name__ == "__main__":
